@@ -9,7 +9,7 @@ function App() {
   return (
   
       <Router>
-        <Link to="/"> Home </Link>
+        <Link to="/PharmaTech"> Home </Link>
         <Link to="/PharmaTech/patients"> Patients </Link>
         <Link to="/PharmaTech/providers"> Providers </Link>
         <Link to="/PharmaTech/products"> Products </Link>
