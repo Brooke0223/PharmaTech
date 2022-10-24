@@ -7,19 +7,22 @@ import Products from './Pages/Products';
 
 function App() {
   return (
-    <Router>
-      <Link to="/"> Home </Link>
-      <Link to="/patients"> Patients </Link>
-      <Link to="/providers"> Providers </Link>
-      <Link to="/products"> Products </Link>
+  
+      <Router>
+        <Link to="/"> Home </Link>
+        <Link to="/PharmaTech/patients"> Patients </Link>
+        <Link to="/PharmaTech/providers"> Providers </Link>
+        <Link to="/PharmaTech/products"> Products </Link>
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/patients" element={<Patients />} />
-        <Route path="/providers" element={<Providers />} />
-        <Route path="/products" element={<Products />} />
-      </Routes>
-    </Router>
+        <Routes>
+          <Route path="/PharmaTech" element={<Home />} />
+          <Route path="/PharmaTech/patients" element={<Patients />} />
+          <Route path="/PharmaTech/providers" element={<Providers />} />
+          <Route path="/PharmaTech/products" element={<Products />} />
+        </Routes>
+      </Router>
+
+  
   );
 }
 
