@@ -1,30 +1,15 @@
-import { BrowserRouter as Router, useNavigate } from "react-router-dom"
-
 import React from 'react'
 
-function Patients() {
-  let navigate = useNavigate();
-
-  //If no matching patient is found, allow re-direct to add a new patient
-  const submitHandler = (e) => {
-    e.preventDefault();
-    console.log(e)
-    if (window.confirm("Patient not found. Would you like to add a new patient?")) {
-      navigate("/PharmaTech/addPatient")
-    }
-  }
-
-
+function AddPatient() {
   return (
     
     <div class="container">
     <br></br>
-    <h1>Find/Add Patient</h1>
-    <p><i>Note for class: If you search a patient and no match is found, you'll be given the option to add that patient</i></p>
+    <h1>Add A New Patient</h1>
 
-    <form class="row g-3" onSubmit={submitHandler}>
+    <form class="row g-3" >
 
-    <div class="col-md-4">
+  <div class="col-md-4">
     <label for="firstName" class="form-label">First Name</label>
     <input type="text" class="form-control" id="firstName" required />
   </div>
@@ -45,21 +30,52 @@ function Patients() {
   </div>
 
   <div class="col-md-4">
-    <label for="patientID" class="form-label">Patient ID</label>
-    <input type="text" class="form-control" id="patientID" />
+    <label for="sex" class="form-label">Sex</label>
+    <select id="sex" class="form-select" >
+      <option disabled selected>Select</option>
+      <option>Male</option>
+      <option>Female</option>
+      <option>Other</option>
+      <option>Unknown</option>
+    </select>
   </div>
 
   <div class="col-md-4">
     <label for="status" class="form-label">Status</label>
     <select id="status" class="form-select" >
-      <option disabled selected>...</option>
+      <option disabled selected>Select</option>
       <option>Alive</option>
       <option>Deceased</option>
       <option>Unknown</option>
     </select>
   </div>
 
-  <div class="col-12">
+
+  <div class="col-md-6">
+    <label for="race" class="form-label">Race</label>
+    <select id="race" class="form-select" >
+      <option disabled selected>Select</option>
+      <option>American Indian or Alaska Native</option>
+      <option>Asian</option>
+      <option>Black or African American</option>
+      <option>Native Hawaiian or Other Pacific Islander</option>
+      <option>White</option>
+      <option>Other Race</option>
+      <option>Unknown</option>
+    </select>
+  </div>
+
+  <div class="col-md-6">
+    <label for="ethnicity" class="form-label">Ethnicity</label>
+    <select id="ethnicity" class="form-select" >
+      <option disabled selected>Select</option>
+      <option>Hispanic or Latino</option>
+      <option>Not Hispanic or Latino</option>
+      <option>Unknown</option>
+    </select>
+  </div>
+
+  <div class="col-6">
     <label for="address" class="form-label">Address</label>
     <input type="text" class="form-control" id="address" placeholder="1234 Main St" />
   </div>
@@ -69,10 +85,11 @@ function Patients() {
     <input type="text" class="form-control" id="city" />
   </div>
 
-  <div class="col-md-4">
+
+  <div class="col-md-2">
     <label for="state" class="form-label">State</label>
     <select id="state" class="form-select" >
-      <option disabled defaultValue>...</option>
+      <option disabled selected>Select</option>
       <option>AL</option>
       <option>AK</option>
       <option>AZ</option>
@@ -140,14 +157,62 @@ function Patients() {
     <input type="text" class="form-control" id="zipCode" />
   </div>
 
-  <div class="col-12">
-    <button type="submit" class="btn btn-primary">Search</button>
+
+  <div class="col-md-4">
+    <label for="phone" class="form-label">Phone</label>
+    <input type="text" class="form-control" id="phone" placeholder="(123) 456-789"/>
   </div>
+
+  <div class="col-md-4">
+    <label for="phoneType" class="form-label">Phone Type</label>
+    <select id="phoneType" class="form-select" >
+      <option disabled selected>Select</option>
+      <option>Home</option>
+      <option>Work</option>
+      <option>Mobile</option>
+    </select>
+  </div>
+
+
+  <div class="col-md-6">
+    <label for="email" class="form-label">Email</label>
+    <input type="text" class="form-control" id="email" />
+  </div>
+
+  <div class="col-md-2">
+    <label for="phoneOpt" class="form-label">Email Opt</label>
+    <select id="phoneOpt" class="form-select" >
+      <option selected>Yes</option>
+      <option>No</option>
+    </select>
+  </div>
+
+  <div class="col-md-2">
+    <label for="phoneOpt" class="form-label">Phone Opt</label>
+    <select id="phoneOpt" class="form-select" >
+      <option selected>No</option>
+      <option>Yes</option>
+    </select>
+  </div>
+
+  <div class="col-md-2">
+    <label for="mailOpt" class="form-label">Mail Opt</label>
+    <select id="mailOpt" class="form-select" >
+      <option selected>No</option>
+      <option>Yes</option>
+    </select>
+  </div>
+
+
+
+  <div class="col-12">
+    <button type="submit" class="btn btn-primary">Add</button>
+  </div>
+
 </form>
 
 </div>
-
   )
 }
 
-export default Patients
+export default AddPatient

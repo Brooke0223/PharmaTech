@@ -6,6 +6,7 @@ import Events from './Pages/Events';
 import Providers from './Pages/Providers';
 import Facilities from './Pages/Facilities';
 import Products from './Pages/Products';
+import AddPatient from './Pages/AddPatient';
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
           <Route path="/PharmaTech/providers" element={<Providers />} />
           <Route path="/PharmaTech/facilities" element={<Facilities />} />
           <Route path="/PharmaTech/products" element={<Products />} />
+          <Route path="/PharmaTech/addPatient" element={<AddPatient />} />
         </Routes>
       </Router>
 

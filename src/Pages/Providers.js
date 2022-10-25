@@ -23,8 +23,13 @@ function Providers() {
     <select id="designation" class="form-select" >
       <option disabled selected>...</option>
       <option>Physician</option>
-      <option>Nurse</option>
+      <option>Physician Associate</option>
       <option>Pharmacist</option>
+      <option>Advanced Practice Registered Nurse</option>
+      <option>Registered Nurse</option>
+      <option>Licensed Practical Nurse</option>
+      <option>Paramedic</option>
+      <option>Other</option>
     </select>
   </div>
 
