@@ -1,37 +1,68 @@
-import React from 'react'
+import { React, useState } from 'react'
+import { useNavigate } from "react-router-dom"
 
 function AddPatient() {
-  return (
+    let navigate = useNavigate(); //This allows us to link user to another page in the pop-up alert window
+
+    const [firstName, setFirstName] = useState('');
+    const [middlename, setMiddleName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [DOB, setDOB] = useState('');
+    const [sex, setSex] = useState('');
+    const [status, setStatus] = useState('');
+    const [race, setRace] = useState('');
+    const [ethnicity, setEthnicity] = useState('');
+    const [address, setAddress] = useState('');
+    const [city, setCity] = useState('');
+    const [state, setState] = useState('');
+    const [zip, setZip] = useState('');
+    const [phone, setPhone] = useState('');
+    const [phoneType, setPhoneType] = useState('');
+    const [email, setEmail] = useState('');
+    const [emailOpt, setEmailOpt] = useState('');
+    const [phoneOpt, setphoneOpt] = useState('');
+    const [mailOpt, setMailOpt] = useState('');
+
+    return (
+    <div className="container">
     
-    <div class="container">
-    <br></br>
+    <ul className="nav nav-tabs">
+            <li className="nav-link" onClick={event => navigate("/PharmaTech/patients")}>
+                Search Patients
+            </li>
+
+            <li className="nav-link" onClick={event => navigate("/PharmaTech/addPatient")}>
+                Add Patient
+            </li>
+    </ul>
+
     <h1>Add A New Patient</h1>
 
-    <form class="row g-3" >
+    <form className="row g-3" >
 
-  <div class="col-md-4">
-    <label for="firstName" class="form-label">First Name</label>
-    <input type="text" class="form-control" id="firstName" required />
+  <div className="col-md-4">
+    <label for="firstName" className="form-label">First Name</label>
+    <input type="text" className="form-control" id="firstName" required onChange={event => setFirstName(event.target.value)}/>
   </div>
 
-  <div class="col-md-4">
-    <label for="middleName" class="form-label">Middle Name</label>
-    <input type="text" class="form-control" id="middleName"  />
+  <div className="col-md-4">
+    <label for="middleName" className="form-label">Middle Name</label>
+    <input type="text" className="form-control" id="middleName"  onChange={event => setMiddleName(event.target.value)}/>
   </div>
 
-  <div class="col-md-4">
-    <label for="lastName" class="form-label">Last Name</label>
-    <input type="text" class="form-control" id="lastName" required />
+  <div className="col-md-4">
+    <label for="lastName" className="form-label">Last Name</label>
+    <input type="text" className="form-control" id="lastName" required onChange={event => setLastName(event.target.value)}/>
   </div>
 
-  <div class="col-md-4">
-    <label for="dob" class="form-label">Date of Birth</label>
-    <input type="date" class="form-control" id="dob" required />
+  <div className="col-md-4">
+    <label for="dob" className="form-label">Date of Birth</label>
+    <input type="date" className="form-control" id="dob" required onChange={event => setDOB(event.target.value)}/>
   </div>
 
-  <div class="col-md-4">
-    <label for="sex" class="form-label">Sex</label>
-    <select id="sex" class="form-select" >
+  <div className="col-md-4">
+    <label for="sex" className="form-label">Sex</label>
+    <select id="sex" className="form-select" onChange={event => setSex(event.target.value)}>
       <option disabled selected>Select</option>
       <option>Male</option>
       <option>Female</option>
@@ -40,9 +71,9 @@ function AddPatient() {
     </select>
   </div>
 
-  <div class="col-md-4">
-    <label for="status" class="form-label">Status</label>
-    <select id="status" class="form-select" >
+  <div className="col-md-4">
+    <label for="status" className="form-label">Status</label>
+    <select id="status" className="form-select" onChange={event => setStatus(event.target.value)} >
       <option disabled selected>Select</option>
       <option>Alive</option>
       <option>Deceased</option>
@@ -51,9 +82,9 @@ function AddPatient() {
   </div>
 
 
-  <div class="col-md-6">
-    <label for="race" class="form-label">Race</label>
-    <select id="race" class="form-select" >
+  <div className="col-md-6">
+    <label for="race" className="form-label">Race</label>
+    <select id="race" className="form-select" onChange={event => setRace(event.target.value)} >
       <option disabled selected>Select</option>
       <option>American Indian or Alaska Native</option>
       <option>Asian</option>
@@ -65,9 +96,9 @@ function AddPatient() {
     </select>
   </div>
 
-  <div class="col-md-6">
-    <label for="ethnicity" class="form-label">Ethnicity</label>
-    <select id="ethnicity" class="form-select" >
+  <div className="col-md-6">
+    <label for="ethnicity" className="form-label">Ethnicity</label>
+    <select id="ethnicity" className="form-select" onChange={event => setEthnicity(event.target.value)} >
       <option disabled selected>Select</option>
       <option>Hispanic or Latino</option>
       <option>Not Hispanic or Latino</option>
@@ -75,20 +106,20 @@ function AddPatient() {
     </select>
   </div>
 
-  <div class="col-6">
-    <label for="address" class="form-label">Address</label>
-    <input type="text" class="form-control" id="address" placeholder="1234 Main St" />
+  <div className="col-6">
+    <label for="address" className="form-label">Address</label>
+    <input type="text" className="form-control" id="address" placeholder="1234 Main St" onChange={event => setAddress(event.target.value)} />
   </div>
 
-  <div class="col-md-6">
-    <label for="city" class="form-label">City</label>
-    <input type="text" class="form-control" id="city" />
+  <div className="col-md-6">
+    <label for="city" className="form-label">City</label>
+    <input type="text" className="form-control" id="city" onChange={event => setCity(event.target.value)} />
   </div>
 
 
-  <div class="col-md-2">
-    <label for="state" class="form-label">State</label>
-    <select id="state" class="form-select" >
+  <div className="col-md-2">
+    <label for="state" className="form-label">State</label>
+    <select id="state" className="form-select" onChange={event => setState(event.target.value)} >
       <option disabled selected>Select</option>
       <option>AL</option>
       <option>AK</option>
@@ -152,20 +183,20 @@ function AddPatient() {
     </select>
   </div>
 
-  <div class="col-md-2">
-    <label for="zipCode" class="form-label">Zip</label>
-    <input type="text" class="form-control" id="zipCode" />
+  <div className="col-md-2">
+    <label for="zipCode" className="form-label">Zip</label>
+    <input type="text" className="form-control" id="zipCode" onChange={event => setZip(event.target.value)} />
   </div>
 
 
-  <div class="col-md-4">
-    <label for="phone" class="form-label">Phone</label>
-    <input type="text" class="form-control" id="phone" placeholder="(123) 456-789"/>
+  <div className="col-md-4">
+    <label for="phone" className="form-label">Phone</label>
+    <input type="text" className="form-control" id="phone" placeholder="(123) 456-789" onChange={event => setPhone(event.target.value)} />
   </div>
 
-  <div class="col-md-4">
-    <label for="phoneType" class="form-label">Phone Type</label>
-    <select id="phoneType" class="form-select" >
+  <div className="col-md-4">
+    <label for="phoneType" className="form-label">Phone Type</label>
+    <select id="phoneType" className="form-select" onChange={event => setPhoneType(event.target.value)} >
       <option disabled selected>Select</option>
       <option>Home</option>
       <option>Work</option>
@@ -174,30 +205,30 @@ function AddPatient() {
   </div>
 
 
-  <div class="col-md-6">
-    <label for="email" class="form-label">Email</label>
-    <input type="text" class="form-control" id="email" />
+  <div className="col-md-6">
+    <label for="email" className="form-label">Email</label>
+    <input type="text" className="form-control" id="email" onChange={event => setEmail(event.target.value)} />
   </div>
 
-  <div class="col-md-2">
-    <label for="phoneOpt" class="form-label">Email Opt</label>
-    <select id="phoneOpt" class="form-select" >
+  <div className="col-md-2">
+    <label for="phoneOpt" className="form-label">Email Opt</label>
+    <select id="phoneOpt" className="form-select" onChange={event => setEmailOpt(event.target.value)} >
       <option selected>Yes</option>
       <option>No</option>
     </select>
   </div>
 
-  <div class="col-md-2">
-    <label for="phoneOpt" class="form-label">Phone Opt</label>
-    <select id="phoneOpt" class="form-select" >
+  <div className="col-md-2">
+    <label for="phoneOpt" className="form-label">Phone Opt</label>
+    <select id="phoneOpt" className="form-select" onChange={event => setphoneOpt(event.target.value)} >
       <option selected>No</option>
       <option>Yes</option>
     </select>
   </div>
 
-  <div class="col-md-2">
-    <label for="mailOpt" class="form-label">Mail Opt</label>
-    <select id="mailOpt" class="form-select" >
+  <div className="col-md-2">
+    <label for="mailOpt" className="form-label">Mail Opt</label>
+    <select id="mailOpt" className="form-select" onChange={event => setMailOpt(event.target.value)} >
       <option selected>No</option>
       <option>Yes</option>
     </select>
@@ -205,8 +236,8 @@ function AddPatient() {
 
 
 
-  <div class="col-12">
-    <button type="submit" class="btn btn-primary">Add</button>
+  <div className="col-12">
+    <button type="submit" className="btn btn-primary">Add</button>
   </div>
 
 </form>

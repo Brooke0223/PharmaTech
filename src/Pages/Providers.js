@@ -1,26 +1,39 @@
 import React from 'react'
+import { useNavigate } from "react-router-dom"
 
 function Providers() {
+  let navigate = useNavigate(); //This allows us to link user to another page in the pop-up alert window
+
   return (
-    <div class="container">
-    <br></br>
-    <h1>Manage Providers</h1>
+    <div className="container">
 
-    <form class="row g-3">
+    <ul className="nav nav-tabs">
+            <li className="nav-link" onClick={event => navigate("/PharmaTech/providers")}>
+                Search Providers
+            </li>
 
-  <div class="col-md-6">
-    <label for="firstName" class="form-label">First Name</label>
-    <input type="text" class="form-control" id="firstName" required />
+            <li className="nav-link" onClick={event => navigate("/PharmaTech/addProvider")}>
+                Add Provider
+            </li>
+    </ul>
+
+    <h1>Search Providers</h1>
+
+    <form className="row g-3">
+
+  <div className="col-md-6">
+    <label for="firstName" className="form-label">First Name</label>
+    <input type="text" className="form-control" id="firstName" required />
   </div>
 
-  <div class="col-md-6">
-    <label for="lastName" class="form-label">Last Name</label>
-    <input type="text" class="form-control" id="lastName" required />
+  <div className="col-md-6">
+    <label for="lastName" className="form-label">Last Name</label>
+    <input type="text" className="form-control" id="lastName" required />
   </div>
 
-  <div class="col-md-12">
-    <label for="designation" class="form-label">Designation</label>
-    <select id="designation" class="form-select" >
+  <div className="col-md-12">
+    <label for="designation" className="form-label">Designation</label>
+    <select id="designation" className="form-select" >
       <option disabled selected>...</option>
       <option>Physician</option>
       <option>Physician Associate</option>
@@ -33,24 +46,24 @@ function Providers() {
     </select>
   </div>
 
-  <div class="col-md-6">
-    <label for="providerID" class="form-label">Provider ID</label>
-    <input type="text" class="form-control" id="providerID" />
+  <div className="col-md-6">
+    <label for="NPI" className="form-label">NPI</label>
+    <input type="text" className="form-control" id="NPI" />
   </div>
 
-  <div class="col-md-6">
-    <label for="NPI" class="form-label">NPI</label>
-    <input type="text" class="form-control" id="NPI" />
+  <div className="col-md-6">
+    <label for="FacilityName" className="form-label">Facility Name</label>
+    <input type="text" className="form-control" id="FacilityName" />
   </div>
 
-  <div class="col-md-6">
-    <label for="city" class="form-label">City</label>
-    <input type="text" class="form-control" id="city" />
+  <div className="col-md-6">
+    <label for="city" className="form-label">City</label>
+    <input type="text" className="form-control" id="city" />
   </div>
 
-  <div class="col-md-6">
-  <label for="state" class="form-label">State</label>
-    <select id="state" class="form-select" >
+  <div className="col-md-6">
+  <label for="state" className="form-label">State</label>
+    <select id="state" className="form-select" >
       <option disabled selected>...</option>
       <option>AL</option>
       <option>AK</option>
@@ -114,8 +127,8 @@ function Providers() {
     </select>
   </div>
 
-  <div class="col-12">
-    <button type="submit" class="btn btn-primary">Search</button>
+  <div className="col-12">
+    <button type="submit" className="btn btn-primary">Search</button>
   </div>
 </form>
 

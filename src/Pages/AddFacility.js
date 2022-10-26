@@ -1,23 +1,22 @@
 import React from 'react'
 import { useNavigate } from "react-router-dom"
 
-function Products() {
-  let navigate = useNavigate(); //This allows us to link user to another page in the pop-up alert window
+function AddFacility() {
+    let navigate = useNavigate(); //This allows us to link user to another page in the pop-up alert window
 
   return (
     <div className="container">
-
     <ul className="nav nav-tabs">
-            <li className="nav-link" onClick={event => navigate("/PharmaTech/products")}>
-                Search Products
-            </li>
+        <li className="nav-link" onClick={event => navigate("/PharmaTech/facilities")}>
+            Search Facilities
+        </li>
 
-            <li className="nav-link" onClick={event => navigate("/PharmaTech/addProduct")}>
-                Add Products
-            </li>
+        <li className="nav-link" onClick={event => navigate("/PharmaTech/addFacility")}>
+            Add Facility
+        </li>
     </ul>
 
-    <h1>Search Products</h1>
+    <h1>Add Facility</h1>
 
     <form className="row g-3">
 
@@ -136,4 +135,4 @@ function Products() {
   )
 }
 
-export default Products
+export default AddFacility

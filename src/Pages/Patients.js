@@ -1,57 +1,89 @@
 import { BrowserRouter as Router, useNavigate } from "react-router-dom"
-
-import React from 'react'
+import { React, useState } from 'react'
 
 function Patients() {
-  let navigate = useNavigate();
+  let navigate = useNavigate(); //This allows us to link user to another page in the pop-up alert window
+
+  const [firstName, setFirstName] = useState('');
+  const [middlename, setMiddleName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [DOB, setDOB] = useState('');
+  const [patientID, setPatientID] = useState('');
+  const [status, setStatus] = useState('');
+  const [address, setAddress] = useState('');
+  const [city, setCity] = useState('');
+  const [state, setState] = useState('');
+  const [zip, setZip] = useState('');
+
 
   //If no matching patient is found, allow re-direct to add a new patient
   const submitHandler = (e) => {
-    e.preventDefault();
-    console.log(e)
-    if (window.confirm("Patient not found. Would you like to add a new patient?")) {
-      navigate("/PharmaTech/addPatient")
-    }
+    e.preventDefault(); //prevent page refresh
+    console.log(firstName)
+    console.log(lastName)
+    console.log(DOB)
+    // if(firstName === "Bob"){
+    //   console.log("You put in the right person")
+    // }
+    // if (window.confirm("Patient not found. Would you like to add a new patient?")) {
+    //   navigate("/PharmaTech/addPatient")
+    // }
   }
 
 
   return (
     
-    <div class="container">
-    <br></br>
-    <h1>Find/Add Patient</h1>
-    <p><i>Note for class: If you search a patient and no match is found, you'll be given the option to add that patient</i></p>
+    <div className="container">
+    <ul className="nav nav-tabs">
+        <li className="nav-link" onClick={event => navigate("/PharmaTech/patients")}>
+            Search Patients
+        </li>
 
-    <form class="row g-3" onSubmit={submitHandler}>
+        <li className="nav-link" onClick={event => navigate("/PharmaTech/addPatient")}>
+            Add Patient
+        </li>
+    </ul>
 
-    <div class="col-md-4">
-    <label for="firstName" class="form-label">First Name</label>
-    <input type="text" class="form-control" id="firstName" required />
+    <h1>Search Patient</h1>
+
+    {/* <i>Notes for className:</i>
+      <br/> 
+      <ul>
+      <li><i>If you search a patient and no match is found, you'll be given the option to add that patient, <b>try searching for a patient who doesn't exist and you'll be able to see the functionality to add a new patient.</b></i></li>
+      <li><i>Try searching the patient <b>"Bob Jones"</b> with the DOB <b>"01/01/2001"</b>, you'll be able to add/alter data for that patient.</i></li>
+      </ul> */}
+
+
+    <form className="row g-3" onSubmit={submitHandler}>
+
+    <div className="col-md-4">
+    <label for="firstName" className="form-label">First Name</label>
+    <input type="text" className="form-control" id="firstName" required onChange={event => setFirstName(event.target.value)} />
   </div>
 
-  <div class="col-md-4">
-    <label for="middleName" class="form-label">Middle Name</label>
-    <input type="text" class="form-control" id="middleName"  />
+  <div className="col-md-4">
+    <label for="middleName" className="form-label">Middle Name</label>
+    <input type="text" className="form-control" id="middleName"  onChange={event => setMiddleName(event.target.value)}/>
   </div>
 
-  <div class="col-md-4">
-    <label for="lastName" class="form-label">Last Name</label>
-    <input type="text" class="form-control" id="lastName" required />
+  <div className="col-md-4">
+    <label for="lastName" className="form-label">Last Name</label>
+    <input type="text" className="form-control" id="lastName" required onChange={event => setLastName(event.target.value)}/>
   </div>
 
-  <div class="col-md-4">
-    <label for="dob" class="form-label">Date of Birth</label>
-    <input type="date" class="form-control" id="dob" required />
+  <div className="col-md-4">
+    <label for="dob" className="form-label">Date of Birth</label>
+    <input type="date" className="form-control" id="dob" required onChange={event => setDOB(event.target.value)} />
   </div>
 
-  <div class="col-md-4">
-    <label for="patientID" class="form-label">Patient ID</label>
-    <input type="text" class="form-control" id="patientID" />
+  <div className="col-md-4">
+    <label for="patientID" className="form-label">Patient ID</label>
+    <input type="text" className="form-control" id="patientID" onChange={event => setPatientID(event.target.value)} />
   </div>
 
-  <div class="col-md-4">
-    <label for="status" class="form-label">Status</label>
-    <select id="status" class="form-select" >
+  <div className="col-md-4">
+    <label for="status" className="form-label">Status</label>
+    <select id="status" className="form-select" onChange={event => setStatus(event.target.value)}>
       <option disabled selected>...</option>
       <option>Alive</option>
       <option>Deceased</option>
@@ -59,20 +91,20 @@ function Patients() {
     </select>
   </div>
 
-  <div class="col-12">
-    <label for="address" class="form-label">Address</label>
-    <input type="text" class="form-control" id="address" placeholder="1234 Main St" />
+  <div className="col-12">
+    <label for="address" className="form-label">Address</label>
+    <input type="text" className="form-control" id="address" placeholder="1234 Main St" onChange={event => setAddress(event.target.value)}/>
   </div>
 
-  <div class="col-md-6">
-    <label for="city" class="form-label">City</label>
-    <input type="text" class="form-control" id="city" />
+  <div className="col-md-6">
+    <label for="city" className="form-label">City</label>
+    <input type="text" className="form-control" id="city" onChange={event => setCity(event.target.value)} />
   </div>
 
-  <div class="col-md-4">
-    <label for="state" class="form-label">State</label>
-    <select id="state" class="form-select" >
-      <option disabled defaultValue>...</option>
+  <div className="col-md-4">
+    <label for="state" className="form-label">State</label>
+    <select id="state" className="form-select" onChange={event => setState(event.target.value)}>
+      <option disabled selected>Select</option>
       <option>AL</option>
       <option>AK</option>
       <option>AZ</option>
@@ -135,13 +167,13 @@ function Patients() {
     </select>
   </div>
 
-  <div class="col-md-2">
-    <label for="zipCode" class="form-label">Zip</label>
-    <input type="text" class="form-control" id="zipCode" />
+  <div className="col-md-2">
+    <label for="zipCode" className="form-label">Zip</label>
+    <input type="text" className="form-control" id="zipCode" onChange={event => setZip(event.target.value)} />
   </div>
 
-  <div class="col-12">
-    <button type="submit" class="btn btn-primary">Search</button>
+  <div className="col-12">
+    <button type="submit" className="btn btn-primary">Search</button>
   </div>
 </form>
 

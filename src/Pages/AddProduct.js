@@ -1,7 +1,7 @@
 import React from 'react'
 import { useNavigate } from "react-router-dom"
 
-function Products() {
+function AddProduct() {
   let navigate = useNavigate(); //This allows us to link user to another page in the pop-up alert window
 
   return (
@@ -12,12 +12,12 @@ function Products() {
                 Search Products
             </li>
 
-            <li className="nav-link" onClick={event => navigate("/PharmaTech/addProduct")}>
+            <li className="nav-link" onClick={event => navigate("/PharmaTech/addProducts")}>
                 Add Products
             </li>
     </ul>
 
-    <h1>Search Products</h1>
+    <h1>Add Product</h1>
 
     <form className="row g-3">
 
@@ -136,4 +136,4 @@ function Products() {
   )
 }
 
-export default Products
+export default AddProduct
