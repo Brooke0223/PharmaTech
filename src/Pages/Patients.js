@@ -177,6 +177,10 @@ function Patients() {
   </div>
 </form>
 
+  <br/>
+  <br/>
+  <br/>
+
 </div>
 
   )

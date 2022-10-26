@@ -42,38 +42,38 @@ function AddReceivedProduct() {
 
   <div className="col-md-6">
     <label for="NDC" className="form-label">Product NDC</label>
-    <input type="text" className="form-control" id="NDC" placeholder="00000-0000-00"/>
+    <input type="text" className="form-control" id="NDC" placeholder="00000-0000-00" required/>
   </div>
 
   <div className="col-md-4">
     <label for="lotNumber" className="form-label">Lot Number</label>
-    <input type="text" className="form-control" id="lotNumber" />
+    <input type="text" className="form-control" id="lotNumber" required />
   </div>
 
   <div className="col-md-4">
           <label for="expiration" className="form-label">Expiration</label>
-          <input type="date" className="form-control" id="expiration" />
+          <input type="date" className="form-control" id="expiration" required />
   </div>
 
   <div className="col-md-4">
     <label for="doseUnits" className="form-label">Individual Dose Units</label>
-    <input type="text" className="form-control" id="doseUnits" placeholder="0" />
+    <input type="text" className="form-control" id="doseUnits" placeholder="0" required />
   </div>
 
   <div className="col-md-6">
     <label for="facilityName" className="form-label">Facility Name</label>
-    <input type="text" className="form-control" id="facilityName" />
+    <input type="text" className="form-control" id="facilityName" required />
   </div>
 
   <div className="col-md-6">
     <label for="city" className="form-label">City</label>
-    <input type="text" className="form-control" id="city" />
+    <input type="text" className="form-control" id="city" required />
   </div>
 
 
   <div className="col-md-6">
   <label for="state" className="form-label">State</label>
-    <select id="state" className="form-select" >
+    <select id="state" className="form-select" required >
       <option disabled selected>...</option>
       <option>AL</option>
       <option>AK</option>
@@ -139,7 +139,7 @@ function AddReceivedProduct() {
 
   <div className="col-md-6">
     <label for="zip" className="form-label">Zip Code</label>
-    <input type="text" className="form-control" id="zip" />
+    <input type="text" className="form-control" id="zip" required />
   </div>
 
 
@@ -147,6 +147,10 @@ function AddReceivedProduct() {
     <button type="submit" className="btn btn-primary">Add</button>
   </div>
 </form>
+
+    <br/>
+    <br/>
+    <br/>
 
 </div>
   )

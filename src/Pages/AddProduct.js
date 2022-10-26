@@ -27,7 +27,7 @@ function AddProduct() {
 
 <div className="col-md-6">
 <label for="productType" className="form-label">Type</label>
-<select id="productType" className="form-select" >
+<select id="productType" className="form-select" required >
   <option disabled selected>...</option>
   <option>Covid-19 (Jannssen)</option>
   <option>Covid-19 (Novavax)</option>
@@ -42,27 +42,27 @@ function AddProduct() {
 
 <div className="col-md-6">
 <label for="NDC" className="form-label">NDC</label>
-<input type="text" className="form-control" id="NDC" placeholder="00000-0000-00"/>
+<input type="text" className="form-control" id="NDC" placeholder="00000-0000-00" required />
 </div>
 
 <div className="col-md-6">
 <label for="lotNumber" className="form-label">Lot Number</label>
-<input type="text" className="form-control" id="lotNumber" />
+<input type="text" className="form-control" id="lotNumber" required />
 </div>
 
 <div className="col-md-6">
           <label for="expiration" className="form-label">Expiration</label>
-          <input type="date" className="form-control" id="expiration" />
+          <input type="date" className="form-control" id="expiration" required />
 </div>
 
 <div className="col-md-6">
 <label for="doseVolume" className="form-label">Dose Volume</label>
-<input type="text" className="form-control" id="doseVolume" placeholder="0.5" />
+<input type="text" className="form-control" id="doseVolume" placeholder="0.5" required />
 </div>
 
 <div className="col-md-6">
 <label for="doseUnit" className="form-label">Dose Unit</label>
-<input type="text" className="form-control" id="doseUnit" placeholder="mL"/>
+<input type="text" className="form-control" id="doseUnit" placeholder="mL" required />
 </div>
 
 
@@ -70,6 +70,10 @@ function AddProduct() {
     <button type="submit" className="btn btn-primary">Add</button>
   </div>
 </form>
+
+    <br/>
+    <br/>
+    <br/>
 
 </div>
   )

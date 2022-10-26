@@ -242,6 +242,10 @@ function AddPatient() {
 
 </form>
 
+    <br/>
+    <br/>
+    <br/>
+
 </div>
   )
 }
