@@ -7,7 +7,7 @@ function AddFacility() {
   return (
     <div className="container">
     <ul className="nav nav-tabs">
-        <li className="nav-link" onClick={event => navigate("/PharmaTech/facilities")}>
+        <li className="nav-link" onClick={event => navigate("/PharmaTech/searchFacility")}>
             Search Facilities
         </li>
 

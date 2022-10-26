@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, useNavigate } from "react-router-dom"
 import { React, useState } from 'react'
 
-function Patients() {
+function SearchPatient() {
   let navigate = useNavigate(); //This allows us to link user to another page in the pop-up alert window
 
   const [firstName, setFirstName] = useState('');
@@ -19,15 +19,16 @@ function Patients() {
   //If no matching patient is found, allow re-direct to add a new patient
   const submitHandler = (e) => {
     e.preventDefault(); //prevent page refresh
-    console.log(firstName)
-    console.log(lastName)
-    console.log(DOB)
-    // if(firstName === "Bob"){
-    //   console.log("You put in the right person")
-    // }
-    // if (window.confirm("Patient not found. Would you like to add a new patient?")) {
-    //   navigate("/PharmaTech/addPatient")
-    // }
+
+    if(firstName === "Jennie" && lastName==="Nichols" && DOB==="1992-03-08"){
+      navigate("/PharmaTech/viewPatient")
+      return
+    } 
+      
+    if (window.confirm("Patient not found. Would you like to add a new patient?")) {
+        navigate("/PharmaTech/addPatient")
+    }
+
   }
 
 
@@ -35,7 +36,7 @@ function Patients() {
     
     <div className="container">
     <ul className="nav nav-tabs">
-        <li className="nav-link" onClick={event => navigate("/PharmaTech/patients")}>
+        <li className="nav-link" onClick={event => navigate("/PharmaTech/searchPatient")}>
             Search Patients
         </li>
 
@@ -45,13 +46,7 @@ function Patients() {
     </ul>
 
     <h1>Search Patient</h1>
-
-    {/* <i>Notes for className:</i>
-      <br/> 
-      <ul>
-      <li><i>If you search a patient and no match is found, you'll be given the option to add that patient, <b>try searching for a patient who doesn't exist and you'll be able to see the functionality to add a new patient.</b></i></li>
-      <li><i>Try searching the patient <b>"Bob Jones"</b> with the DOB <b>"01/01/2001"</b>, you'll be able to add/alter data for that patient.</i></li>
-      </ul> */}
+    <p>For the sake of the class: search for patient <b>"Jennie Nichols"</b> with the DOB <b>03/08/1992</b> to be able to generate a table that can be edited/deleted. Search for any other patient to be re-directed to a page where you can create a new patient. </p>
 
 
     <form className="row g-3" onSubmit={submitHandler}>
@@ -186,4 +181,4 @@ function Patients() {
   )
 }
 
-export default Patients
+export default SearchPatient

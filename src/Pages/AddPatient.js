@@ -27,7 +27,7 @@ function AddPatient() {
     <div className="container">
     
     <ul className="nav nav-tabs">
-            <li className="nav-link" onClick={event => navigate("/PharmaTech/patients")}>
+            <li className="nav-link" onClick={event => navigate("/PharmaTech/searchPatient")}>
                 Search Patients
             </li>
 

@@ -8,7 +8,7 @@ function AddProduct() {
     <div className="container">
 
     <ul className="nav nav-tabs">
-            <li className="nav-link" onClick={event => navigate("/PharmaTech/products")}>
+            <li className="nav-link" onClick={event => navigate("/PharmaTech/searchProduct")}>
                 Search Products
             </li>
 

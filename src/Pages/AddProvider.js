@@ -8,7 +8,7 @@ function AddProvider() {
     <div className="container">
 
     <ul className="nav nav-tabs">
-            <li className="nav-link" onClick={event => navigate("/PharmaTech/providers")}>
+            <li className="nav-link" onClick={event => navigate("/PharmaTech/searchProvider")}>
                 Search Providers
             </li>
 

@@ -9,11 +9,11 @@ function AddEvent() {
   return (
     <div className="container">
     <ul className="nav nav-tabs">
-        <li className="nav-link" onClick={event => navigate("/PharmaTech/events")}>
+        <li className="nav-link" onClick={event => navigate("/PharmaTech/searchEvent")}>
             Search Events
         </li>
 
-        <li className="nav-link" onClick={event => navigate("/PharmaTech/searchEvents")}>
+        <li className="nav-link" onClick={event => navigate("/PharmaTech/addEvent")}>
             Add Event
         </li>
     </ul>

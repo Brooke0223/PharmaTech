@@ -1,13 +1,38 @@
-import React from 'react'
+import { React, useState } from 'react'
 import { useNavigate } from "react-router-dom"
 
-function Facilities() {
+function SearchFacility() {
     let navigate = useNavigate(); //This allows us to link user to another page in the pop-up alert window
+
+    const [name, setName] = useState('');
+    const [type, setType] = useState('');
+    const [city, setCity] = useState('');
+    const [state, setState] = useState('');
+    const [providerFirst, setProviderFirst] = useState('');
+    const [providerLast, setProviderLast] = useState('');
+    const [providerType, setProductType] = useState('');
+    const [NDC, setNDC] = useState('');
+
+
+  //If no matching facility is found, allow re-direct to add a new provider
+  const submitHandler = (e) => {
+    e.preventDefault(); //prevent page refresh
+
+    if(name === "Walgreens" && city==="Sunnyvale" && state==="CA"){
+      navigate("/PharmaTech/viewFacility")
+      return
+    } 
+      
+    if (window.confirm("Facility not found. Would you like to add a new facility?")) {
+        navigate("/PharmaTech/addFacility")
+    }
+
+  }
 
   return (
     <div className="container">
     <ul className="nav nav-tabs">
-        <li className="nav-link" onClick={event => navigate("/PharmaTech/facilities")}>
+        <li className="nav-link" onClick={event => navigate("/PharmaTech/searchFacility")}>
             Search Facilities
         </li>
 
@@ -17,17 +42,18 @@ function Facilities() {
     </ul>
 
     <h1>Search Facilities</h1>
+    <p>For the sake of the class: search for a <b>Walgreens</b> located in <b>Sunnyvale, CA</b> to be able to generate a table that can be edited/deleted. Search for any other Facility to be re-directed to a page where you can create a new Facility. </p>
 
-    <form className="row g-3">
+    <form className="row g-3" onSubmit={submitHandler}>
 
   <div className="col-md-6">
     <label for="facilityName" className="form-label">Name</label>
-    <input type="text" className="form-control" id="facilityName" />
+    <input type="text" className="form-control" id="facilityName" required onChange={event => setName(event.target.value)} />
   </div>
 
   <div className="col-md-6">
     <label for="designation" className="form-label">Type</label>
-    <select id="designation" className="form-select" >
+    <select id="designation" className="form-select" onChange={event => setType(event.target.value)} >
       <option disabled selected>...</option>
       <option>Hospital</option>
       <option>Pharmacy</option>
@@ -39,12 +65,12 @@ function Facilities() {
 
   <div className="col-md-6">
     <label for="city" className="form-label">City</label>
-    <input type="text" className="form-control" id="city" />
+    <input type="text" className="form-control" id="city" required onChange={event => setCity(event.target.value)} />
   </div>
 
   <div className="col-md-6">
   <label for="state" className="form-label">State</label>
-    <select id="state" className="form-select" >
+    <select id="state" className="form-select" required onChange={event => setState(event.target.value)} >
       <option disabled selected>...</option>
       <option>AL</option>
       <option>AK</option>
@@ -111,17 +137,17 @@ function Facilities() {
 
   <div className="col-md-6">
     <label for="lastName" className="form-label">Provider First Name</label>
-    <input type="text" className="form-control" id="lastName" />
+    <input type="text" className="form-control" id="lastName" onChange={event => setProviderFirst(event.target.value)} />
   </div>
   
   <div className="col-md-6">
     <label for="lastName" className="form-label">Provider Last Name</label>
-    <input type="text" className="form-control" id="lastName" />
+    <input type="text" className="form-control" id="lastName" onChange={event => setProviderLast(event.target.value)} />
   </div>
 
   <div className="col-md-6">
     <label for="productType" className="form-label">Product Type</label>
-    <select id="productType" className="form-select" >
+    <select id="productType" className="form-select" onChange={event => setProductType(event.target.value)} >
       <option disabled selected>...</option>
       <option>Covid-19 (Jannssen)</option>
       <option>Covid-19 (Novavax)</option>
@@ -136,7 +162,7 @@ function Facilities() {
 
   <div className="col-md-6">
     <label for="NDC" className="form-label">Product NDC</label>
-    <input type="text" className="form-control" id="NDC" placeholder="00000-0000-00"/>
+    <input type="text" className="form-control" id="NDC" placeholder="00000-0000-00"onChange={event => setNDC(event.target.value)} />
   </div>
   
   <div className="col-12">
@@ -152,4 +178,4 @@ function Facilities() {
   )
 }
 
-export default Facilities
+export default SearchFacility

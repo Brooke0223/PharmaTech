@@ -1,14 +1,38 @@
-import React from 'react'
+import { React, useState } from 'react'
 import { useNavigate } from "react-router-dom"
 
-function Providers() {
+function SearchProvider() {
   let navigate = useNavigate(); //This allows us to link user to another page in the pop-up alert window
+
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [NPI, setNPI] = useState('');
+  const [designation, setDesignation] = useState('');
+  const [facilityName, setFacilityName] = useState('');
+  const [city, setCity] = useState('');
+  const [state, setState] = useState('');
+
+  //If no matching provider is found, allow re-direct to add a new provider
+  const submitHandler = (e) => {
+    e.preventDefault(); //prevent page refresh
+
+    if(firstName === "Rebecca" && lastName==="Mitchell"){
+      navigate("/PharmaTech/viewProvider")
+      return
+    } 
+      
+    if (window.confirm("Provider not found. Would you like to add a new provider?")) {
+        navigate("/PharmaTech/addProvider")
+    }
+
+  }
+
 
   return (
     <div className="container">
 
     <ul className="nav nav-tabs">
-            <li className="nav-link" onClick={event => navigate("/PharmaTech/providers")}>
+            <li className="nav-link" onClick={event => navigate("/PharmaTech/searchProvider")}>
                 Search Providers
             </li>
 
@@ -18,22 +42,23 @@ function Providers() {
     </ul>
 
     <h1>Search Providers</h1>
+    <p>For the sake of the class: search for the provider <b>"Rebecca Mitchell"</b> to be able to generate a table that can be edited/deleted. Search for any other provider to be re-directed to a page where you can create a new provider. </p>
 
-    <form className="row g-3">
+    <form className="row g-3" onSubmit={submitHandler}>
 
   <div className="col-md-6">
     <label for="firstName" className="form-label">First Name</label>
-    <input type="text" className="form-control" id="firstName" required />
+    <input type="text" className="form-control" id="firstName" onChange={event => setFirstName(event.target.value)} />
   </div>
 
   <div className="col-md-6">
     <label for="lastName" className="form-label">Last Name</label>
-    <input type="text" className="form-control" id="lastName" required />
+    <input type="text" className="form-control" id="lastName" onChange={event => setLastName(event.target.value)} />
   </div>
 
   <div className="col-md-12">
     <label for="designation" className="form-label">Designation</label>
-    <select id="designation" className="form-select" >
+    <select id="designation" className="form-select" onChange={event => setDesignation(event.target.value)} >
       <option disabled selected>...</option>
       <option>Physician</option>
       <option>Physician Associate</option>
@@ -48,22 +73,22 @@ function Providers() {
 
   <div className="col-md-6">
     <label for="NPI" className="form-label">NPI</label>
-    <input type="text" className="form-control" id="NPI" />
+    <input type="text" className="form-control" id="NPI" onChange={event => setNPI(event.target.value)} />
   </div>
 
   <div className="col-md-6">
     <label for="FacilityName" className="form-label">Facility Name</label>
-    <input type="text" className="form-control" id="FacilityName" />
+    <input type="text" className="form-control" id="FacilityName" onChange={event => setFacilityName(event.target.value)} />
   </div>
 
   <div className="col-md-6">
     <label for="city" className="form-label">City</label>
-    <input type="text" className="form-control" id="city" />
+    <input type="text" className="form-control" id="city" onChange={event => setCity(event.target.value)} />
   </div>
 
   <div className="col-md-6">
   <label for="state" className="form-label">State</label>
-    <select id="state" className="form-select" >
+    <select id="state" className="form-select" onChange={event => setState(event.target.value)} >
       <option disabled selected>...</option>
       <option>AL</option>
       <option>AK</option>
@@ -140,4 +165,4 @@ function Providers() {
   )
 }
 
-export default Providers
+export default SearchProvider

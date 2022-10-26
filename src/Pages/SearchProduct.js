@@ -1,14 +1,35 @@
-import React from 'react'
+import { React, useState } from 'react'
 import { useNavigate } from "react-router-dom"
 
-function Products() {
+function SearchProduct() {
   let navigate = useNavigate(); //This allows us to link user to another page in the pop-up alert window
+
+  const [type, setType] = useState('');
+  const [NDC, setNDC] = useState('');
+  const [lot, setLot] = useState('');
+  const [expiration, setExpiration] = useState('');
+  const [facilityName, setFacilityName] = useState('');
+  const [city, setCity] = useState('');
+  const [state, setState] = useState('');
+  const [zip, setZip] = useState('');
+
+
+  //If no matching product is found, display window alert to notify user
+  const submitHandler = (e) => {
+    e.preventDefault(); //prevent page refresh
+
+    if(facilityName === "Walgreens" && city==="Sunnyvale" && state==="CA"){
+      navigate("/PharmaTech/viewProduct")
+    }else{
+      window.alert("No matching product found")
+    } 
+  }
 
   return (
     <div className="container">
 
     <ul className="nav nav-tabs">
-            <li className="nav-link" onClick={event => navigate("/PharmaTech/products")}>
+            <li className="nav-link" onClick={event => navigate("/PharmaTech/searchProduct")}>
                 Search Products
             </li>
 
@@ -22,12 +43,13 @@ function Products() {
     </ul>
 
     <h1>Search Products</h1>
+    <p>For the sake of the class: search for products in the "Facility Name" <b>Walgreens</b> located in <b>Sunnyvale, CA</b> to be able to generate a table that can be edited/deleted.</p>
 
-    <form className="row g-3">
+    <form className="row g-3" onSubmit={submitHandler}>
 
     <div className="col-md-6">
     <label for="productType" className="form-label">Product Type</label>
-    <select id="productType" className="form-select" >
+    <select id="productType" className="form-select" onChange={event => setType(event.target.value)} >
       <option disabled selected>...</option>
       <option>Covid-19 (Jannssen)</option>
       <option>Covid-19 (Novavax)</option>
@@ -42,33 +64,33 @@ function Products() {
 
   <div className="col-md-6">
     <label for="NDC" className="form-label">Product NDC</label>
-    <input type="text" className="form-control" id="NDC" placeholder="00000-0000-00"/>
+    <input type="text" className="form-control" id="NDC" placeholder="00000-0000-00" onChange={event => setNDC(event.target.value)} />
   </div>
 
   <div className="col-md-6">
     <label for="lotNumber" className="form-label">Lot Number</label>
-    <input type="text" className="form-control" id="lotNumber" />
+    <input type="text" className="form-control" id="lotNumber" onChange={event => setLot(event.target.value)} />
   </div>
 
   <div className="col-md-6">
           <label for="expiration" className="form-label">Expiration</label>
-          <input type="date" className="form-control" id="expiration" />
+          <input type="date" className="form-control" id="expiration" onChange={event => setExpiration(event.target.value)} />
   </div>
 
   <div className="col-md-6">
     <label for="facilityName" className="form-label">Facility Name</label>
-    <input type="text" className="form-control" id="facilityName" />
+    <input type="text" className="form-control" id="facilityName" onChange={event => setFacilityName(event.target.value)} />
   </div>
 
   <div className="col-md-6">
     <label for="city" className="form-label">City</label>
-    <input type="text" className="form-control" id="city" />
+    <input type="text" className="form-control" id="city" onChange={event => setCity(event.target.value)} />
   </div>
 
 
   <div className="col-md-6">
   <label for="state" className="form-label">State</label>
-    <select id="state" className="form-select" >
+    <select id="state" className="form-select" onChange={event => setState(event.target.value)} >
       <option disabled selected>...</option>
       <option>AL</option>
       <option>AK</option>
@@ -134,7 +156,7 @@ function Products() {
 
   <div className="col-md-6">
     <label for="zip" className="form-label">Zip Code</label>
-    <input type="text" className="form-control" id="zip" />
+    <input type="text" className="form-control" id="zip" onChange={event => setZip(event.target.value)} />
   </div>
 
 
@@ -151,4 +173,4 @@ function Products() {
   )
 }
 
-export default Products
+export default SearchProduct
