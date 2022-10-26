@@ -20,7 +20,7 @@ function App() {
 
 
       <Router>
-        <Link to="/PharmaTech"> Home </Link>
+        {/* <Link to="/PharmaTech"> Home </Link> */}
         <Link to="/PharmaTech/patients"> Patients </Link>
         <Link to="/PharmaTech/events"> Events </Link>
         <Link to="/PharmaTech/providers"> Providers </Link>
@@ -28,7 +28,8 @@ function App() {
         <Link to="/PharmaTech/products"> Products </Link>
 
         <Routes>
-          <Route path="/PharmaTech" element={<Home />} />
+          {/* <Route path="/PharmaTech" element={<Home />} /> */}
+          <Route path="/PharmaTech" element={<Patients />} />
           <Route path="/PharmaTech/patients" element={<Patients />} />
           <Route path="/PharmaTech/events" element={<Events />} />
           <Route path="/PharmaTech/addEvent" element={<AddEvent />} />

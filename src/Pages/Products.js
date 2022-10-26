@@ -21,45 +21,46 @@ function Products() {
 
     <form className="row g-3">
 
-  <div className="col-md-6">
-    <label for="firstName" className="form-label">First Name</label>
-    <input type="text" className="form-control" id="firstName" required />
-  </div>
-
-  <div className="col-md-6">
-    <label for="lastName" className="form-label">Last Name</label>
-    <input type="text" className="form-control" id="lastName" required />
-  </div>
-
-  <div className="col-md-12">
-    <label for="designation" className="form-label">Designation</label>
-    <select id="designation" className="form-select" >
+    <div className="col-md-6">
+    <label for="productType" className="form-label">Product Type</label>
+    <select id="productType" className="form-select" >
       <option disabled selected>...</option>
-      <option>Physician</option>
-      <option>Physician Associate</option>
-      <option>Pharmacist</option>
-      <option>Advanced Practice Registered Nurse</option>
-      <option>Registered Nurse</option>
-      <option>Licensed Practical Nurse</option>
-      <option>Paramedic</option>
-      <option>Other</option>
+      <option>Covid-19 (Jannssen)</option>
+      <option>Covid-19 (Novavax)</option>
+      <option>Covid-19 (Pfizer)</option>
+      <option>Covid-19 (Moderna)</option>
+      <option>Influenza</option>
+      <option>Influenza (Adult)</option>
+      <option>Zoster RZV (Shingrix)</option>
+      <option>Zoster ZVL (Zostavax)</option>
     </select>
   </div>
 
   <div className="col-md-6">
-    <label for="providerID" className="form-label">Provider ID</label>
-    <input type="text" className="form-control" id="providerID" />
+    <label for="NDC" className="form-label">Product NDC</label>
+    <input type="text" className="form-control" id="NDC" placeholder="00000-0000-00"/>
   </div>
 
   <div className="col-md-6">
-    <label for="NPI" className="form-label">NPI</label>
-    <input type="text" className="form-control" id="NPI" />
+    <label for="lotNumber" className="form-label">Lot Number</label>
+    <input type="text" className="form-control" id="lotNumber" />
+  </div>
+
+  <div className="col-md-6">
+          <label for="expiration" className="form-label">Expiration</label>
+          <input type="date" className="form-control" id="expiration" />
+  </div>
+
+  <div className="col-md-6">
+    <label for="facilityName" className="form-label">Facility Name</label>
+    <input type="text" className="form-control" id="facilityName" />
   </div>
 
   <div className="col-md-6">
     <label for="city" className="form-label">City</label>
     <input type="text" className="form-control" id="city" />
   </div>
+
 
   <div className="col-md-6">
   <label for="state" className="form-label">State</label>
@@ -126,6 +127,12 @@ function Products() {
       <option>WY</option>
     </select>
   </div>
+
+  <div className="col-md-6">
+    <label for="zip" className="form-label">Zip Code</label>
+    <input type="text" className="form-control" id="zip" />
+  </div>
+
 
   <div className="col-12">
     <button type="submit" className="btn btn-primary">Search</button>

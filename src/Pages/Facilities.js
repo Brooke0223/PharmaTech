@@ -21,38 +21,20 @@ function Facilities() {
     <form className="row g-3">
 
   <div className="col-md-6">
-    <label for="firstName" className="form-label">First Name</label>
-    <input type="text" className="form-control" id="firstName" required />
+    <label for="facilityName" className="form-label">Name</label>
+    <input type="text" className="form-control" id="facilityName" />
   </div>
 
   <div className="col-md-6">
-    <label for="lastName" className="form-label">Last Name</label>
-    <input type="text" className="form-control" id="lastName" required />
-  </div>
-
-  <div className="col-md-12">
-    <label for="designation" className="form-label">Designation</label>
+    <label for="designation" className="form-label">Type</label>
     <select id="designation" className="form-select" >
       <option disabled selected>...</option>
-      <option>Physician</option>
-      <option>Physician Associate</option>
-      <option>Pharmacist</option>
-      <option>Advanced Practice Registered Nurse</option>
-      <option>Registered Nurse</option>
-      <option>Licensed Practical Nurse</option>
-      <option>Paramedic</option>
-      <option>Other</option>
+      <option>Hospital</option>
+      <option>Pharmacy</option>
+      <option>Walk-In Clinic</option>
+      <option>Primary Care Clinic</option>
+      <option>Other Medical Practice</option>
     </select>
-  </div>
-
-  <div className="col-md-6">
-    <label for="providerID" className="form-label">Provider ID</label>
-    <input type="text" className="form-control" id="providerID" />
-  </div>
-
-  <div className="col-md-6">
-    <label for="NPI" className="form-label">NPI</label>
-    <input type="text" className="form-control" id="NPI" />
   </div>
 
   <div className="col-md-6">
@@ -126,6 +108,37 @@ function Facilities() {
     </select>
   </div>
 
+
+  <div className="col-md-6">
+    <label for="lastName" className="form-label">Provider First Name</label>
+    <input type="text" className="form-control" id="lastName" />
+  </div>
+  
+  <div className="col-md-6">
+    <label for="lastName" className="form-label">Provider Last Name</label>
+    <input type="text" className="form-control" id="lastName" />
+  </div>
+
+  <div className="col-md-6">
+    <label for="productType" className="form-label">Product Type</label>
+    <select id="productType" className="form-select" >
+      <option disabled selected>...</option>
+      <option>Covid-19 (Jannssen)</option>
+      <option>Covid-19 (Novavax)</option>
+      <option>Covid-19 (Pfizer)</option>
+      <option>Covid-19 (Moderna)</option>
+      <option>Influenza</option>
+      <option>Influenza (Adult)</option>
+      <option>Zoster RZV (Shingrix)</option>
+      <option>Zoster ZVL (Zostavax)</option>
+    </select>
+  </div>
+
+  <div className="col-md-6">
+    <label for="NDC" className="form-label">Product NDC</label>
+    <input type="text" className="form-control" id="NDC" placeholder="00000-0000-00"/>
+  </div>
+  
   <div className="col-12">
     <button type="submit" className="btn btn-primary">Search</button>
   </div>

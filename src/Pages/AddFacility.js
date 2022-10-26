@@ -16,54 +16,41 @@ function AddFacility() {
         </li>
     </ul>
 
-    <h1>Add Facility</h1>
+    <h1>Add A New Facility</h1>
 
     <form className="row g-3">
 
-  <div className="col-md-6">
-    <label for="firstName" className="form-label">First Name</label>
-    <input type="text" className="form-control" id="firstName" required />
+    <div className="col-md-6">
+    <label for="facilityName" className="form-label">Name</label>
+    <input type="text" className="form-control" id="facilityName" required />
   </div>
 
   <div className="col-md-6">
-    <label for="lastName" className="form-label">Last Name</label>
-    <input type="text" className="form-control" id="lastName" required />
-  </div>
-
-  <div className="col-md-12">
-    <label for="designation" className="form-label">Designation</label>
-    <select id="designation" className="form-select" >
+    <label for="designation" className="form-label">Type</label>
+    <select id="designation" className="form-select" required >
       <option disabled selected>...</option>
-      <option>Physician</option>
-      <option>Physician Associate</option>
-      <option>Pharmacist</option>
-      <option>Advanced Practice Registered Nurse</option>
-      <option>Registered Nurse</option>
-      <option>Licensed Practical Nurse</option>
-      <option>Paramedic</option>
-      <option>Other</option>
+      <option>Hospital</option>
+      <option>Pharmacy</option>
+      <option>Walk-In Clinic</option>
+      <option>Primary Care Clinic</option>
+      <option>Other Medical Practice</option>
     </select>
   </div>
 
-  <div className="col-md-6">
-    <label for="providerID" className="form-label">Provider ID</label>
-    <input type="text" className="form-control" id="providerID" />
-  </div>
-
-  <div className="col-md-6">
-    <label for="NPI" className="form-label">NPI</label>
-    <input type="text" className="form-control" id="NPI" />
+  <div className="col-12">
+    <label for="address" className="form-label">Address</label>
+    <input type="text" className="form-control" id="address" placeholder="1234 Main St" required/>
   </div>
 
   <div className="col-md-6">
     <label for="city" className="form-label">City</label>
-    <input type="text" className="form-control" id="city" />
+    <input type="text" className="form-control" id="city" required />
   </div>
 
-  <div className="col-md-6">
-  <label for="state" className="form-label">State</label>
-    <select id="state" className="form-select" >
-      <option disabled selected>...</option>
+  <div className="col-md-4">
+    <label for="state" className="form-label">State</label>
+    <select id="state" className="form-select" required>
+      <option disabled selected>Select</option>
       <option>AL</option>
       <option>AK</option>
       <option>AZ</option>
@@ -126,8 +113,14 @@ function AddFacility() {
     </select>
   </div>
 
+  <div className="col-md-2">
+    <label for="zipCode" className="form-label">Zip</label>
+    <input type="text" className="form-control" id="zipCode" required />
+  </div>
+  
+
   <div className="col-12">
-    <button type="submit" className="btn btn-primary">Search</button>
+    <button type="submit" className="btn btn-primary">Add</button>
   </div>
 </form>
 

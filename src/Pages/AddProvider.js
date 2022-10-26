@@ -128,7 +128,7 @@ function AddProvider() {
   </div>
 
   <div className="col-12">
-    <button type="submit" className="btn btn-primary">Search</button>
+    <button type="submit" className="btn btn-primary">Add</button>
   </div>
 </form>
 
