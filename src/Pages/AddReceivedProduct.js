@@ -1,7 +1,7 @@
 import React from 'react'
 import { useNavigate } from "react-router-dom"
 
-function Products() {
+function AddReceivedProduct() {
   let navigate = useNavigate(); //This allows us to link user to another page in the pop-up alert window
 
   return (
@@ -21,7 +21,7 @@ function Products() {
             </li>
     </ul>
 
-    <h1>Search Products</h1>
+    <h1>Add Product To Facility Inventory</h1>
 
     <form className="row g-3">
 
@@ -45,14 +45,19 @@ function Products() {
     <input type="text" className="form-control" id="NDC" placeholder="00000-0000-00"/>
   </div>
 
-  <div className="col-md-6">
+  <div className="col-md-4">
     <label for="lotNumber" className="form-label">Lot Number</label>
     <input type="text" className="form-control" id="lotNumber" />
   </div>
 
-  <div className="col-md-6">
+  <div className="col-md-4">
           <label for="expiration" className="form-label">Expiration</label>
           <input type="date" className="form-control" id="expiration" />
+  </div>
+
+  <div className="col-md-4">
+    <label for="doseUnits" className="form-label">Individual Dose Units</label>
+    <input type="text" className="form-control" id="doseUnits" placeholder="0" />
   </div>
 
   <div className="col-md-6">
@@ -139,7 +144,7 @@ function Products() {
 
 
   <div className="col-12">
-    <button type="submit" className="btn btn-primary">Search</button>
+    <button type="submit" className="btn btn-primary">Add</button>
   </div>
 </form>
 
@@ -147,4 +152,4 @@ function Products() {
   )
 }
 
-export default Products
+export default AddReceivedProduct

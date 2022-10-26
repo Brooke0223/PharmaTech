@@ -12,8 +12,12 @@ function AddProduct() {
                 Search Products
             </li>
 
-            <li className="nav-link" onClick={event => navigate("/PharmaTech/addProducts")}>
-                Add Products
+            <li className="nav-link" onClick={event => navigate("/PharmaTech/addReceivedProduct")}>
+                Receive Product Shipment
+            </li>
+
+            <li className="nav-link" onClick={event => navigate("/PharmaTech/addProduct")}>
+                Add A New Product
             </li>
     </ul>
 

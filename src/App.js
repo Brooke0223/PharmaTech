@@ -11,6 +11,7 @@ import AddPatient from './Pages/AddPatient';
 import AddProvider from './Pages/AddProvider';
 import AddFacility from './Pages/AddFacility';
 import AddProduct from './Pages/AddProduct';
+import AddReceivedProduct from './Pages/AddReceivedProduct';
 
 
 function App() {
@@ -26,6 +27,8 @@ function App() {
         <Link to="/PharmaTech/providers"> Providers </Link>
         <Link to="/PharmaTech/facilities"> Facilities </Link>
         <Link to="/PharmaTech/products"> Products </Link>
+        <br></br>
+        <br></br>
 
         <Routes>
           {/* <Route path="/PharmaTech" element={<Home />} /> */}
@@ -40,6 +43,7 @@ function App() {
           <Route path="/PharmaTech/addProvider" element={<AddProvider />} />
           <Route path="/PharmaTech/addFacility" element={<AddFacility />} />
           <Route path="/PharmaTech/addProduct" element={<AddProduct />} />
+          <Route path="/PharmaTech/addReceivedProduct" element={<AddReceivedProduct />} />
         </Routes>
       </Router>
 
