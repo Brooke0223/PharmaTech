@@ -37,7 +37,7 @@ function App() {
 
         <Routes>
           {/* <Route path="/PharmaTech" element={<Home />} /> */}
-          <Route path="/PharmaTech" element={<SearchPatient />} />
+          <Route path="/PharmaTech" element={<ViewPatient />} />
           <Route path="/PharmaTech/searchPatient" element={<SearchPatient />} />
           <Route path="/PharmaTech/searchEvent" element={<SearchEvent />} />
           <Route path="/PharmaTech/addEvent" element={<AddEvent />} />

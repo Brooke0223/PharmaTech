@@ -14,28 +14,19 @@ function SearchPatient() {
   const [city, setCity] = useState('');
   const [state, setState] = useState('');
   const [zip, setZip] = useState('');
+  const [phone, setPhone] = useState('');
+  const [email, setEmail] = useState('');
 
-
-  //If no matching patient is found, allow re-direct to add a new patient
-  const submitHandler = (e) => {
-    e.preventDefault(); //prevent page refresh
-
-    if(firstName === "Jennie" && lastName==="Nichols" && DOB==="1992-03-08"){
-      navigate("/PharmaTech/viewPatient")
-      return
-    } 
-      
-    if (window.confirm("Patient not found. Would you like to add a new patient?")) {
-        navigate("/PharmaTech/addPatient")
-    }
-
-  }
 
 
   return (
     
     <div className="container">
     <ul className="nav nav-tabs">
+        <li className="nav-link" onClick={event => navigate("/PharmaTech/ViewPatient")}>
+            View Patients
+        </li>
+
         <li className="nav-link" onClick={event => navigate("/PharmaTech/searchPatient")}>
             Search Patients
         </li>
@@ -45,11 +36,10 @@ function SearchPatient() {
         </li>
     </ul>
 
-    <h1>Search Patient</h1>
-    <p>For the sake of the class: search for patient <b>"Jennie Nichols"</b> with the DOB <b>03/08/1992</b> to be able to generate a table that can be edited/deleted. Search for any other patient to be re-directed to a page where you can create a new patient. </p>
+    <h1>Search Patients</h1>
+    
 
-
-    <form className="row g-3" onSubmit={submitHandler}>
+    <form className="row g-3">
 
     <div className="col-md-4">
     <label for="firstName" className="form-label">First Name</label>
@@ -167,9 +157,20 @@ function SearchPatient() {
     <input type="text" className="form-control" id="zipCode" onChange={event => setZip(event.target.value)} />
   </div>
 
+  <div className="col-md-6">
+    <label for="phone" className="form-label">Phone</label>
+    <input type="text" className="form-control" id="phone" placeholder="(123) 456-7890" onChange={event => setPhone(event.target.value)} />
+  </div>
+
+  <div className="col-md-6">
+    <label for="email" className="form-label">Email</label>
+    <input type="text" className="form-control" id="email" onChange={event => setEmail(event.target.value)} />
+  </div>
+
   <div className="col-12">
     <button type="submit" className="btn btn-primary">Search</button>
   </div>
+  
 </form>
 
   <br/>

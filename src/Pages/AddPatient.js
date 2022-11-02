@@ -27,13 +27,17 @@ function AddPatient() {
     <div className="container">
     
     <ul className="nav nav-tabs">
-            <li className="nav-link" onClick={event => navigate("/PharmaTech/searchPatient")}>
-                Search Patients
-            </li>
+        <li className="nav-link" onClick={event => navigate("/PharmaTech/ViewPatient")}>
+            View Patients
+        </li>
 
-            <li className="nav-link" onClick={event => navigate("/PharmaTech/addPatient")}>
-                Add Patient
-            </li>
+        <li className="nav-link" onClick={event => navigate("/PharmaTech/searchPatient")}>
+            Search Patients
+        </li>
+
+        <li className="nav-link" onClick={event => navigate("/PharmaTech/addPatient")}>
+            Add Patient
+        </li>
     </ul>
 
     <h1>Add A New Patient</h1>
@@ -73,7 +77,7 @@ function AddPatient() {
 
   <div className="col-md-4">
     <label for="status" className="form-label">Status</label>
-    <select id="status" className="form-select" onChange={event => setStatus(event.target.value)} >
+    <select id="status" className="form-select" required onChange={event => setStatus(event.target.value)} >
       <option disabled selected>Select</option>
       <option>Alive</option>
       <option>Deceased</option>
@@ -191,7 +195,7 @@ function AddPatient() {
 
   <div className="col-md-4">
     <label for="phone" className="form-label">Phone</label>
-    <input type="text" className="form-control" id="phone" placeholder="(123) 456-789" onChange={event => setPhone(event.target.value)} />
+    <input type="text" className="form-control" id="phone" placeholder="(123) 456-7890" onChange={event => setPhone(event.target.value)} />
   </div>
 
   <div className="col-md-4">
