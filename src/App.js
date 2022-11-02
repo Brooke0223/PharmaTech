@@ -17,6 +17,8 @@ import ViewEvent from './Pages/ViewEvent';
 import ViewProvider from './Pages/ViewProvider';
 import ViewFacility from './Pages/ViewFacility';
 import ViewProduct from './Pages/ViewProduct';
+import ViewContact from './Pages/ViewContact';
+import AddContact from './Pages/AddContact';
 
 
 function App() {
@@ -27,8 +29,9 @@ function App() {
 
       <Router>
         {/* <Link to="/PharmaTech"> Home </Link> */}
-        <Link to="/PharmaTech/searchPatient"> Patients </Link>
-        <Link to="/PharmaTech/searchEvent"> Events </Link>
+        <Link to="/PharmaTech/viewPatient"> Patients </Link>
+        <Link to="/PharmaTech/viewContact"> Contacts </Link>
+        <Link to="/PharmaTech/viewEvent"> Events </Link>
         <Link to="/PharmaTech/searchProvider"> Providers </Link>
         <Link to="/PharmaTech/searchFacility"> Facilities </Link>
         <Link to="/PharmaTech/searchProduct"> Products </Link>
@@ -54,6 +57,8 @@ function App() {
           <Route path="/PharmaTech/viewProvider" element={<ViewProvider />} />
           <Route path="/PharmaTech/viewFacility" element={<ViewFacility />} />
           <Route path="/PharmaTech/viewProduct" element={<ViewProduct />} />
+          <Route path="/PharmaTech/viewContact" element={<ViewContact />} />
+          <Route path="/PharmaTech/addContact" element={<AddContact />} />
         </Routes>
       </Router>
 

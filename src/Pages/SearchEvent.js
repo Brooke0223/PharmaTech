@@ -35,17 +35,20 @@ function SearchEvent() {
   return (
     <div className="container">
       <ul className="nav nav-tabs">
-        <li className="nav-link" onClick={(event) => navigate("/PharmaTech/searchEvent")} >
-          Search Events
-        </li>
+          <li className="nav-link" onClick={event => navigate("/PharmaTech/viewEvent")}>
+              View Events
+          </li>
 
-        <li className="nav-link" onClick={(event) => navigate("/PharmaTech/addEvent")} >
-          Add Event
-        </li>
+          <li className="nav-link" onClick={event => navigate("/PharmaTech/searchEvent")}>
+              Search Events
+          </li>
+
+          <li className="nav-link" onClick={event => navigate("/PharmaTech/addEvent")}>
+              Add Event
+          </li>
       </ul>
 
       <h1>Search Events</h1>
-      <p>For the sake of the class: search events for patient <b>"Jennie Nichols"</b> with the DOB <b>03/08/1992</b> to be able to generate a table that can be edited/deleted.</p>
 
       <form className="row g-3" onSubmit={submitHandler}>
         <div className="col-md-4">
