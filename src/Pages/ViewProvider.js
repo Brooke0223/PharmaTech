@@ -53,10 +53,19 @@ function ViewProvider() {
     </tr>
     <tr>
       <th scope="row">2</th>
-      <td>Rebecca</td>
-      <td>Mitchell</td>
+      <td>Timothy</td>
+      <td>Vanleer</td>
       <td>1367862067</td>
       <td>Pharmacist</td>
+      <td>⨁</td>
+      <td>⨂</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>Edward</td>
+      <td>Lemus</td>
+      <td>1608102055</td>
+      <td>Nurse</td>
       <td>⨁</td>
       <td>⨂</td>
     </tr>
