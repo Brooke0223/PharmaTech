@@ -7,16 +7,16 @@ function ViewProviderFacility() {
   return (
     <div className="container">
         <ul className="nav nav-tabs">
-            <li className="nav-link" onClick={event => navigate("/PharmaTech/viewFacility")}>
-                View Facilities
+            <li className="nav-link" onClick={event => navigate("/PharmaTech/viewProvider")}>
+                View Providers
             </li>
 
-            <li className="nav-link" onClick={event => navigate("/PharmaTech/searchFacility")}>
-                Search Facilities
+            <li className="nav-link" onClick={event => navigate("/PharmaTech/searchProvider")}>
+                Search Providers
             </li>
 
-            <li className="nav-link" onClick={event => navigate("/PharmaTech/addFacility")}>
-                Add Facility
+            <li className="nav-link" onClick={event => navigate("/PharmaTech/addProvider")}>
+                Add Provider
             </li>
 
             <li className="nav-link" onClick={event => navigate("/PharmaTech/viewProviderFacility")}>
@@ -26,9 +26,9 @@ function ViewProviderFacility() {
             <li className="nav-link" onClick={event => navigate("/PharmaTech/addProviderFacility")}>
                 Add Providers to Facilities
             </li>
-        </ul>
+         </ul>
 
-      <h1>View Providers Associated with a Facility</h1>
+      <h1>View Facilities Associated With a Provider</h1>
       <br></br>
     <table className="table table-hover">
   <thead>

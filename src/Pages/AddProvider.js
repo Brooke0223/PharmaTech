@@ -19,7 +19,15 @@ function AddProvider() {
             <li className="nav-link" onClick={event => navigate("/PharmaTech/addProvider")}>
                 Add Provider
             </li>
-        </ul>
+
+            <li className="nav-link" onClick={event => navigate("/PharmaTech/viewProviderFacility")}>
+                View Providers' Facilities
+            </li>
+
+            <li className="nav-link" onClick={event => navigate("/PharmaTech/addProviderFacility")}>
+                Add Providers to Facilities
+            </li>
+         </ul>
 
     <h1>Add A New Provider</h1>
 

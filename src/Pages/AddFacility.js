@@ -18,14 +18,6 @@ function AddFacility() {
             <li className="nav-link" onClick={event => navigate("/PharmaTech/addFacility")}>
                 Add Facility
             </li>
-
-            <li className="nav-link" onClick={event => navigate("/PharmaTech/viewProviderFacility")}>
-                View Providers' Facilities
-            </li>
-
-            <li className="nav-link" onClick={event => navigate("/PharmaTech/addProviderFacility")}>
-                Add Providers' Facilities
-            </li>
         </ul>
 
     <h1>Add A New Facility</h1>

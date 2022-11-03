@@ -31,7 +31,7 @@ function SearchProvider() {
   return (
     <div className="container">
 
-    <ul className="nav nav-tabs">
+        <ul className="nav nav-tabs">
             <li className="nav-link" onClick={event => navigate("/PharmaTech/viewProvider")}>
                 View Providers
             </li>
@@ -43,7 +43,15 @@ function SearchProvider() {
             <li className="nav-link" onClick={event => navigate("/PharmaTech/addProvider")}>
                 Add Provider
             </li>
-    </ul>
+
+            <li className="nav-link" onClick={event => navigate("/PharmaTech/viewProviderFacility")}>
+                View Providers' Facilities
+            </li>
+
+            <li className="nav-link" onClick={event => navigate("/PharmaTech/addProviderFacility")}>
+                Add Providers to Facilities
+            </li>
+         </ul>
 
     <h1>Search Providers</h1>
 
