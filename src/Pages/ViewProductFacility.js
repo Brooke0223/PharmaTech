@@ -1,7 +1,7 @@
 import React from 'react'
 import { useNavigate } from "react-router-dom"
 
-function ViewProduct() {
+function ViewProductFacility() {
     let navigate = useNavigate(); //This allows us to link user to another page in the pop-up alert window
 
   return (
@@ -29,18 +29,16 @@ function ViewProduct() {
         </ul>
 
 
-      <h1>View Products</h1>
+      <h1>View Facilities' Product Inventory</h1>
       <br></br>
     <table className="table table-hover">
   <thead>
     <tr>
+      <th scope="col">Product Facility ID</th>
       <th scope="col">Product ID</th>
-      <th scope="col">Product Type</th>
-      <th scope="col">NDC</th>
-      <th scope="col">Lot</th>
+      <th scope="col">Facility ID</th>
+      <th scope="col">Dose Quantity</th>
       <th scope="col">Expiration</th>
-      <th scope="col">Dose Volume</th>
-      <th scope="col">Dose Unit</th>
       <th scope="col">Modify</th>
       <th scope="col">Delete</th>
     </tr>
@@ -48,45 +46,55 @@ function ViewProduct() {
   <tbody>
     <tr>
       <th scope="row">1</th>
-      <td>Tdap</td>
-      <td><i>Null</i></td>
-      <td><i>Null</i></td>
-      <td><i>Null</i></td>
-      <td><i>Null</i></td>
-      <td><i>Null</i></td>
+      <td>2</td>
+      <td>1</td>
+      <td>553</td>
+      <td>2023-06-30</td>
       <td>⨁</td>
       <td>⨂</td>
     </tr>
     <tr>
       <th scope="row">2</th>
-      <td>Influenza</td>
-      <td>49281042210</td>
-      <td>UI975AB</td>
-      <td>2023-06-30</td>
-      <td>0.5</td>
-      <td>mL</td>
+      <td>3</td>
+      <td>1</td>
+      <td>65</td>
+      <td>2022-10-31</td>
       <td>⨁</td>
       <td>⨂</td>
     </tr>
     <tr>
       <th scope="row">3</th>
-      <td>Zoster</td>
-      <td>58160081912</td>
-      <td>4ZYUYGL3</td>
-      <td>2022-09-30</td>
-      <td>0.5</td>
-      <td>mL</td>
+      <td>3</td>
+      <td>2</td>
+      <td>50</td>
+      <td>2023-09-30</td>
       <td>⨁</td>
       <td>⨂</td>
     </tr>
     <tr>
       <th scope="row">4</th>
-      <td>Pneumococcal</td>
-      <td>0005200001</td>
-      <td>EHEBY352</td>
+      <td>4</td>
+      <td>2</td>
+      <td>25</td>
+      <td>2023-04-30</td>
+      <td>⨁</td>
+      <td>⨂</td>
+    </tr>
+    <tr>
+      <th scope="row">5</th>
+      <td>1</td>
+      <td>3</td>
+      <td>20</td>
       <td>2022-05-31</td>
-      <td>0.5</td>
-      <td>mL</td>
+      <td>⨁</td>
+      <td>⨂</td>
+    </tr>
+    <tr>
+      <th scope="row">6</th>
+      <td>4</td>
+      <td>4</td>
+      <td>15</td>
+      <td>2022-12-31</td>
       <td>⨁</td>
       <td>⨂</td>
     </tr>
@@ -97,4 +105,4 @@ function ViewProduct() {
   )
 }
 
-export default ViewProduct
+export default ViewProductFacility

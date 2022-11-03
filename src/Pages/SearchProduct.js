@@ -17,23 +17,27 @@ function SearchProduct() {
   return (
     <div className="container">
 
-      <ul className="nav nav-tabs">
-          <li className="nav-link" onClick={event => navigate("/PharmaTech/viewProduct")}>
-              View Products
-          </li>
+<ul className="nav nav-tabs">
+            <li className="nav-link" onClick={event => navigate("/PharmaTech/viewProduct")}>
+                View Products
+            </li>
 
-          <li className="nav-link" onClick={event => navigate("/PharmaTech/searchProduct")}>
-              Search Products
-          </li>
+            <li className="nav-link" onClick={event => navigate("/PharmaTech/searchProduct")}>
+                Search Products
+            </li>
 
-          <li className="nav-link" onClick={event => navigate("/PharmaTech/addReceivedProduct")}>
-              Receive Product Shipment
-          </li>
+            <li className="nav-link" onClick={event => navigate("/PharmaTech/addProduct")}>
+                Add A New Product
+            </li>
 
-          <li className="nav-link" onClick={event => navigate("/PharmaTech/addProduct")}>
-              Add A New Product
-          </li>
-      </ul>
+            <li className="nav-link" onClick={event => navigate("/PharmaTech/viewProductFacility")}>
+                View Products in Facilities
+            </li>
+
+            <li className="nav-link" onClick={event => navigate("/PharmaTech/addProductFacility")}>
+                Add Products to Facilities
+            </li>
+        </ul>
 
     <h1>Search Products</h1>
 

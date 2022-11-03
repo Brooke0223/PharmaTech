@@ -11,7 +11,7 @@ import AddEvent from './Pages/AddEvent';
 import AddProvider from './Pages/AddProvider';
 import AddFacility from './Pages/AddFacility';
 import AddProduct from './Pages/AddProduct';
-import AddReceivedProduct from './Pages/AddReceivedProduct';
+import AddProductFacility from './Pages/AddProductFacility';
 import ViewPatient from './Pages/ViewPatient';
 import ViewEvent from './Pages/ViewEvent';
 import ViewProvider from './Pages/ViewProvider';
@@ -21,6 +21,7 @@ import ViewContact from './Pages/ViewContact';
 import AddContact from './Pages/AddContact';
 import ViewProviderFacility from './Pages/ViewProviderFacility';
 import AddProviderFacility from './Pages/AddProviderFacility';
+import ViewProductFacility from './Pages/ViewProductFacility';
 
 
 function App() {
@@ -55,7 +56,7 @@ function App() {
           <Route path="/PharmaTech/addProvider" element={<AddProvider />} />
           <Route path="/PharmaTech/addFacility" element={<AddFacility />} />
           <Route path="/PharmaTech/addProduct" element={<AddProduct />} />
-          <Route path="/PharmaTech/addReceivedProduct" element={<AddReceivedProduct />} />
+          <Route path="/PharmaTech/addProductFacility" element={<AddProductFacility />} />
           <Route path="/PharmaTech/viewPatient" element={<ViewPatient />} />
           <Route path="/PharmaTech/viewEvent" element={<ViewEvent />} />
           <Route path="/PharmaTech/viewProvider" element={<ViewProvider />} />
@@ -65,6 +66,7 @@ function App() {
           <Route path="/PharmaTech/addContact" element={<AddContact />} />
           <Route path="/PharmaTech/viewProviderFacility" element={<ViewProviderFacility />} />
           <Route path="/PharmaTech/addProviderFacility" element={<AddProviderFacility />} />
+          <Route path="/PharmaTech/viewProductFacility" element={<ViewProductFacility />} />
         </Routes>
       </Router>
 

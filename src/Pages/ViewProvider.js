@@ -17,7 +17,7 @@ function ViewProvider() {
             <li className="nav-link" onClick={event => navigate("/PharmaTech/addProvider")}>
                 Add Provider
             </li>
-        </ul>
+         </ul>
 
       <h1>View Providers</h1>
       <br></br>
