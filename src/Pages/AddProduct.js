@@ -34,9 +34,9 @@ function AddProduct() {
     <form className="row g-3">
 
 <div className="col-md-6">
-<label for="productType" className="form-label">Type</label>
+<label for="productType" className="form-label">Type <b>(required)</b></label>
 <select id="productType" className="form-select" required >
-  <option disabled selected>...</option>
+  <option disabled selected>Select</option>
   <option>Covid-19 (Jannssen)</option>
   <option>Covid-19 (Novavax)</option>
   <option>Covid-19 (Pfizer)</option>

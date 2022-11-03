@@ -37,7 +37,7 @@ function AddPatient() {
     <form className="row g-3" >
 
   <div className="col-md-4">
-    <label for="firstName" className="form-label">First Name</label>
+    <label for="firstName" className="form-label">First Name <b>(required)</b></label>
     <input type="text" className="form-control" id="firstName" required onChange={event => setFirstName(event.target.value)}/>
   </div>
 
@@ -47,12 +47,12 @@ function AddPatient() {
   </div>
 
   <div className="col-md-4">
-    <label for="lastName" className="form-label">Last Name</label>
+    <label for="lastName" className="form-label">Last Name <b>(required)</b></label>
     <input type="text" className="form-control" id="lastName" required onChange={event => setLastName(event.target.value)}/>
   </div>
 
   <div className="col-md-4">
-    <label for="dob" className="form-label">Date of Birth</label>
+    <label for="dob" className="form-label">Date of Birth <b>(required)</b></label>
     <input type="date" className="form-control" id="dob" required onChange={event => setDOB(event.target.value)}/>
   </div>
 
@@ -68,7 +68,7 @@ function AddPatient() {
   </div>
 
   <div className="col-md-4">
-    <label for="status" className="form-label">Status</label>
+    <label for="status" className="form-label">Status <b>(required)</b></label>
     <select id="status" className="form-select" required onChange={event => setStatus(event.target.value)} >
       <option disabled selected>Select</option>
       <option>Alive</option>

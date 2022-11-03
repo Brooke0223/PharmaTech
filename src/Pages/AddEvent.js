@@ -4,12 +4,12 @@ import { useNavigate } from "react-router-dom"
 function AddEvent() {
   let navigate = useNavigate(); //This allows us to link user to another page in the pop-up alert window
 
-  const submissionDate = "HAVE TO PUT CURRENT DATE IN HERE"
   let newDate = new Date()
-  let date = String(newDate.getDate());
-  let month = String(newDate.getMonth() + 1);
+  let date = String("0" + newDate.getDate()).slice(-2);
+  let month = String("0" + (newDate.getMonth() + 1)).slice(-2);
   let year = String(newDate.getFullYear());
-  let currentDate = month+"-"+date+"-"+year
+
+  let currentDate = month+"/"+date+"/"+year
 
   return (
     <div className="container">
@@ -33,7 +33,7 @@ function AddEvent() {
     <form className="row g-3">
 
         <div className="col-md-4">
-          <label for="status" className="form-label">Patient ID</label>
+          <label for="status" className="form-label">Patient ID <b>(required)</b></label>
           <select id="status" className="form-select" required >
             <option disabled selected>Select</option>
             <option>1 - Jennie Nichols</option>
@@ -43,7 +43,7 @@ function AddEvent() {
         </div>
 
         <div className="col-md-4">
-          <label for="status" className="form-label">Event Type</label>
+          <label for="status" className="form-label">Event Type <b>(required)</b></label>
           <select id="status" className="form-select" required >
           <option disabled selected>Select</option>
           <option>Administration</option>
@@ -53,17 +53,17 @@ function AddEvent() {
         </div>
 
         <div className="col-md-4">
-          <label for="eventDate" className="form-label">Event Date</label>
+          <label for="eventDate" className="form-label">Event Date <b>(required)</b></label>
           <input type="date" className="form-control" id="eventDate" required />
       </div>
 
         <div className="col-md-4">
-        <label for="submissionDate" className="form-label">Submission Date</label>
+        <label for="submissionDate" className="form-label">Submission Date  <b>(required)</b></label>
         <input type="text" className="form-control" id="submissionDate" placeholder={currentDate} disabled />
         </div>
 
         <div className="col-md-4">
-        <label for="productID" className="form-label">Product ID</label>
+        <label for="productID" className="form-label">Product ID <b>(required)</b></label>
         <select id="productID" className="form-select" required>
           <option disabled selected>Select</option>
           <option>1 - Tdap</option>

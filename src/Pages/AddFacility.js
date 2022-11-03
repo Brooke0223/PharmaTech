@@ -25,12 +25,12 @@ function AddFacility() {
     <form className="row g-3">
 
     <div className="col-md-6">
-    <label for="facilityName" className="form-label">Name</label>
+    <label for="facilityName" className="form-label">Name <b>(required)</b></label>
     <input type="text" className="form-control" id="facilityName" required />
   </div>
 
   <div className="col-md-6">
-    <label for="designation" className="form-label">Type</label>
+    <label for="designation" className="form-label">Type <b>(required)</b></label>
     <select id="designation" className="form-select" required >
       <option disabled selected>Select</option>
       <option>Hospital</option>
@@ -42,17 +42,17 @@ function AddFacility() {
   </div>
 
   <div className="col-12">
-    <label for="address" className="form-label">Address</label>
+    <label for="address" className="form-label">Address <b>(required)</b></label>
     <input type="text" className="form-control" id="address" placeholder="1234 Main St" required/>
   </div>
 
   <div className="col-md-6">
-    <label for="city" className="form-label">City</label>
+    <label for="city" className="form-label">City <b>(required)</b></label>
     <input type="text" className="form-control" id="city" required />
   </div>
 
   <div className="col-md-4">
-    <label for="state" className="form-label">State</label>
+    <label for="state" className="form-label">State <b>(required)</b></label>
     <select id="state" className="form-select" required>
       <option disabled selected>Select</option>
       <option>AL</option>
@@ -118,7 +118,7 @@ function AddFacility() {
   </div>
 
   <div className="col-md-2">
-    <label for="zipCode" className="form-label">Zip</label>
+    <label for="zipCode" className="form-label">Zip <b>(required)</b></label>
     <input type="text" className="form-control" id="zipCode" required />
   </div>
   

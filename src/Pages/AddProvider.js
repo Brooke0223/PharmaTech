@@ -34,12 +34,12 @@ function AddProvider() {
     <form className="row g-3">
 
   <div className="col-md-6">
-    <label for="firstName" className="form-label">First Name</label>
+    <label for="firstName" className="form-label">First Name <b>(required)</b></label>
     <input type="text" className="form-control" id="firstName" required />
   </div>
 
   <div className="col-md-6">
-    <label for="lastName" className="form-label">Last Name</label>
+    <label for="lastName" className="form-label">Last Name <b>(required)</b></label>
     <input type="text" className="form-control" id="lastName" required />
   </div>
 
@@ -49,7 +49,7 @@ function AddProvider() {
   </div>
 
   <div className="col-md-6">
-    <label for="designation" className="form-label">Designation</label>
+    <label for="designation" className="form-label">Designation <b>(required)</b></label>
     <select id="designation" className="form-select" >
       <option disabled selected>...</option>
       <option>Physician</option>

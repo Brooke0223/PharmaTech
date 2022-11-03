@@ -36,7 +36,7 @@ function AddContact() {
 
 
   <div className="col-md-12">
-    <label for="race" className="form-label">Patient ID</label>
+    <label for="race" className="form-label">Patient ID <b>(required)</b></label>
     <select id="race" className="form-select" required onChange={event => setPatientID(event.target.value)} >
       <option disabled selected>Select</option>
       <option>1 - Jennie Nichols</option>
