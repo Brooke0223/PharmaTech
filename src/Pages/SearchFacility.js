@@ -14,24 +14,13 @@ function SearchFacility() {
     const [NDC, setNDC] = useState('');
 
 
-  //If no matching facility is found, allow re-direct to add a new provider
-  const submitHandler = (e) => {
-    e.preventDefault(); //prevent page refresh
-
-    if(name === "Walgreens" && city==="Sunnyvale" && state==="CA"){
-      navigate("/PharmaTech/viewFacility")
-      return
-    } 
-      
-    if (window.confirm("Facility not found. Would you like to add a new facility?")) {
-        navigate("/PharmaTech/addFacility")
-    }
-
-  }
-
   return (
     <div className="container">
     <ul className="nav nav-tabs">
+        <li className="nav-link" onClick={event => navigate("/PharmaTech/viewFacility")}>
+            View Facilities
+        </li>
+
         <li className="nav-link" onClick={event => navigate("/PharmaTech/searchFacility")}>
             Search Facilities
         </li>
@@ -39,12 +28,19 @@ function SearchFacility() {
         <li className="nav-link" onClick={event => navigate("/PharmaTech/addFacility")}>
             Add Facility
         </li>
+
+        <li className="nav-link" onClick={event => navigate("/PharmaTech/viewProviderFacility")}>
+            View Providers' Facilities
+        </li>
+
+        <li className="nav-link" onClick={event => navigate("/PharmaTech/addProviderFacility")}>
+            Add Providers' Facilities
+        </li>
     </ul>
 
     <h1>Search Facilities</h1>
-    <p>For the sake of the class: search for a <b>Walgreens</b> located in <b>Sunnyvale, CA</b> to be able to generate a table that can be edited/deleted. Search for any other Facility to be re-directed to a page where you can create a new Facility. </p>
 
-    <form className="row g-3" onSubmit={submitHandler}>
+    <form className="row g-3">
 
   <div className="col-md-6">
     <label for="facilityName" className="form-label">Name</label>
@@ -54,7 +50,7 @@ function SearchFacility() {
   <div className="col-md-6">
     <label for="designation" className="form-label">Type</label>
     <select id="designation" className="form-select" onChange={event => setType(event.target.value)} >
-      <option disabled selected>...</option>
+      <option disabled selected>Select</option>
       <option>Hospital</option>
       <option>Pharmacy</option>
       <option>Walk-In Clinic</option>
@@ -71,7 +67,7 @@ function SearchFacility() {
   <div className="col-md-6">
   <label for="state" className="form-label">State</label>
     <select id="state" className="form-select" required onChange={event => setState(event.target.value)} >
-      <option disabled selected>...</option>
+      <option disabled selected>Select</option>
       <option>AL</option>
       <option>AK</option>
       <option>AZ</option>
@@ -148,7 +144,7 @@ function SearchFacility() {
   <div className="col-md-6">
     <label for="productType" className="form-label">Product Type</label>
     <select id="productType" className="form-select" onChange={event => setProductType(event.target.value)} >
-      <option disabled selected>...</option>
+      <option disabled selected>Select</option>
       <option>Covid-19 (Jannssen)</option>
       <option>Covid-19 (Novavax)</option>
       <option>Covid-19 (Pfizer)</option>

@@ -1,9 +1,25 @@
 import React from 'react'
+import { useNavigate } from "react-router-dom"
 
 function ViewProvider() {
+    let navigate = useNavigate(); //This allows us to link user to another page in the pop-up alert window
   return (
-    <div>
-      <h1>Provider Search Results</h1>
+    <div className="container">
+        <ul className="nav nav-tabs">
+            <li className="nav-link" onClick={event => navigate("/PharmaTech/viewProvider")}>
+                View Providers
+            </li>
+
+            <li className="nav-link" onClick={event => navigate("/PharmaTech/searchProvider")}>
+                Search Providers
+            </li>
+
+            <li className="nav-link" onClick={event => navigate("/PharmaTech/addProvider")}>
+                Add Provider
+            </li>
+        </ul>
+
+      <h1>View Providers</h1>
       <br></br>
     <table className="table table-hover">
   <thead>

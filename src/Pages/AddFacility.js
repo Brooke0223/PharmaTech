@@ -6,15 +6,27 @@ function AddFacility() {
 
   return (
     <div className="container">
-    <ul className="nav nav-tabs">
-        <li className="nav-link" onClick={event => navigate("/PharmaTech/searchFacility")}>
-            Search Facilities
-        </li>
+        <ul className="nav nav-tabs">
+            <li className="nav-link" onClick={event => navigate("/PharmaTech/viewFacility")}>
+                View Facilities
+            </li>
 
-        <li className="nav-link" onClick={event => navigate("/PharmaTech/addFacility")}>
-            Add Facility
-        </li>
-    </ul>
+            <li className="nav-link" onClick={event => navigate("/PharmaTech/searchFacility")}>
+                Search Facilities
+            </li>
+
+            <li className="nav-link" onClick={event => navigate("/PharmaTech/addFacility")}>
+                Add Facility
+            </li>
+
+            <li className="nav-link" onClick={event => navigate("/PharmaTech/viewProviderFacility")}>
+                View Providers' Facilities
+            </li>
+
+            <li className="nav-link" onClick={event => navigate("/PharmaTech/addProviderFacility")}>
+                Add Providers' Facilities
+            </li>
+        </ul>
 
     <h1>Add A New Facility</h1>
 
@@ -28,7 +40,7 @@ function AddFacility() {
   <div className="col-md-6">
     <label for="designation" className="form-label">Type</label>
     <select id="designation" className="form-select" required >
-      <option disabled selected>...</option>
+      <option disabled selected>Select</option>
       <option>Hospital</option>
       <option>Pharmacy</option>
       <option>Walk-In Clinic</option>

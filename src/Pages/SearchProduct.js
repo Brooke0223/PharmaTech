@@ -14,43 +14,35 @@ function SearchProduct() {
   const [zip, setZip] = useState('');
 
 
-  //If no matching product is found, display window alert to notify user
-  const submitHandler = (e) => {
-    e.preventDefault(); //prevent page refresh
-
-    if(facilityName === "Walgreens" && city==="Sunnyvale" && state==="CA"){
-      navigate("/PharmaTech/viewProduct")
-    }else{
-      window.alert("No matching product found")
-    } 
-  }
-
   return (
     <div className="container">
 
-    <ul className="nav nav-tabs">
-            <li className="nav-link" onClick={event => navigate("/PharmaTech/searchProduct")}>
-                Search Products
-            </li>
+      <ul className="nav nav-tabs">
+          <li className="nav-link" onClick={event => navigate("/PharmaTech/viewProduct")}>
+              View Products
+          </li>
 
-            <li className="nav-link" onClick={event => navigate("/PharmaTech/addReceivedProduct")}>
-                Receive Product Shipment
-            </li>
+          <li className="nav-link" onClick={event => navigate("/PharmaTech/searchProduct")}>
+              Search Products
+          </li>
 
-            <li className="nav-link" onClick={event => navigate("/PharmaTech/addProduct")}>
-                Add A New Product
-            </li>
-    </ul>
+          <li className="nav-link" onClick={event => navigate("/PharmaTech/addReceivedProduct")}>
+              Receive Product Shipment
+          </li>
+
+          <li className="nav-link" onClick={event => navigate("/PharmaTech/addProduct")}>
+              Add A New Product
+          </li>
+      </ul>
 
     <h1>Search Products</h1>
-    <p>For the sake of the class: search for products in the "Facility Name" <b>Walgreens</b> located in <b>Sunnyvale, CA</b> to be able to generate a table that can be edited/deleted.</p>
 
-    <form className="row g-3" onSubmit={submitHandler}>
+    <form className="row g-3">
 
     <div className="col-md-6">
     <label for="productType" className="form-label">Product Type</label>
     <select id="productType" className="form-select" onChange={event => setType(event.target.value)} >
-      <option disabled selected>...</option>
+      <option disabled selected>Select</option>
       <option>Covid-19 (Jannssen)</option>
       <option>Covid-19 (Novavax)</option>
       <option>Covid-19 (Pfizer)</option>
@@ -91,7 +83,7 @@ function SearchProduct() {
   <div className="col-md-6">
   <label for="state" className="form-label">State</label>
     <select id="state" className="form-select" onChange={event => setState(event.target.value)} >
-      <option disabled selected>...</option>
+      <option disabled selected>Select</option>
       <option>AL</option>
       <option>AK</option>
       <option>AZ</option>

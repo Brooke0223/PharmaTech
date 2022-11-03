@@ -1,3 +1,10 @@
+.links {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  font-size: large;
+}
+
 /* .App {
   text-align: center;
 }

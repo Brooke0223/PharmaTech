@@ -7,7 +7,11 @@ function AddReceivedProduct() {
   return (
     <div className="container">
 
-    <ul className="nav nav-tabs">
+        <ul className="nav nav-tabs">
+            <li className="nav-link" onClick={event => navigate("/PharmaTech/viewProduct")}>
+                View Products
+            </li>
+
             <li className="nav-link" onClick={event => navigate("/PharmaTech/searchProduct")}>
                 Search Products
             </li>
@@ -19,7 +23,7 @@ function AddReceivedProduct() {
             <li className="nav-link" onClick={event => navigate("/PharmaTech/addProduct")}>
                 Add A New Product
             </li>
-    </ul>
+        </ul>
 
     <h1>Add Product To Facility Inventory</h1>
 

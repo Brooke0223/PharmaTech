@@ -32,6 +32,10 @@ function SearchProvider() {
     <div className="container">
 
     <ul className="nav nav-tabs">
+            <li className="nav-link" onClick={event => navigate("/PharmaTech/viewProvider")}>
+                View Providers
+            </li>
+
             <li className="nav-link" onClick={event => navigate("/PharmaTech/searchProvider")}>
                 Search Providers
             </li>
@@ -42,7 +46,6 @@ function SearchProvider() {
     </ul>
 
     <h1>Search Providers</h1>
-    <p>For the sake of the class: search for the provider <b>"Rebecca Mitchell"</b> to be able to generate a table that can be edited/deleted. Search for any other provider to be re-directed to a page where you can create a new provider. </p>
 
     <form className="row g-3" onSubmit={submitHandler}>
 
