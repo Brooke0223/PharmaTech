@@ -50,8 +50,8 @@ function AddProvider() {
 
   <div className="col-md-6">
     <label for="designation" className="form-label">Designation <b>(required)</b></label>
-    <select id="designation" className="form-select" >
-      <option disabled selected>...</option>
+    <select id="designation" className="form-select" required >
+      <option value="" disabled selected>Select</option>
       <option>Physician</option>
       <option>Physician Associate</option>
       <option>Pharmacist</option>

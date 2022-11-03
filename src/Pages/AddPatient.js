@@ -70,7 +70,7 @@ function AddPatient() {
   <div className="col-md-4">
     <label for="status" className="form-label">Status <b>(required)</b></label>
     <select id="status" className="form-select" required onChange={event => setStatus(event.target.value)} >
-      <option disabled selected>Select</option>
+      <option value="" disabled selected>Select</option>
       <option>Alive</option>
       <option>Deceased</option>
       <option>Unknown</option>

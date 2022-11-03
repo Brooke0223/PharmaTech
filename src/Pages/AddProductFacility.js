@@ -35,8 +35,8 @@ function AddProductFacility() {
 
     <div className="col-md-6">
     <label for="productID" className="form-label">Product ID <b>(required)</b></label>
-    <select id="productID" className="form-select" >
-      <option disabled selected>Select</option>
+    <select id="productID" className="form-select" required >
+      <option value="" disabled selected>Select</option>
       <option>1 - Tdap</option>
       <option>2 - Influenza</option>
       <option>3 - Zoster</option>
@@ -46,8 +46,8 @@ function AddProductFacility() {
 
   <div className="col-md-6">
     <label for="FacilityID" className="form-label">Facility ID <b>(required)</b></label>
-    <select id="FacilityID" className="form-select" >
-      <option disabled selected>Select</option>
+    <select id="FacilityID" className="form-select" required >
+      <option value="" disabled selected>Select</option>
       <option>1 - Spectrum Health</option>
       <option>2 - Walgreens</option>
       <option>3 - Wellnow</option>

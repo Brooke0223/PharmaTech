@@ -35,7 +35,7 @@ function AddEvent() {
         <div className="col-md-4">
           <label for="status" className="form-label">Patient ID <b>(required)</b></label>
           <select id="status" className="form-select" required >
-            <option disabled selected>Select</option>
+            <option value="" disabled selected>Select</option>
             <option>1 - Jennie Nichols</option>
             <option>2 - Max Tucker</option>
             <option>3 - Calvin James</option>
@@ -45,7 +45,7 @@ function AddEvent() {
         <div className="col-md-4">
           <label for="status" className="form-label">Event Type <b>(required)</b></label>
           <select id="status" className="form-select" required >
-          <option disabled selected>Select</option>
+          <option value="" disabled selected>Select</option>
           <option>Administration</option>
           <option>Historical</option>
           <option>Refusal</option>
@@ -65,7 +65,7 @@ function AddEvent() {
         <div className="col-md-4">
         <label for="productID" className="form-label">Product ID <b>(required)</b></label>
         <select id="productID" className="form-select" required>
-          <option disabled selected>Select</option>
+          <option value="" disabled selected>Select</option>
           <option>1 - Tdap</option>
           <option>2 - Influenza</option>
           <option>3 - Zoster</option>

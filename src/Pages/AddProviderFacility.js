@@ -36,7 +36,7 @@ function AddProviderFacility() {
   <div className="col-md-6">
     <label for="providerID" className="form-label">Provider ID <b>(required)</b></label>
     <select id="providerID" className="form-select" required >
-      <option disabled selected>Select</option>
+      <option value="" disabled selected>Select</option>
       <option>1 - Rebecca Mitchell</option>
       <option>2 - Timothy Vanleer</option>
       <option>3  Edward Lemus</option>
@@ -46,7 +46,7 @@ function AddProviderFacility() {
   <div className="col-md-6">
     <label for="facilityID" className="form-label">Facility ID <b>(required)</b></label>
     <select id="facilityID" className="form-select" required >
-      <option disabled selected>Select</option>
+      <option value="" disabled selected>Select</option>
       <option>1 - Spectrum Health</option>
       <option>2 - Walgreens</option>
       <option>3 - WellNow</option>

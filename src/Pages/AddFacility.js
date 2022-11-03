@@ -32,7 +32,7 @@ function AddFacility() {
   <div className="col-md-6">
     <label for="designation" className="form-label">Type <b>(required)</b></label>
     <select id="designation" className="form-select" required >
-      <option disabled selected>Select</option>
+      <option value="" disabled selected>Select</option>
       <option>Hospital</option>
       <option>Pharmacy</option>
       <option>Walk-In Clinic</option>
@@ -54,7 +54,7 @@ function AddFacility() {
   <div className="col-md-4">
     <label for="state" className="form-label">State <b>(required)</b></label>
     <select id="state" className="form-select" required>
-      <option disabled selected>Select</option>
+      <option value="" disabled selected>Select</option>
       <option>AL</option>
       <option>AK</option>
       <option>AZ</option>
