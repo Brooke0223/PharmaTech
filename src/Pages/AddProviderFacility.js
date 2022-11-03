@@ -34,7 +34,7 @@ function AddProviderFacility() {
 
 
   <div className="col-md-6">
-    <label for="providerID" className="form-label">Provider ID</label>
+    <label for="providerID" className="form-label">Provider ID <b>(required)</b></label>
     <select id="providerID" className="form-select" required >
       <option disabled selected>Select</option>
       <option>1 - Rebecca Mitchell</option>
@@ -44,7 +44,7 @@ function AddProviderFacility() {
   </div>
 
   <div className="col-md-6">
-    <label for="facilityID" className="form-label">Facility ID</label>
+    <label for="facilityID" className="form-label">Facility ID <b>(required)</b></label>
     <select id="facilityID" className="form-select" required >
       <option disabled selected>Select</option>
       <option>1 - Spectrum Health</option>

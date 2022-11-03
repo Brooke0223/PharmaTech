@@ -34,7 +34,7 @@ function AddProductFacility() {
     <form className="row g-3">
 
     <div className="col-md-6">
-    <label for="productID" className="form-label">Product ID</label>
+    <label for="productID" className="form-label">Product ID <b>(required)</b></label>
     <select id="productID" className="form-select" >
       <option disabled selected>Select</option>
       <option>1 - Tdap</option>
@@ -45,7 +45,7 @@ function AddProductFacility() {
   </div>
 
   <div className="col-md-6">
-    <label for="FacilityID" className="form-label">Facility ID</label>
+    <label for="FacilityID" className="form-label">Facility ID <b>(required)</b></label>
     <select id="FacilityID" className="form-select" >
       <option disabled selected>Select</option>
       <option>1 - Spectrum Health</option>
@@ -56,12 +56,12 @@ function AddProductFacility() {
   </div>
 
   <div className="col-md-6">
-    <label for="doseQuantity" className="form-label">Dose Quantity</label>
+    <label for="doseQuantity" className="form-label">Dose Quantity <b>(required)</b></label>
     <input type="text" className="form-control" id="doseQuantity" placeholder="e.g. 550 individual doses"required/>
   </div>
 
   <div className="col-md-6">
-          <label for="expiration" className="form-label">Expiration</label>
+          <label for="expiration" className="form-label">Expiration <b>(required)</b></label>
           <input type="date" className="form-control" id="expiration" required />
   </div>
 
