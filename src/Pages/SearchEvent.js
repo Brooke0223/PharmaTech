@@ -11,10 +11,10 @@ function SearchEvent() {
   const [DOB, setDOB] = useState('');
   const [patientID, setPatientID] = useState('');
   const [status, setStatus] = useState('');
-  const [address, setAddress] = useState('');
-  const [city, setCity] = useState('');
-  const [state, setState] = useState('');
-  const [zip, setZip] = useState('');
+  const [facilityName, setFacilityName] = useState('');
+  const [facilityCity, setFacilityCity] = useState('');
+  const [facilityState, setFacilityState] = useState('');
+  const [facilityZip, setFacilityZip] = useState('');
 
 
   //If no matching patient is found, allow re-direct to add a new patient
@@ -92,7 +92,7 @@ function SearchEvent() {
           </label>
           <select id="status" className="form-select" onChange={event => setStatus(event.target.value)}>
             <option disabled selected>
-              ...
+              Select
             </option>
             <option>Alive</option>
             <option>Deceased</option>
@@ -101,30 +101,32 @@ function SearchEvent() {
         </div>
 
         <div className="col-12">
-          <label for="address" className="form-label">
-            Address
+          <label for="facilityName" className="form-label">
+            Facility Name
           </label>
-          <input
-            type="text"
-            className="form-control"
-            id="address"
-            placeholder="1234 Main St"
-            onChange={event => setAddress(event.target.value)}
-          />
+          <select id="facilityName" className="form-select" onChange={event => setFacilityName(event.target.value)}>
+            <option disabled selected>
+              Select
+            </option>
+            <option>1 - Spectrum Health</option>
+            <option>2 - Walgreens</option>
+            <option>3 - WellNow</option>
+            <option>4 - Oak Street Health</option>
+          </select>
         </div>
 
         <div className="col-md-6">
-          <label for="city" className="form-label">
-            City
+          <label for="facilityCity" className="form-label">
+            Facility City
           </label>
-          <input type="text" className="form-control" id="city" onChange={event => setCity(event.target.value)} />
+          <input type="text" className="form-control" id="facilityCity" onChange={event => setFacilityCity(event.target.value)} />
         </div>
 
         <div className="col-md-4">
-          <label for="state" className="form-label">
-            State
+          <label for="facilityState" className="form-label">
+            Facility State
           </label>
-          <select id="state" className="form-select" onChange={event => setState(event.target.value)}>
+          <select id="facilityState" className="form-select" onChange={event => setFacilityState(event.target.value)}>
             <option disabled selected>
               Select
             </option>
@@ -191,10 +193,10 @@ function SearchEvent() {
         </div>
 
         <div className="col-md-2">
-          <label for="zipCode" className="form-label">
-            Zip
+          <label for="facilityZip" className="form-label">
+            Facility Zip
           </label>
-          <input type="text" className="form-control" id="zipCode" onChange={event => setZip(event.target.value)} />
+          <input type="text" className="form-control" id="facilityZip" onChange={event => setFacilityZip(event.target.value)} />
         </div>
 
         <div className="col-12">
