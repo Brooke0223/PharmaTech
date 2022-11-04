@@ -55,7 +55,7 @@ function SearchEvent() {
           <label for="firstName" className="form-label">
             First Name
           </label>
-          <input type="text" className="form-control" id="firstName" required onChange={event => setFirstName(event.target.value)} />
+          <input type="text" className="form-control" id="firstName" onChange={event => setFirstName(event.target.value)} />
         </div>
 
         <div className="col-md-4">
@@ -69,14 +69,14 @@ function SearchEvent() {
           <label for="lastName" className="form-label">
             Last Name
           </label>
-          <input type="text" className="form-control" id="lastName" required onChange={event => setLastName(event.target.value)} />
+          <input type="text" className="form-control" id="lastName" onChange={event => setLastName(event.target.value)} />
         </div>
 
         <div className="col-md-4">
           <label for="dob" className="form-label">
             Date of Birth
           </label>
-          <input type="date" className="form-control" id="dob" required onChange={event => setDOB(event.target.value)} />
+          <input type="date" className="form-control" id="dob" onChange={event => setDOB(event.target.value)} />
         </div>
 
         <div className="col-md-4">

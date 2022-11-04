@@ -36,7 +36,7 @@ function SearchFacility() {
 
   <div className="col-md-6">
     <label for="facilityName" className="form-label">Name</label>
-    <input type="text" className="form-control" id="facilityName" required onChange={event => setName(event.target.value)} />
+    <input type="text" className="form-control" id="facilityName" onChange={event => setName(event.target.value)} />
   </div>
 
   <div className="col-md-6">
@@ -53,12 +53,12 @@ function SearchFacility() {
 
   <div className="col-md-6">
     <label for="city" className="form-label">City</label>
-    <input type="text" className="form-control" id="city" required onChange={event => setCity(event.target.value)} />
+    <input type="text" className="form-control" id="city" onChange={event => setCity(event.target.value)} />
   </div>
 
   <div className="col-md-6">
   <label for="state" className="form-label">State</label>
-    <select id="state" className="form-select" required onChange={event => setState(event.target.value)} >
+    <select id="state" className="form-select" onChange={event => setState(event.target.value)} >
       <option disabled selected>Select</option>
       <option>AL</option>
       <option>AK</option>
