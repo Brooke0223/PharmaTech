@@ -1,8 +1,45 @@
 import { useNavigate } from "react-router-dom"
-import React from 'react'
+import { React, useState, useEffect } from 'react'
 
 function ViewPatient() {
   let navigate = useNavigate(); //This allows us to link user to another page in the pop-up alert window
+
+  const [patients, setPatients] = useState('');
+
+
+  //fetch Patient Data upon page mount
+  useEffect(() => {
+    fetch('http://flip3.engr.oregonstate.edu:44265/ViewPatient')
+    .then(res => res.json())
+    .then(data => setPatients(data))
+    // console.log(patients)
+  }, [patients])
+
+
+  //OnClick handler to modify a patient
+  const modifyHandler = (patientID) => {
+    // console.log("MODIFY THIS PATIENT"+patientID)
+    navigate("/PharmaTech/editPatient/"+patientID)
+  }
+
+  //OnClick handler to delete a patient
+  const deleteHandler = (patientID) => {
+    if (window.confirm(`Are you sure you want to delete the patient with the id: ${patientID}?`)) {
+
+      //send DELETE request to server
+      fetch('http://flip3.engr.oregonstate.edu:44265/DeletePatient/' + patientID, {
+        method: 'DELETE',
+      })
+      .then(res => res.text()) // or res.json()
+      .then(res => console.log(res))
+
+
+      //send GET request to server to re-render updated page contents
+      fetch('http://flip3.engr.oregonstate.edu:44265/ViewPatient')
+      .then(res => res.json())
+      .then(data => setPatients(data))
+    }
+  }
 
   return (
     
@@ -39,47 +76,27 @@ function ViewPatient() {
       <th scope="col">Delete</th>
     </tr>
   </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Jennie</td>
-      <td>Elizabeth</td>
-      <td>Nichols</td>
-      <td>1992-03-08</td>
-      <td>F</td>
-      <td>White</td>
-      <td>Not Hispanic or Latino</td>
-      <td>Alive</td>
-      <td>⨁</td>
-      <td>⨂</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Max</td>
-      <td><i>NULL</i></td>
-      <td>Tucker</td>
-      <td>2015-09-05</td>
-      <td>M</td>
-      <td>Other Race</td>
-      <td>Hispanic or Latino</td>
-      <td>Alive</td>
-      <td>⨁</td>
-      <td>⨂</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Calvin</td>
-      <td>James</td>
-      <td>Hudson</td>
-      <td>1950-11-07</td>
-      <td>M</td>
-      <td>Black or African American</td>
-      <td>Not Hispanic or Latino</td>
-      <td>Alive</td>
-      <td>⨁</td>
-      <td>⨂</td>
-    </tr>
-  </tbody>
+
+  {Array.isArray(patients) && patients.map((patient, index) => {
+        return (
+          <tbody>
+              <tr key={index}>
+                <td>{patient.PatientID}</td>
+                <td>{patient.FirstName}</td>
+                <td>{patient.MiddleName}</td>
+                <td>{patient.LastName}</td>
+                <td>{patient.DOB.slice(0, 10)}</td>
+                <td>{patient.Sex}</td>
+                <td>{patient.Race}</td>
+                <td>{patient.Ethnicity}</td>
+                <td>{patient.ActiveStatus}</td>
+                <td className="modify" onClick={() => modifyHandler(patient.PatientID)}>⨁</td>
+                <td className="delete" onClick={() => deleteHandler(patient.PatientID)}>⨂</td>
+              </tr>
+          </tbody>
+        );
+      })}
+  
 </table>
 </div>
 

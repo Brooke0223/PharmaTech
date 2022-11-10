@@ -5,7 +5,7 @@ function AddPatient() {
     let navigate = useNavigate(); //This allows us to link user to another page in the pop-up alert window
 
     const [firstName, setFirstName] = useState('');
-    const [middlename, setMiddleName] = useState('');
+    const [middleName, setMiddleName] = useState('');
     const [lastName, setLastName] = useState('');
     const [DOB, setDOB] = useState('');
     const [sex, setSex] = useState('');
@@ -13,6 +13,35 @@ function AddPatient() {
     const [race, setRace] = useState('');
     const [ethnicity, setEthnicity] = useState('');
 
+
+    //onSubmit handler to add a new patient
+    const addPatient = (e) => {
+      e.preventDefault();
+      
+      fetch('http://flip3.engr.oregonstate.edu:44265/AddPatient', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          FirstName: firstName,
+          MiddleName: middleName,
+          LastName: lastName,
+          DOB: DOB,
+          Sex: sex,
+          ActiveStatus: status,
+          Race: race,
+          Ethnicity: ethnicity,
+        })
+      })
+      .then(res => res.json())
+      .then(json => console.log(json));
+
+      window.alert("You will now be routed back to the main page")
+      navigate("/PharmaTech/ViewPatient")
+    }
+
+    
 
     return (
     <div className="container">
@@ -34,7 +63,7 @@ function AddPatient() {
     <h1>Add A New Patient</h1>
     <p><i>Note: Add contact methods for a patient (phone, email, and address) via the "Contacts" tab.</i></p>
 
-    <form className="row g-3" >
+    <form className="row g-3" onSubmit={addPatient}>
 
   <div className="col-md-4">
     <label for="firstName" className="form-label">First Name <b>(required)</b></label>

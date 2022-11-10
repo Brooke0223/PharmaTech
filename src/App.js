@@ -22,6 +22,7 @@ import AddContact from './Pages/AddContact';
 import ViewProviderFacility from './Pages/ViewProviderFacility';
 import AddProviderFacility from './Pages/AddProviderFacility';
 import ViewProductFacility from './Pages/ViewProductFacility';
+import EditPatient from './Pages/EditPatient';
 
 
 function App() {
@@ -67,6 +68,7 @@ function App() {
           <Route path="/PharmaTech/viewProviderFacility" element={<ViewProviderFacility />} />
           <Route path="/PharmaTech/addProviderFacility" element={<AddProviderFacility />} />
           <Route path="/PharmaTech/viewProductFacility" element={<ViewProductFacility />} />
+          <Route path="/PharmaTech/editPatient/:id" element={<EditPatient />} />
         </Routes>
       </Router>
 

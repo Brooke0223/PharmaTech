@@ -4,3 +4,7 @@
   justify-content: space-around;
   font-size: large;
 }
+
+.modify:hover, .delete:hover {
+  cursor: pointer;
+}
