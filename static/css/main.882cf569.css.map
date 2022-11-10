@@ -1,0 +1,1 @@
+{"version":3,"file":"static/css/main.882cf569.css","mappings":"AAAA,OACE,YAAa,CACb,kBAAmB,CAEnB,eAAgB,CADhB,4BAEF,CAEA,4BACE,cACF","sources":["App.css"],"sourcesContent":[".links {\n  display: flex;\n  flex-flow: row wrap;\n  justify-content: space-around;\n  font-size: large;\n}\n\n.modify:hover, .delete:hover {\n  cursor: pointer;\n}"],"names":[],"sourceRoot":""}

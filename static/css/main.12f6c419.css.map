@@ -1,1 +1,0 @@
-{"version":3,"file":"static/css/main.12f6c419.css","mappings":"AAAA,OACE,YAAa,CACb,kBAAmB,CAEnB,eAAgB,CADhB,4BAEF","sources":["App.css"],"sourcesContent":[".links {\n  display: flex;\n  flex-flow: row wrap;\n  justify-content: space-around;\n  font-size: large;\n}"],"names":[],"sourceRoot":""}

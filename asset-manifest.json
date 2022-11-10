@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/PharmaTech/static/css/main.12f6c419.css",
-    "main.js": "/PharmaTech/static/js/main.2e07bc51.js",
+    "main.css": "/PharmaTech/static/css/main.882cf569.css",
+    "main.js": "/PharmaTech/static/js/main.73e7e25a.js",
     "index.html": "/PharmaTech/index.html",
-    "main.12f6c419.css.map": "/PharmaTech/static/css/main.12f6c419.css.map",
-    "main.2e07bc51.js.map": "/PharmaTech/static/js/main.2e07bc51.js.map"
+    "main.882cf569.css.map": "/PharmaTech/static/css/main.882cf569.css.map",
+    "main.73e7e25a.js.map": "/PharmaTech/static/js/main.73e7e25a.js.map"
   },
   "entrypoints": [
-    "static/css/main.12f6c419.css",
-    "static/js/main.2e07bc51.js"
+    "static/css/main.882cf569.css",
+    "static/js/main.73e7e25a.js"
   ]
 }
