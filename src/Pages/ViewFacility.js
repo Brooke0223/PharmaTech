@@ -1,8 +1,54 @@
-import React from 'react'
+import { React, useState, useEffect } from 'react'
 import { useNavigate } from "react-router-dom"
 
 function ViewFacility() {
-    let navigate = useNavigate(); //This allows us to link user to another page in the pop-up alert window
+  let navigate = useNavigate(); //This allows us to link user to another page in the pop-up alert window
+
+  const [facilities, setFacilities] = useState('');
+  
+  // fetch Facilities Data upon page mount, and refresh if facilities are deleted
+  useEffect(() => {
+    fetch('http://localhost:44265/ViewFacility')
+    .then(res => res.json())
+    .then(data => setFacilities(data))
+    // .then(data => console.log(facilities))
+  }, [facilities]) //I changed this to an empty bracket because I think it kept loading forever?????????
+
+  //OnClick handler to modify a facility
+  const modifyHandler = (facilityID) => {
+    navigate(`/PharmaTech/editFacility/${facilityID}`)
+  }
+
+  //OnClick handler to delete a facility
+  const deleteHandler = (facilityID) => {
+    if (window.confirm(`Are you sure you want to delete the contact with the id: ${facilityID}?`)) {
+
+      //send DELETE request to server (THIS ONE WORKS!!!!! (Except for obviously when the SQL fails))
+      // fetch(`http://localhost:44265/DeleteFacility/${facilityID}`, {
+      //   method: 'DELETE',
+      // })
+      // .then(res => res.text())
+      // .then(res => console.log(res))
+      
+      //send DELETE request to server
+      async function deleteData() {
+        const response = await fetch(`http://localhost:44265/DeleteFacility/${facilityID}`, {
+          method: 'DELETE'
+        })
+        if(response.status === 500){
+          alert("Unable to delete Facility with associated immunization event(s).")
+        }
+      }
+      deleteData()
+        
+
+
+      //send GET request to server to re-render updated page contents
+      fetch('http://localhost:44265/ViewFacility')
+      .then(res => res.json())
+      .then(data => setFacilities(data))
+    }
+  }
 
   return (
     <div className="container">
@@ -36,7 +82,26 @@ function ViewFacility() {
       <th scope="col">Delete</th>
     </tr>
   </thead>
-  <tbody>
+
+  {Array.isArray(facilities) && facilities.map((facility, index) => {
+      return (
+        <tbody>
+            <tr key={facility.FacilityID}>
+              <td>{facility.FacilityID}</td>
+              <td>{facility.FacilityName}</td>
+              <td>{facility.FacilityType}</td>
+              <td>{facility.AddressStreet}</td>
+              <td>{facility.AddressCity}</td>
+              <td>{facility.AddressState}</td>
+              <td>{facility.AddressZip}</td>
+              <td className="modify" onClick={() => modifyHandler(facility.FacilityID)}>⨁</td>
+              <td className="delete" onClick={() => deleteHandler(facility.FacilityID)}>⨂</td>
+            </tr>
+        </tbody>
+        );
+      })}
+
+  {/* <tbody>
     <tr>
       <th scope="row">1</th>
       <td>Spectrum Health</td>
@@ -81,7 +146,9 @@ function ViewFacility() {
       <td>⨁</td>
       <td>⨂</td>
     </tr>
-  </tbody>
+  </tbody> */}
+
+
 </table>
 </div>
 

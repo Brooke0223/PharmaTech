@@ -44,7 +44,20 @@ function EditPatient() {
   //OnClick handler to submit changes
   const modifyHandler = (e) => {
     e.preventDefault();
-    fetch('http://flip3.engr.oregonstate.edu:44265/EditPatient/'+patientID, {
+
+    // validate patient's DOB
+    let newDateString = new Date()
+    let date = String("0" + newDateString.getDate()).slice(-2);
+    let month = String("0" + (newDateString.getMonth() + 1)).slice(-2);
+    let year = String(newDateString.getFullYear());
+    let currentDateInteger = parseInt(year+month+date)
+    let DOBInteger = parseInt(DOB.slice(0,4)+DOB.slice(5,7)+DOB.slice(8,10))
+    if(DOBInteger > currentDateInteger){
+      alert("Patient's Date of Birth cannot be set in the future")
+      return
+    }
+
+    fetch(`http://flip3.engr.oregonstate.edu:44265/EditPatient/${patientID}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
@@ -63,7 +76,7 @@ function EditPatient() {
       .then(res => res.json())
       .then(json => console.log(json));
 
-      window.alert("You will now be routed back to the main page")
+      window.alert("Edit complete. You will now be routed back to the main page")
       navigate("/PharmaTech/ViewPatient")
     }
   

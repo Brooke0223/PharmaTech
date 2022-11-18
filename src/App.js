@@ -23,6 +23,8 @@ import ViewProviderFacility from './Pages/ViewProviderFacility';
 import AddProviderFacility from './Pages/AddProviderFacility';
 import ViewProductFacility from './Pages/ViewProductFacility';
 import EditPatient from './Pages/EditPatient';
+import EditContact from './Pages/EditContact';
+import EditFacility from './Pages/EditFacility';
 
 
 function App() {
@@ -69,6 +71,8 @@ function App() {
           <Route path="/PharmaTech/addProviderFacility" element={<AddProviderFacility />} />
           <Route path="/PharmaTech/viewProductFacility" element={<ViewProductFacility />} />
           <Route path="/PharmaTech/editPatient/:id" element={<EditPatient />} />
+          <Route path="/PharmaTech/editContact/:id" element={<EditContact />} />
+          <Route path="/PharmaTech/editFacility/:id" element={<EditFacility />} />
         </Routes>
       </Router>
 

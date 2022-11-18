@@ -1,8 +1,68 @@
-import React from 'react'
+import { React, useState, useEffect } from 'react'
 import { useNavigate } from "react-router-dom"
 
 function AddFacility() {
     let navigate = useNavigate(); //This allows us to link user to another page in the pop-up alert window
+
+    const [facilityName, setFacilityName] = useState('');
+    const [facilityType, setFacilityType] = useState('');
+    const [facilityAddress, setFacilityAddress] = useState('');
+    const [facilityCity, setFacilityCity] = useState('');
+    const [facilityState, setFacilityState] = useState('');
+    const [facilityZip, setFacilityZip] = useState('');
+
+
+    //onSubmit handler to add a new Facility
+    const addFacility = (e) => {
+      e.preventDefault();
+
+      // console.log(
+      //   `The facilityName is ${facilityName}`,
+      //   `The facilityType is ${facilityType}`,
+      //   `The facilityAddress is ${facilityAddress}`,
+      //   `The facilityCity is ${facilityCity}`,
+      //   `The facilityState is ${facilityState}`,
+      //   `The facilityZip is ${facilityZip}`,
+      // )
+      
+      // validate zipcode length before submitting
+      if(facilityZip.length !== 5 && facilityZip !== 0){
+        alert("Please enter a valid 5-digit zip code")
+        return
+      }
+      // else{
+      //   alert("VALID ZIP")
+      // }
+
+
+      // send POST request to the server to add this contact
+      // fetch('http://flip3.engr.oregonstate.edu:44265/AddContact', {
+      fetch('http://localhost:44265/AddFacility', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          Name: facilityName,  
+          Type: facilityType,
+          Address: facilityAddress,
+          City: facilityCity,
+          State: facilityState,
+          Zip: facilityZip,
+        })
+      })
+      .then(res => res.json())
+      .then(json => console.log(json));
+
+      window.alert("Facility added. You will now be routed back to the main Facilities page")
+      navigate("/PharmaTech/viewFacility")
+    }
+
+    // data-validator for zipcode input
+    const zipValidator = (e) => {
+      const value = e.target.value.replace(/\D/g, "");
+      setFacilityZip(value.slice(0,5));
+    };
 
   return (
     <div className="container">
@@ -22,16 +82,16 @@ function AddFacility() {
 
     <h1>Add A New Facility</h1>
 
-    <form className="row g-3">
+    <form className="row g-3" onSubmit={addFacility}>
 
     <div className="col-md-6">
     <label for="facilityName" className="form-label">Name <b>(required)</b></label>
-    <input type="text" className="form-control" id="facilityName" required />
+    <input type="text" className="form-control" id="facilityName" required onChange={event => setFacilityName(event.target.value)} />
   </div>
 
   <div className="col-md-6">
     <label for="designation" className="form-label">Type <b>(required)</b></label>
-    <select id="designation" className="form-select" required >
+    <select id="designation" className="form-select" required onChange={event => setFacilityType(event.target.value)}>
       <option value="" disabled selected>Select</option>
       <option>Hospital</option>
       <option>Pharmacy</option>
@@ -43,17 +103,17 @@ function AddFacility() {
 
   <div className="col-12">
     <label for="address" className="form-label">Address <b>(required)</b></label>
-    <input type="text" className="form-control" id="address" placeholder="1234 Main St" required/>
+    <input type="text" className="form-control" id="address" placeholder="1234 Main St" required onChange={event => setFacilityAddress(event.target.value)} />
   </div>
 
   <div className="col-md-6">
     <label for="city" className="form-label">City <b>(required)</b></label>
-    <input type="text" className="form-control" id="city" required />
+    <input type="text" className="form-control" id="city" required onChange={event => setFacilityCity(event.target.value)} />
   </div>
 
-  <div className="col-md-4">
+  <div className="col-md-3">
     <label for="state" className="form-label">State <b>(required)</b></label>
-    <select id="state" className="form-select" required>
+    <select id="state" className="form-select" required onChange={event => setFacilityState(event.target.value)} >
       <option value="" disabled selected>Select</option>
       <option>AL</option>
       <option>AK</option>
@@ -93,7 +153,7 @@ function AddFacility() {
       <option>NY</option>
       <option>NC</option>
       <option>ND</option>
-      <option>CM</option>
+      <option>NM</option>
 
       <option>OH</option>
       <option>OK</option>
@@ -117,9 +177,9 @@ function AddFacility() {
     </select>
   </div>
 
-  <div className="col-md-2">
+  <div className="col-md-3">
     <label for="zipCode" className="form-label">Zip <b>(required)</b></label>
-    <input type="text" className="form-control" id="zipCode" required />
+    <input value={facilityZip} type="text" className="form-control" id="zipCode" placeholder="12345" required onChange={zipValidator} />
   </div>
   
 

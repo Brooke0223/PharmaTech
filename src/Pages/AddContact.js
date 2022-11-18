@@ -1,4 +1,4 @@
-import { React, useState } from 'react'
+import { React, useState, useEffect } from 'react'
 import { useNavigate } from "react-router-dom"
 
 function AddContact() {
@@ -13,8 +13,140 @@ function AddContact() {
     const [phoneType, setPhoneType] = useState('');
     const [email, setEmail] = useState('');
     const [emailOpt, setEmailOpt] = useState('');
-    const [phoneOpt, setphoneOpt] = useState('');
+    const [phoneOpt, setPhoneOpt] = useState('');
     const [mailOpt, setMailOpt] = useState('');
+
+    const [patients, setPatients] = useState('');
+
+
+    //onSubmit handler to add a new Contact
+    const addContact = (e) => {
+      e.preventDefault();
+
+      console.log(
+        `The patientID is ${patientID}`,
+        `The address is ${address}`,
+        `The city is ${city}`,
+        `The state is ${state}`,
+        `The zip is ${zip}`,
+        `The phone is ${phone}`,
+        `The phoneType is ${phoneType}`,
+        `The email is ${email}`,
+        `The emailOpt is ${emailOpt}`,
+        `The phoneOpt is ${phoneOpt}`,
+        `The mailOpt is ${mailOpt}`,
+      )
+      
+      // validate phone length before submitting
+      if(phone.length !== 10 && phone.length !== 0){
+        alert("Please enter a valid 10-digit phone number")
+        return
+      }
+      // else{
+      //   alert("VALID PHONE")
+      // }
+
+      // validate zipcode length before submitting
+      if(zip.length !== 5 && zip.length !== 0){
+        alert("Please enter a valid 5-digit zip code")
+        return
+      }
+      // else{
+      //   alert("VALID ZIP")
+      // }
+
+      // reject empty submission
+      if(address.length === 0 && phone.length === 0 && email.length === 0){
+        alert("Please enter at least one form of contact information for this patient")
+        return
+      }
+      // else{
+      //   alert("Yes, at least one method was entered")
+      // }
+
+
+      // detect full address is present if 'mailOpt' is selected
+      if(mailOpt === "Yes" && (address.length === 0 || city.length === 0 || state.length === 0 || zip.length === 0)){
+        alert("Please enter a valid mailing address for this patient")
+        return
+      }
+      // else{
+      //   alert("Yes, a complete mailing address was entered")
+      // }
+
+
+      // detect full email is present if emailOpt is selected
+      if(emailOpt === "Yes" && email.length === 0){
+        alert("Please enter a valid email address for this patient")
+        return
+      }
+      // else{
+      //   alert("Yes, a complete email address was entered")
+      // }
+
+
+      // detect phone number is present if phoneOpt is selected
+      if(phoneOpt === "Yes" && (phone === "" || phoneType === "")){
+        alert("Please enter a valid phone number and phone type for this patient")
+        return
+      }
+      // else{
+      //   alert("Yes, a complete email address was entered")
+      // }
+
+
+      // window.alert("Just testing to see if it gets here")
+
+
+      // send POST request to the server to add this contact
+      // fetch('http://flip3.engr.oregonstate.edu:44265/AddContact', {
+      fetch('http://localhost:44265/AddContact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          PatientID: patientID,  
+          Address: address,
+          City: city,
+          State: state,
+          Zip: zip,
+          Phone: phone,
+          PhoneType: phoneType,
+          Email: email,
+          EmailOpt: emailOpt,
+          PhoneOpt: phoneOpt,
+          MailOpt: mailOpt,
+        })
+      })
+      .then(res => res.json())
+      .then(json => console.log(json));
+
+      window.alert("Contact Added. You will now be routed back to the main Contacts page")
+      navigate("/PharmaTech/viewContact")
+    }
+  
+  
+    //fetch Patient Data upon page mount (will use PatientID, FirstName, LastName to assist with edit selection)
+    useEffect(() => {
+      fetch('http://localhost:44265/ViewPatient')
+      .then(res => res.json())
+      .then(data => setPatients(data))
+    }, [])
+
+
+
+    // data-validator for phone input
+    const phoneValidator = (e) => {
+      const value = e.target.value.replace(/\D/g, "");
+      setPhone(value.slice(0,10));
+    };
+
+    // data-validator for zipcode input
+    const zipValidator = (e) => {
+      const value = e.target.value.replace(/\D/g, "");
+      setZip(value.slice(0,5));
+    };
 
     return (
     <div className="container">
@@ -32,10 +164,23 @@ function AddContact() {
     <h1>Add A New Contact</h1>
     <p><i>Note: Contacts may be added to a patient as needed, including multiple contacts for a single patient (e.g. in the case of adding two parents for a minor child).</i></p>
 
-    <form className="row g-3" >
+    <form className="row g-3" onSubmit={addContact} >
+      <div className="col-md-12">
+        <label for="race" className="form-label">Patient ID <b>(required)</b></label>
+        <select id="race" className="form-select" required onChange={event => setPatientID(event.target.value)} >
+          <option value="" disabled selected>Select</option>
 
+          {Array.isArray(patients) && patients.map((patient, index) => {
+                    return (
+                      <option value={patient.PatientID} key={patient.PatientID}>
+                          {`${patient.PatientID} ${patient.FirstName} ${patient.LastName}`}
+                      </option>
+                    );
+            })}
+        </select>
+      </div>
 
-  <div className="col-md-12">
+  {/* <div className="col-md-12">
     <label for="race" className="form-label">Patient ID <b>(required)</b></label>
     <select id="race" className="form-select" required onChange={event => setPatientID(event.target.value)} >
       <option value="" disabled selected>Select</option>
@@ -43,7 +188,7 @@ function AddContact() {
       <option>2 - Max Tucker</option>
       <option>3 - Calvin James</option>
     </select>
-  </div>
+  </div> */}
 
 
   <div className="col-6">
@@ -99,7 +244,7 @@ function AddContact() {
       <option>NY</option>
       <option>NC</option>
       <option>ND</option>
-      <option>CM</option>
+      <option>NM</option>
 
       <option>OH</option>
       <option>OK</option>
@@ -125,13 +270,13 @@ function AddContact() {
 
   <div className="col-md-2">
     <label for="zipCode" className="form-label">Zip</label>
-    <input type="text" className="form-control" id="zipCode" onChange={event => setZip(event.target.value)} />
+    <input value={zip} type="text" className="form-control" id="zipCode" placeholder="12345" onChange={zipValidator} />
   </div>
 
 
   <div className="col-md-4">
     <label for="phone" className="form-label">Phone</label>
-    <input type="text" className="form-control" id="phone" placeholder="(123) 456-7890" onChange={event => setPhone(event.target.value)} />
+    <input value={phone} type="text" className="form-control" id="phone" placeholder="(123) 456-7890" onChange={phoneValidator} />
   </div>
 
   <div className="col-md-4">
@@ -153,24 +298,25 @@ function AddContact() {
   <div className="col-md-2">
     <label for="phoneOpt" className="form-label">Email Opt</label>
     <select id="phoneOpt" className="form-select" onChange={event => setEmailOpt(event.target.value)} >
-      <option selected>Yes</option>
-      <option>No</option>
+      <option selected>No</option>
+      <option >Yes</option>
     </select>
   </div>
 
   <div className="col-md-2">
     <label for="phoneOpt" className="form-label">Phone Opt</label>
-    <select id="phoneOpt" className="form-select" onChange={event => setphoneOpt(event.target.value)} >
+    <select id="phoneOpt" className="form-select" onChange={event => setPhoneOpt(event.target.value)} >
       <option selected>No</option>
-      <option>Yes</option>
+      <option >Yes</option>
     </select>
   </div>
 
   <div className="col-md-2">
     <label for="mailOpt" className="form-label">Mail Opt</label>
     <select id="mailOpt" className="form-select" onChange={event => setMailOpt(event.target.value)} >
+      <option value="" disabled selected>Select</option>
       <option selected>No</option>
-      <option>Yes</option>
+      <option >Yes</option>
     </select>
   </div>
 

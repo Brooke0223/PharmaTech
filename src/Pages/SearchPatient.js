@@ -4,8 +4,10 @@ import { React, useState } from 'react'
 function SearchPatient() {
   let navigate = useNavigate(); //This allows us to link user to another page in the pop-up alert window
 
+  const [searchResults, setSearchResults] = useState('');
+  
   const [firstName, setFirstName] = useState('');
-  const [middlename, setMiddleName] = useState('');
+  const [middleName, setMiddleName] = useState('');
   const [lastName, setLastName] = useState('');
   const [DOB, setDOB] = useState('');
   const [patientID, setPatientID] = useState('');
@@ -17,6 +19,29 @@ function SearchPatient() {
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
 
+  const searchHandler = (e) => {
+    e.preventDefault();
+
+    fetch('http://localhost:44265/SearchPatient', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            FirstName: firstName,
+            MiddleName: middleName,
+            LastName: lastName,
+            DOB: DOB,
+            PatientID: patientID,
+            Address: address,
+            City: city,
+            State: state,
+            Zip: zip,
+            Phone: phone,
+            Email: email,
+          })
+        })
+    }
 
 
   return (
@@ -39,7 +64,7 @@ function SearchPatient() {
     <h1>Search Patients</h1>
     
 
-    <form className="row g-3">
+    <form className="row g-3" onSubmit={searchHandler}>
 
     <div className="col-md-4">
     <label for="firstName" className="form-label">First Name</label>
