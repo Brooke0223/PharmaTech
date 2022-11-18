@@ -8,11 +8,11 @@ function ViewFacility() {
   
   // fetch Facilities Data upon page mount, and refresh if facilities are deleted
   useEffect(() => {
-    fetch('http://localhost:44265/ViewFacility')
+    // fetch('http://localhost:44265/ViewFacility')
+    fetch('http://flip1.engr.oregonstate.edu:44265/ViewFacility')
     .then(res => res.json())
     .then(data => setFacilities(data))
-    // .then(data => console.log(facilities))
-  }, [facilities]) //I changed this to an empty bracket because I think it kept loading forever?????????
+  }, [facilities])
 
   //OnClick handler to modify a facility
   const modifyHandler = (facilityID) => {
@@ -23,16 +23,11 @@ function ViewFacility() {
   const deleteHandler = (facilityID) => {
     if (window.confirm(`Are you sure you want to delete the contact with the id: ${facilityID}?`)) {
 
-      //send DELETE request to server (THIS ONE WORKS!!!!! (Except for obviously when the SQL fails))
-      // fetch(`http://localhost:44265/DeleteFacility/${facilityID}`, {
-      //   method: 'DELETE',
-      // })
-      // .then(res => res.text())
-      // .then(res => console.log(res))
       
       //send DELETE request to server
       async function deleteData() {
-        const response = await fetch(`http://localhost:44265/DeleteFacility/${facilityID}`, {
+        // const response = await fetch(`http://localhost:44265/DeleteFacility/${facilityID}`, {
+        const response = await fetch(`http://flip1.engr.oregonstate.edu:44265/DeleteFacility/${facilityID}`, {
           method: 'DELETE'
         })
         if(response.status === 500){
@@ -44,7 +39,8 @@ function ViewFacility() {
 
 
       //send GET request to server to re-render updated page contents
-      fetch('http://localhost:44265/ViewFacility')
+      // fetch('http://localhost:44265/ViewFacility')
+      fetch('http://flip1.engr.oregonstate.edu:44265/ViewFacility')
       .then(res => res.json())
       .then(data => setFacilities(data))
     }
@@ -100,54 +96,6 @@ function ViewFacility() {
         </tbody>
         );
       })}
-
-  {/* <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Spectrum Health</td>
-      <td>Hospital</td>
-      <td>3712 Robinson Court</td>
-      <td>Saginaw</td>
-      <td>MI</td>
-      <td>48607</td>
-      <td>⨁</td>
-      <td>⨂</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Walgreens</td>
-      <td>Pharmacy</td>
-      <td>3367 Main Street</td>
-      <td>Sunnyvale</td>
-      <td>CA</td>
-      <td>94086</td>
-      <td>⨁</td>
-      <td>⨂</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>WellNow</td>
-      <td>Urgent Care</td>
-      <td>833 Pearlman Avenue</td>
-      <td>St Louis</td>
-      <td>MO</td>
-      <td>63101</td>
-      <td>⨁</td>
-      <td>⨂</td>
-    </tr>
-    <tr>
-      <th scope="row">4</th>
-      <td>Oak Street Health</td>
-      <td>Walk-In Clinic</td>
-      <td>1983 Tennessee Avenue</td>
-      <td>Detroit</td>
-      <td>MI</td>
-      <td>48226</td>
-      <td>⨁</td>
-      <td>⨂</td>
-    </tr>
-  </tbody> */}
-
 
 </table>
 </div>

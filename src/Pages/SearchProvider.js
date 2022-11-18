@@ -139,7 +139,7 @@ function SearchProvider() {
       <option>NY</option>
       <option>NC</option>
       <option>ND</option>
-      <option>CM</option>
+      <option>NM</option>
 
       <option>OH</option>
       <option>OK</option>

@@ -26,7 +26,8 @@ function ViewContact() {
       if (window.confirm(`Are you sure you want to delete the contact with the id: ${contactID}?`)) {
   
         //send DELETE request to server
-        fetch('http://localhost:44265/DeleteContact/' + contactID, {
+        // fetch(`http://localhost:44265/DeleteContact/${contactID}`, {
+        fetch(`http://flip1.engr.oregonstate.edu:44265/DeleteContact/${contactID}`, {
           method: 'DELETE',
         })
         .then(res => res.text())
@@ -34,7 +35,8 @@ function ViewContact() {
   
   
         //send GET request to server to re-render updated page contents
-        fetch('http://localhost:44265/ViewContact')
+        // fetch('http://localhost:44265/ViewContact')
+        fetch('http://flip1.engr.oregonstate.edu:44265/ViewContact')
         .then(res => res.json())
         .then(data => setContacts(data))
       }

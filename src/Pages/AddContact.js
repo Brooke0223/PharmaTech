@@ -23,46 +23,26 @@ function AddContact() {
     const addContact = (e) => {
       e.preventDefault();
 
-      console.log(
-        `The patientID is ${patientID}`,
-        `The address is ${address}`,
-        `The city is ${city}`,
-        `The state is ${state}`,
-        `The zip is ${zip}`,
-        `The phone is ${phone}`,
-        `The phoneType is ${phoneType}`,
-        `The email is ${email}`,
-        `The emailOpt is ${emailOpt}`,
-        `The phoneOpt is ${phoneOpt}`,
-        `The mailOpt is ${mailOpt}`,
-      )
       
       // validate phone length before submitting
       if(phone.length !== 10 && phone.length !== 0){
         alert("Please enter a valid 10-digit phone number")
         return
       }
-      // else{
-      //   alert("VALID PHONE")
-      // }
+
 
       // validate zipcode length before submitting
       if(zip.length !== 5 && zip.length !== 0){
         alert("Please enter a valid 5-digit zip code")
         return
       }
-      // else{
-      //   alert("VALID ZIP")
-      // }
+
 
       // reject empty submission
       if(address.length === 0 && phone.length === 0 && email.length === 0){
         alert("Please enter at least one form of contact information for this patient")
         return
       }
-      // else{
-      //   alert("Yes, at least one method was entered")
-      // }
 
 
       // detect full address is present if 'mailOpt' is selected
@@ -70,9 +50,7 @@ function AddContact() {
         alert("Please enter a valid mailing address for this patient")
         return
       }
-      // else{
-      //   alert("Yes, a complete mailing address was entered")
-      // }
+
 
 
       // detect full email is present if emailOpt is selected
@@ -80,9 +58,7 @@ function AddContact() {
         alert("Please enter a valid email address for this patient")
         return
       }
-      // else{
-      //   alert("Yes, a complete email address was entered")
-      // }
+
 
 
       // detect phone number is present if phoneOpt is selected
@@ -90,17 +66,19 @@ function AddContact() {
         alert("Please enter a valid phone number and phone type for this patient")
         return
       }
-      // else{
-      //   alert("Yes, a complete email address was entered")
-      // }
+
+      // detect phone number is present if phoneOpt is selected
+      if(phone !== "" && phoneType === ""){
+        alert("Please select a phone type")
+        return
+      }
 
 
-      // window.alert("Just testing to see if it gets here")
-
-
+    
       // send POST request to the server to add this contact
       // fetch('http://flip3.engr.oregonstate.edu:44265/AddContact', {
-      fetch('http://localhost:44265/AddContact', {
+      // fetch('http://localhost:44265/AddContact', {
+      fetch('http://flip1.engr.oregonstate.edu:44265/AddContact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -129,7 +107,8 @@ function AddContact() {
   
     //fetch Patient Data upon page mount (will use PatientID, FirstName, LastName to assist with edit selection)
     useEffect(() => {
-      fetch('http://localhost:44265/ViewPatient')
+      // fetch('http://localhost:44265/ViewPatient')
+      fetch('http://flip1.engr.oregonstate.edu:44265/ViewPatient')
       .then(res => res.json())
       .then(data => setPatients(data))
     }, [])
@@ -283,6 +262,7 @@ function AddContact() {
     <label for="phoneType" className="form-label">Phone Type</label>
     <select id="phoneType" className="form-select" onChange={event => setPhoneType(event.target.value)} >
       <option disabled selected>Select</option>
+      <option></option>
       <option>Home</option>
       <option>Work</option>
       <option>Mobile</option>

@@ -20,7 +20,8 @@ function EditPatient() {
 
   //fetch Patient Data
   const CollectData = async () => {
-    let response = await fetch(`http://flip3.engr.oregonstate.edu:44265/FindPatient/${patientID}`)
+    // let response = await fetch(`http://flip3.engr.oregonstate.edu:44265/FindPatient/${patientID}`)
+    let response = await fetch(`http://flip1.engr.oregonstate.edu:44265/FindPatient/${patientID}`)
     response = await response.json();
     
     if(response){
@@ -57,7 +58,8 @@ function EditPatient() {
       return
     }
 
-    fetch(`http://flip3.engr.oregonstate.edu:44265/EditPatient/${patientID}`, {
+    // fetch(`http://flip3.engr.oregonstate.edu:44265/EditPatient/${patientID}`, {
+    fetch(`http://flip1.engr.oregonstate.edu:44265/EditPatient/${patientID}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'

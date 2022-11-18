@@ -9,7 +9,8 @@ function ViewPatient() {
 
   //fetch Patient Data upon page mount, and refresh if patients are deleted
   useEffect(() => {
-    fetch('http://localhost:44265/ViewPatient')
+    // fetch('http://localhost:44265/ViewPatient')
+    fetch('http://flip1.engr.oregonstate.edu:44265/ViewPatient')
     .then(res => res.json())
     .then(data => setPatients(data))
   }, [patients])
@@ -25,7 +26,8 @@ function ViewPatient() {
     if (window.confirm(`Are you sure you want to delete the patient with the id: ${patientID}?`)) {
 
       //send DELETE request to server
-      fetch('http://localhost:44265/DeletePatient/' + patientID, {
+      // fetch(`http://localhost:44265/DeletePatient/${patientID}`, {
+      fetch(`http://flip1.engr.oregonstate.edu:44265/DeletePatient/${patientID}`, {
         method: 'DELETE',
       })
       .then(res => res.text())
@@ -33,7 +35,8 @@ function ViewPatient() {
 
 
       //send GET request to server to re-render updated page contents
-      fetch('http://localhost:44265/ViewPatient')
+      // fetch('http://localhost:44265/ViewPatient')
+      fetch('http://flip1.engr.oregonstate.edu:44265/ViewPatient')
       .then(res => res.json())
       .then(data => setPatients(data))
     }

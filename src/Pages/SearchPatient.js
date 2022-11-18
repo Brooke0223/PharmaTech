@@ -22,7 +22,8 @@ function SearchPatient() {
   const searchHandler = (e) => {
     e.preventDefault();
 
-    fetch('http://localhost:44265/SearchPatient', {
+    // fetch('http://localhost:44265/SearchPatient', {
+    fetch('http://flip1.engr.oregonstate.edu:44265/SearchPatient', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'

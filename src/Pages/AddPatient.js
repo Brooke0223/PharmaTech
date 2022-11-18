@@ -30,7 +30,8 @@ function AddPatient() {
         return
       }
 
-      fetch('http://localhost:44265/AddPatient', {
+      // fetch('http://localhost:44265/AddPatient', {
+      fetch('http://flip1.engr.oregonstate.edu:44265/AddPatient', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

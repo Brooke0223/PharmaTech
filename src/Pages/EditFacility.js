@@ -18,7 +18,8 @@ function EditFacility() {
 
   //fetch Facility Data
   const CollectData = async () => {
-    let response = await fetch(`http://localhost:44265/FindFacility/${facilityID}`)
+    // let response = await fetch(`http://localhost:44265/FindFacility/${facilityID}`)
+    let response = await fetch(`http://flip1.engr.oregonstate.edu:44265/FindFacility/${facilityID}`)
     response = await response.json();
     
     if(response){
@@ -57,7 +58,8 @@ function EditFacility() {
       }
 
     //send PUT request to server to modify the specified facility
-    fetch(`http://localhost:44265/EditFacility/${facilityID}`, {
+    // fetch(`http://localhost:44265/EditFacility/${facilityID}`, {
+    fetch(`http://flip1.engr.oregonstate.edu:44265/EditFacility/${facilityID}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'

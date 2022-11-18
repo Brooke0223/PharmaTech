@@ -36,8 +36,8 @@ function AddFacility() {
 
 
       // send POST request to the server to add this contact
-      // fetch('http://flip3.engr.oregonstate.edu:44265/AddContact', {
-      fetch('http://localhost:44265/AddFacility', {
+      // fetch('http://localhost:44265/AddFacility', {
+      fetch('http://flip1.engr.oregonstate.edu:44265/AddFacility', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
