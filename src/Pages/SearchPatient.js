@@ -1,6 +1,11 @@
 import { BrowserRouter as Router, useNavigate } from "react-router-dom"
 import { React, useState } from 'react'
 
+
+// const ENDPOINT = 'http://localhost:44265'
+const ENDPOINT = 'http://flip1.engr.oregonstate.edu:44265'
+
+
 function SearchPatient() {
   let navigate = useNavigate(); //This allows us to link user to another page in the pop-up alert window
 
@@ -19,11 +24,9 @@ function SearchPatient() {
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
 
-  const searchHandler = (e) => {
-    e.preventDefault();
 
-    // fetch('http://localhost:44265/SearchPatient', {
-    fetch('http://flip1.engr.oregonstate.edu:44265/SearchPatient', {
+  async function fetchPatients() {
+    const response = await fetch(`${ENDPOINT}/SearchPatient`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -42,6 +45,40 @@ function SearchPatient() {
             Email: email,
           })
         })
+      const data = await response.json()
+      return data
+    }
+
+
+  const searchHandler = async (e) => {
+    e.preventDefault();
+
+    const data = await fetchPatients()
+    setSearchResults(data)
+    console.log(data)
+  }
+
+
+
+    //OnClick handler to modify a patient
+    const modifyHandler = (patientID) => {
+      navigate("/PharmaTech/editPatient/"+patientID)
+    }
+  
+
+    //OnClick handler to delete a patient
+    const deleteHandler = (patientID) => {
+      if (window.confirm(`Are you sure you want to delete the patient with the id: ${patientID}?`)) {
+  
+        //send DELETE request to server and refresh page
+        fetch(`${ENDPOINT}/DeletePatient/${patientID}`, {
+          method: 'DELETE',
+        })
+        .then(res => res.text())
+        .then(res => console.log(res))
+        alert("Patient successfully deleted.")
+        navigate("/PharmaTech/ViewPatient")  
+      }
     }
 
 
@@ -62,9 +99,17 @@ function SearchPatient() {
         </li>
     </ul>
 
-    <h1>Search Patients</h1>
+
+
+
+
+    {/* If the user has not yet searched a patient, display the search inputs */}
+    {(searchResults === '') && 
+      <>
     
 
+    <h1>Search Patients</h1>
+    
     <form className="row g-3" onSubmit={searchHandler}>
 
     <div className="col-md-4">
@@ -203,8 +248,63 @@ function SearchPatient() {
   <br/>
   <br/>
 
-</div>
+ </>
+}
 
+
+
+
+{/* If the user has submitted their search, display search results table */}
+{(searchResults !== '') && 
+      <>
+      <h1>Patient Search Results</h1>
+      <br/>
+      <h5>Search returned {searchResults.length} results</h5>
+
+      <br/>
+      <table className="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Patient ID</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Middle Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">DOB</th>
+            <th scope="col">Sex</th>
+            <th scope="col">Race</th>
+            <th scope="col">Ethnicity</th>
+            <th scope="col">Active Status</th>
+            <th scope="col">Modify</th>
+            <th scope="col">Delete</th>
+          </tr>
+        </thead>
+
+        {Array.isArray(searchResults) && searchResults.map((patient, index) => {
+              return (
+                <tbody>
+                    <tr key={patient.PatientID}>
+                      <td>{patient.PatientID}</td>
+                      <td>{patient.FirstName}</td>
+                      <td>{patient.MiddleName}</td>
+                      <td>{patient.LastName}</td>
+                      <td>{patient.DOB.slice(0, 10)}</td>
+                      <td>{patient.Sex}</td>
+                      <td>{patient.Race}</td>
+                      <td>{patient.Ethnicity}</td>
+                      <td>{patient.ActiveStatus}</td>
+                      <td className="modify" onClick={() => modifyHandler(patient.PatientID)}>⨁</td>
+                      <td className="delete" onClick={() => deleteHandler(patient.PatientID)}>⨂</td>
+                    </tr>
+                </tbody>
+              );
+            })}
+      </table>
+      </>
+}
+  
+
+
+</div>
   )
 }
 

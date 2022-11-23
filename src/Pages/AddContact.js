@@ -1,6 +1,10 @@
 import { React, useState, useEffect } from 'react'
 import { useNavigate } from "react-router-dom"
 
+// const ENDPOINT = 'http://localhost:44265'
+const ENDPOINT = 'http://flip1.engr.oregonstate.edu:44265'
+
+
 function AddContact() {
     let navigate = useNavigate(); //This allows us to link user to another page in the pop-up alert window
 
@@ -47,38 +51,36 @@ function AddContact() {
 
       // detect full address is present if 'mailOpt' is selected
       if(mailOpt === "Yes" && (address.length === 0 || city.length === 0 || state.length === 0 || zip.length === 0)){
-        alert("Please enter a valid mailing address for this patient")
+        alert("Please enter a valid mailing address for this patient, or select 'No' for the 'Mail Opt' option")
         return
       }
 
 
 
-      // detect full email is present if emailOpt is selected
+      // detect full email is present if 'emailOpt' is selected
       if(emailOpt === "Yes" && email.length === 0){
-        alert("Please enter a valid email address for this patient")
+        alert("Please enter a valid email address for this patient, or select 'No' for the 'Email Opt' option")
         return
       }
 
 
 
-      // detect phone number is present if phoneOpt is selected
+      // detect phone number is present if 'phoneOpt' is selected
       if(phoneOpt === "Yes" && (phone === "" || phoneType === "")){
-        alert("Please enter a valid phone number and phone type for this patient")
+        alert("Please enter a valid phone number and phone type for this patient, or select 'No' for the 'Phone Opt' option")
         return
       }
 
-      // detect phone number is present if phoneOpt is selected
+      // detect phone type is present if phone number is entered
       if(phone !== "" && phoneType === ""){
-        alert("Please select a phone type")
+        alert("Please select a phone type, or remove inputted Phone number")
         return
       }
 
 
     
       // send POST request to the server to add this contact
-      // fetch('http://flip3.engr.oregonstate.edu:44265/AddContact', {
-      // fetch('http://localhost:44265/AddContact', {
-      fetch('http://flip1.engr.oregonstate.edu:44265/AddContact', {
+      fetch(`${ENDPOINT}/AddContact`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -107,8 +109,8 @@ function AddContact() {
   
     //fetch Patient Data upon page mount (will use PatientID, FirstName, LastName to assist with edit selection)
     useEffect(() => {
-      // fetch('http://localhost:44265/ViewPatient')
-      fetch('http://flip1.engr.oregonstate.edu:44265/ViewPatient')
+      fetch(`${ENDPOINT}/ViewPatient`)
+      // fetch('http://flip1.engr.oregonstate.edu:44265/ViewPatient')
       .then(res => res.json())
       .then(data => setPatients(data))
     }, [])
@@ -158,16 +160,6 @@ function AddContact() {
             })}
         </select>
       </div>
-
-  {/* <div className="col-md-12">
-    <label for="race" className="form-label">Patient ID <b>(required)</b></label>
-    <select id="race" className="form-select" required onChange={event => setPatientID(event.target.value)} >
-      <option value="" disabled selected>Select</option>
-      <option>1 - Jennie Nichols</option>
-      <option>2 - Max Tucker</option>
-      <option>3 - Calvin James</option>
-    </select>
-  </div> */}
 
 
   <div className="col-6">

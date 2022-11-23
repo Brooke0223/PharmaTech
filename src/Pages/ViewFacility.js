@@ -1,6 +1,11 @@
 import { React, useState, useEffect } from 'react'
 import { useNavigate } from "react-router-dom"
 
+// const ENDPOINT = 'http://localhost:44265'
+const ENDPOINT = 'http://flip1.engr.oregonstate.edu:44265'
+
+
+
 function ViewFacility() {
   let navigate = useNavigate(); //This allows us to link user to another page in the pop-up alert window
 
@@ -8,11 +13,10 @@ function ViewFacility() {
   
   // fetch Facilities Data upon page mount, and refresh if facilities are deleted
   useEffect(() => {
-    // fetch('http://localhost:44265/ViewFacility')
-    fetch('http://flip1.engr.oregonstate.edu:44265/ViewFacility')
+    fetch(`${ENDPOINT}/ViewFacility`)
     .then(res => res.json())
     .then(data => setFacilities(data))
-  }, [facilities])
+  }, [])
 
   //OnClick handler to modify a facility
   const modifyHandler = (facilityID) => {
@@ -21,13 +25,11 @@ function ViewFacility() {
 
   //OnClick handler to delete a facility
   const deleteHandler = (facilityID) => {
-    if (window.confirm(`Are you sure you want to delete the contact with the id: ${facilityID}?`)) {
-
+    if (window.confirm(`Are you sure you want to delete the facility with the id: ${facilityID}?`)) {
       
-      //send DELETE request to server
+      //send DELETE request to server and refresh page
       async function deleteData() {
-        // const response = await fetch(`http://localhost:44265/DeleteFacility/${facilityID}`, {
-        const response = await fetch(`http://flip1.engr.oregonstate.edu:44265/DeleteFacility/${facilityID}`, {
+        const response = await fetch(`${ENDPOINT}/DeleteFacility/${facilityID}`, {
           method: 'DELETE'
         })
         if(response.status === 500){
@@ -35,14 +37,7 @@ function ViewFacility() {
         }
       }
       deleteData()
-        
-
-
-      //send GET request to server to re-render updated page contents
-      // fetch('http://localhost:44265/ViewFacility')
-      fetch('http://flip1.engr.oregonstate.edu:44265/ViewFacility')
-      .then(res => res.json())
-      .then(data => setFacilities(data))
+      window.location.reload();
     }
   }
 

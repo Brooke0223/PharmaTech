@@ -1,6 +1,11 @@
 import { React, useState, useEffect } from 'react'
 import { useNavigate } from "react-router-dom"
 
+
+// const ENDPOINT = 'http://localhost:44265'
+const ENDPOINT = 'http://flip1.engr.oregonstate.edu:44265'
+
+
 function AddFacility() {
     let navigate = useNavigate(); //This allows us to link user to another page in the pop-up alert window
 
@@ -16,28 +21,16 @@ function AddFacility() {
     const addFacility = (e) => {
       e.preventDefault();
 
-      // console.log(
-      //   `The facilityName is ${facilityName}`,
-      //   `The facilityType is ${facilityType}`,
-      //   `The facilityAddress is ${facilityAddress}`,
-      //   `The facilityCity is ${facilityCity}`,
-      //   `The facilityState is ${facilityState}`,
-      //   `The facilityZip is ${facilityZip}`,
-      // )
       
       // validate zipcode length before submitting
       if(facilityZip.length !== 5 && facilityZip !== 0){
         alert("Please enter a valid 5-digit zip code")
         return
       }
-      // else{
-      //   alert("VALID ZIP")
-      // }
-
 
       // send POST request to the server to add this contact
-      // fetch('http://localhost:44265/AddFacility', {
-      fetch('http://flip1.engr.oregonstate.edu:44265/AddFacility', {
+      fetch(`${ENDPOINT}/AddFacility`, {
+      // fetch('http://flip1.engr.oregonstate.edu:44265/AddFacility', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

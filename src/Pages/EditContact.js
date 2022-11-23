@@ -2,6 +2,10 @@ import { useNavigate } from "react-router-dom"
 import { React, useState, useEffect } from 'react'
 
 
+// const ENDPOINT = 'http://localhost:44265'
+const ENDPOINT = 'http://flip1.engr.oregonstate.edu:44265'
+
+
 function EditContact() {
   let navigate = useNavigate(); //This allows us to link user to another page in the pop-up alert window
 
@@ -22,12 +26,11 @@ function EditContact() {
 
   //fetch Contact Data
   const CollectData = async () => {
-    // let response = await fetch(`http://localhost:44265/FindContact/${contactID}`)
-    let response = await fetch(`http://flip1.engr.oregonstate.edu:44265/FindContact/${contactID}`)
+    let response = await fetch(`${ENDPOINT}/FindContact/${contactID}`)
     response = await response.json();
     
     if(response){
-      setPhone(response[0].Phone)
+      setPhone(response[0].Phone != 0 ? response[0].Phone : '')
       setPhoneType(response[0].PhoneType)
       setPhoneOpt(response[0].PhoneOpt)
       setEmail(response[0].Email)
@@ -35,7 +38,7 @@ function EditContact() {
       setAddress(response[0].AddressStreet)
       setCity(response[0].AddressCity)
       setState(response[0].AddressState)
-      setZip(response[0].AddressZip)
+      setZip(response[0].AddressZip != 0 ? response[0].AddressZip : '')
       setMailOpt(response[0].MailOpt)
     }
   }
@@ -84,26 +87,25 @@ function EditContact() {
 
       // detect full address is present if 'mailOpt' is selected
       if(mailOpt === "Yes" && (address.length === 0 || city.length === 0 || state.length === 0 || zip.length === 0)){
-        alert("Please enter a valid mailing address for this patient")
+        alert("Please enter a valid mailing address for this patient, or select 'No' for the 'Mail Opt' option")
         return
       }
 
       // detect full email is present if emailOpt is selected
       if(emailOpt === "Yes" && email.length === 0){
-        alert("Please enter a valid email address for this patient")
+        alert("Please enter a valid email address for this patient, or select 'No' for the 'Email Opt' option")
         return
       }
 
       // detect phone number is present if phoneOpt is selected
       if(phoneOpt === "Yes" && (phone === "" || phoneType === "")){
-        alert("Please enter a valid phone number and phone type for this patient")
+        alert("Please enter a valid phone number and phone type for this patient, or select 'No' for the 'Phone Opt' option")
         return
       }
 
 
 
-    // fetch(`http://localhost:44265/EditContact/${contactID}`, {
-    fetch(`http://flip1.engr.oregonstate.edu:44265/EditContact/${contactID}`, {
+    fetch(`${ENDPOINT}/EditContact/${contactID}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
@@ -234,19 +236,19 @@ function EditContact() {
 
         <div className="col-md-3">
           <label for="zip" className="form-label">Zip </label>
-          <input value={zip !== 0 ? zip : ''} type="text" className="form-control" id="zip" onChange={zipValidator}/>
+          <input value={zip} type="text" className="form-control" id="zip" onChange={zipValidator}/>
         </div>
 
         <div className="col-md-4">
           <label for="phone" className="form-label">Phone </label>
-          <input value={phone !== 0 ? phone : ''} type="text" className="form-control" id="phone" onChange={phoneValidator}/>
+          <input value={phone} type="text" className="form-control" id="phone" onChange={phoneValidator}/>
         </div>
 
         <div className="col-md-2">
           <label for="phoneType" className="form-label">Phone Type</label>
           <select id="phoneType" className="form-select" onChange={event => setPhoneType(event.target.value)}>
             <option selected disabled>{phoneType}</option>
-            <option></option>
+            <option value=''></option>
             <option>Home</option>
             <option>Work</option>
             <option>Mobile</option>

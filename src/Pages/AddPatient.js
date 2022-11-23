@@ -1,6 +1,11 @@
 import { React, useState } from 'react'
 import { useNavigate } from "react-router-dom"
 
+
+// const ENDPOINT = 'http://localhost:44265'
+const ENDPOINT = 'http://flip1.engr.oregonstate.edu:44265'
+
+
 function AddPatient() {
     let navigate = useNavigate(); //This allows us to link user to another page in the pop-up alert window
 
@@ -30,8 +35,7 @@ function AddPatient() {
         return
       }
 
-      // fetch('http://localhost:44265/AddPatient', {
-      fetch('http://flip1.engr.oregonstate.edu:44265/AddPatient', {
+      fetch(`${ENDPOINT}/AddPatient`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

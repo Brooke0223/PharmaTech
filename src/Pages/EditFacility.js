@@ -1,6 +1,9 @@
 import { useNavigate } from "react-router-dom"
 import { React, useState, useEffect } from 'react'
 
+// const ENDPOINT = 'http://localhost:44265'
+const ENDPOINT = 'http://flip1.engr.oregonstate.edu:44265'
+
 
 function EditFacility() {
   let navigate = useNavigate(); //This allows us to link user to another page in the pop-up alert window
@@ -18,12 +21,11 @@ function EditFacility() {
 
   //fetch Facility Data
   const CollectData = async () => {
-    // let response = await fetch(`http://localhost:44265/FindFacility/${facilityID}`)
-    let response = await fetch(`http://flip1.engr.oregonstate.edu:44265/FindFacility/${facilityID}`)
+    let response = await fetch(`${ENDPOINT}/FindFacility/${facilityID}`)
+    // let response = await fetch(`http://flip1.engr.oregonstate.edu:44265/FindFacility/${facilityID}`)
     response = await response.json();
     
     if(response){
-        // console.log(response)
       setFacilityName(response[0].FacilityName)
       setFacilityType(response[0].FacilityType)
       setFacilityAddress(response[0].AddressStreet)
@@ -58,8 +60,8 @@ function EditFacility() {
       }
 
     //send PUT request to server to modify the specified facility
-    // fetch(`http://localhost:44265/EditFacility/${facilityID}`, {
-    fetch(`http://flip1.engr.oregonstate.edu:44265/EditFacility/${facilityID}`, {
+    fetch(`${ENDPOINT}/EditFacility/${facilityID}`, {
+    // fetch(`http://flip1.engr.oregonstate.edu:44265/EditFacility/${facilityID}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'

@@ -1,19 +1,23 @@
 import { useNavigate } from "react-router-dom"
 import { React, useState, useEffect } from 'react'
 
+// const ENDPOINT = 'http://localhost:44265'
+const ENDPOINT = 'http://flip1.engr.oregonstate.edu:44265'
+
+
+
 function ViewPatient() {
   let navigate = useNavigate(); //This allows us to link user to another page in the pop-up alert window
 
   const [patients, setPatients] = useState('');
 
 
-  //fetch Patient Data upon page mount, and refresh if patients are deleted
+  //fetch Patient Data once upon page mount
   useEffect(() => {
-    // fetch('http://localhost:44265/ViewPatient')
-    fetch('http://flip1.engr.oregonstate.edu:44265/ViewPatient')
+    fetch(`${ENDPOINT}/ViewPatient`)
     .then(res => res.json())
     .then(data => setPatients(data))
-  }, [patients])
+  }, [])
 
 
   //OnClick handler to modify a patient
@@ -25,20 +29,13 @@ function ViewPatient() {
   const deleteHandler = (patientID) => {
     if (window.confirm(`Are you sure you want to delete the patient with the id: ${patientID}?`)) {
 
-      //send DELETE request to server
-      // fetch(`http://localhost:44265/DeletePatient/${patientID}`, {
-      fetch(`http://flip1.engr.oregonstate.edu:44265/DeletePatient/${patientID}`, {
+      //send DELETE request to server and refresh page
+      fetch(`${ENDPOINT}/DeletePatient/${patientID}`, {
         method: 'DELETE',
       })
       .then(res => res.text())
       .then(res => console.log(res))
-
-
-      //send GET request to server to re-render updated page contents
-      // fetch('http://localhost:44265/ViewPatient')
-      fetch('http://flip1.engr.oregonstate.edu:44265/ViewPatient')
-      .then(res => res.json())
-      .then(data => setPatients(data))
+      window.location.reload();
     }
   }
 

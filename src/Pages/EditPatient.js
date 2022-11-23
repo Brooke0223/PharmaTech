@@ -2,6 +2,10 @@ import { useNavigate } from "react-router-dom"
 import { React, useState, useEffect } from 'react'
 
 
+// const ENDPOINT = 'http://localhost:44265'
+const ENDPOINT = 'http://flip1.engr.oregonstate.edu:44265'
+
+
 function EditPatient() {
   let navigate = useNavigate(); //This allows us to link user to another page in the pop-up alert window
 
@@ -20,8 +24,7 @@ function EditPatient() {
 
   //fetch Patient Data
   const CollectData = async () => {
-    // let response = await fetch(`http://flip3.engr.oregonstate.edu:44265/FindPatient/${patientID}`)
-    let response = await fetch(`http://flip1.engr.oregonstate.edu:44265/FindPatient/${patientID}`)
+    let response = await fetch(`${ENDPOINT}/FindPatient/${patientID}`)
     response = await response.json();
     
     if(response){
@@ -58,29 +61,28 @@ function EditPatient() {
       return
     }
 
-    // fetch(`http://flip3.engr.oregonstate.edu:44265/EditPatient/${patientID}`, {
-    fetch(`http://flip1.engr.oregonstate.edu:44265/EditPatient/${patientID}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          FirstName: firstName,
-          MiddleName: middleName,
-          LastName: lastName,
-          DOB: DOB,
-          Sex: sex,
-          ActiveStatus: status,
-          Race: race,
-          Ethnicity: ethnicity,
-        })
+    fetch(`${ENDPOINT}/EditPatient/${patientID}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        FirstName: firstName,
+        MiddleName: middleName,
+        LastName: lastName,
+        DOB: DOB,
+        Sex: sex,
+        ActiveStatus: status,
+        Race: race,
+        Ethnicity: ethnicity,
       })
-      .then(res => res.json())
-      .then(json => console.log(json));
+    })
+    .then(res => res.json())
+    .then(json => console.log(json));
 
-      window.alert("Edit complete. You will now be routed back to the main page")
-      navigate("/PharmaTech/ViewPatient")
-    }
+    window.alert("Edit complete. You will now be routed back to the main page")
+    navigate("/PharmaTech/ViewPatient")
+  }
   
   
   return (

@@ -1,21 +1,23 @@
 import { useNavigate } from "react-router-dom"
 import { React, useState, useEffect } from 'react'
 
+// const ENDPOINT = 'http://localhost:44265'
+const ENDPOINT = 'http://flip1.engr.oregonstate.edu:44265'
+
+
 function ViewContact() {
   let navigate = useNavigate(); //This allows us to link user to another page in the pop-up alert window
 
   const [contacts, setContacts] = useState('');
 
-  // fetch Contact Data upon page mount, and refresh if contacts are deleted
+  // fetch Contact Data once upon page mount
   useEffect(() => {
-    fetch('http://localhost:44265/ViewContact')
+    fetch(`${ENDPOINT}/ViewContact`)
     .then(res => res.json())
     .then(data => setContacts(data))
-  }, [contacts])
+  }, [])
 
-  //Correct any null numeric values that are returning as "0"
-
-
+  
     //OnClick handler to modify a contact
     const modifyHandler = (contactID) => {
       navigate(`/PharmaTech/editContact/${contactID}`)
@@ -25,20 +27,13 @@ function ViewContact() {
     const deleteHandler = (contactID) => {
       if (window.confirm(`Are you sure you want to delete the contact with the id: ${contactID}?`)) {
   
-        //send DELETE request to server
-        // fetch(`http://localhost:44265/DeleteContact/${contactID}`, {
-        fetch(`http://flip1.engr.oregonstate.edu:44265/DeleteContact/${contactID}`, {
+        //send DELETE request to server and refresh page
+        fetch(`${ENDPOINT}/DeleteContact/${contactID}`, {
           method: 'DELETE',
         })
         .then(res => res.text())
         .then(res => console.log(res))
-  
-  
-        //send GET request to server to re-render updated page contents
-        // fetch('http://localhost:44265/ViewContact')
-        fetch('http://flip1.engr.oregonstate.edu:44265/ViewContact')
-        .then(res => res.json())
-        .then(data => setContacts(data))
+        window.location.reload();
       }
     }
   
