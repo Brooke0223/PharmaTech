@@ -1,8 +1,15 @@
-import { React, useState } from 'react'
 import { useNavigate } from "react-router-dom"
+import { React, useState } from 'react'
+
+
+// const ENDPOINT = 'http://localhost:44265'
+const ENDPOINT = 'http://flip1.engr.oregonstate.edu:44265'
+
 
 function SearchProduct() {
   let navigate = useNavigate(); //This allows us to link user to another page in the pop-up alert window
+
+  const [searchResults, setSearchResults] = useState('');
 
   const [type, setType] = useState('');
   const [NDC, setNDC] = useState('');
@@ -14,10 +21,67 @@ function SearchProduct() {
   const [zip, setZip] = useState('');
 
 
+  async function fetchProducts() {
+    const response = await fetch(`${ENDPOINT}/SearchProduct`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            Type: type,
+            NDC: NDC,
+            Lot: lot,
+            Expiration: expiration,
+            FacilityName: facilityName,
+            City: city,
+            State: state,
+            Zip: zip,
+          })
+        })
+      const data = await response.json()
+      return data
+    }
+
+
+  const searchHandler = async (e) => {
+    e.preventDefault();
+
+    const data = await fetchProducts()
+    setSearchResults(data)
+    console.log(data)
+  }
+
+
+    //OnClick handler to modify a product
+    const modifyHandler = (productID) => {
+      navigate("/PharmaTech/editProduct/"+productID)
+    }
+  
+
+    //OnClick handler to delete a product
+    const deleteHandler = (productID) => {
+      if (window.confirm(`Are you sure you want to delete the product with the id: ${productID}?`)) {
+  
+        //send DELETE request to server and refresh page
+        fetch(`${ENDPOINT}/DeleteProduct/${productID}`, {
+          method: 'DELETE',
+        })
+        .then(res => res.text())
+        .then(res => console.log(res))
+        alert("Product successfully deleted.")
+        navigate("/PharmaTech/ViewProduct")  
+      }
+    }
+
+    const clearResults = () =>{
+      setSearchResults('')
+    }    
+
   return (
+
     <div className="container">
 
-<ul className="nav nav-tabs">
+      <ul className="nav nav-tabs">
             <li className="nav-link" onClick={event => navigate("/PharmaTech/viewProduct")}>
                 View Products
             </li>
@@ -39,11 +103,16 @@ function SearchProduct() {
             </li>
         </ul>
 
+
+
+    {/* If the user has not yet searched a patient, display the search inputs */}
+    {(searchResults === '') && 
+      <>
     <h1>Search Products</h1>
 
-    <form className="row g-3">
+    <form className="row g-3" onSubmit={searchHandler}>
 
-    <div className="col-md-6">
+  <div className="col-md-6">
     <label for="productType" className="form-label">Product Type</label>
     <select id="productType" className="form-select" onChange={event => setType(event.target.value)} >
       <option disabled selected>Select</option>
@@ -69,8 +138,8 @@ function SearchProduct() {
   </div>
 
   <div className="col-md-6">
-          <label for="expiration" className="form-label">Expiration</label>
-          <input type="date" className="form-control" id="expiration" onChange={event => setExpiration(event.target.value)} />
+    <label for="expiration" className="form-label">Expiration</label>
+    <input type="date" className="form-control" id="expiration" onChange={event => setExpiration(event.target.value)} />
   </div>
 
   <div className="col-md-6">
@@ -164,9 +233,62 @@ function SearchProduct() {
   <br/>
   <br/>
   <br/>
+  </>}
+
+
+
+{/* If the user has submitted their search, display search results table */}
+{(searchResults !== '') && 
+      <>
+      <h1>Product Search Results</h1>
+      <br/>
+      <button className="btn btn-primary" onClick={clearResults}>New Search</button>
+      <br/>
+      <br/>
+      <h5>Search returned {searchResults.length} results</h5>
+
+    <br/>
+    <table className="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Product ID</th>
+      <th scope="col">Product Type</th>
+      <th scope="col">NDC</th>
+      <th scope="col">Lot</th>
+      <th scope="col">Expiration</th>
+      <th scope="col">Dose Volume</th>
+      <th scope="col">Dose Unit</th>
+      <th scope="col">Modify</th>
+      <th scope="col">Delete</th>
+    </tr>
+  </thead>
+
+  {Array.isArray(searchResults) && searchResults.map((product, index) => {
+              return (
+                <tbody>
+                    <tr key={product.ProductID}>
+                      <td>{product.ProductID}</td>
+                      <td>{product.ProductType}</td>
+                      <td>{product.NDC !== 0 ? product.NDC : ''}</td>
+                      <td>{product.Lot}</td>
+                      <td>{product.Expiration !== '0000-00-00' ? product.Expiration.slice(0, 10) : ''}</td>
+                      <td>{product.DoseVolume !== 0 ? product.DoseVolume : ''}</td>
+                      <td>{product.DoseUnit}</td>
+                      <td className="modify" onClick={() => modifyHandler(product.ProductID)}>⨁</td>
+                      <td className="delete" onClick={() => deleteHandler(product.ProductID)}>⨂</td>
+                    </tr>
+                </tbody>
+              );
+            })}
+      </table>
+      </>
+}
+  
+
 
 </div>
   )
 }
+
 
 export default SearchProduct

@@ -1,8 +1,15 @@
-import { React, useState } from 'react'
 import { useNavigate } from "react-router-dom"
+import { React, useState } from 'react'
+
+
+// const ENDPOINT = 'http://localhost:44265'
+const ENDPOINT = 'http://flip1.engr.oregonstate.edu:44265'
+
 
 function SearchProvider() {
   let navigate = useNavigate(); //This allows us to link user to another page in the pop-up alert window
+
+  const [searchResults, setSearchResults] = useState('');
 
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -12,20 +19,62 @@ function SearchProvider() {
   const [city, setCity] = useState('');
   const [state, setState] = useState('');
 
-  //If no matching provider is found, allow re-direct to add a new provider
-  const submitHandler = (e) => {
-    e.preventDefault(); //prevent page refresh
 
-    if(firstName === "Rebecca" && lastName==="Mitchell"){
-      navigate("/PharmaTech/viewProvider")
-      return
-    } 
-      
-    if (window.confirm("Provider not found. Would you like to add a new provider?")) {
-        navigate("/PharmaTech/addProvider")
+  async function fetchProviders() {
+    const response = await fetch(`${ENDPOINT}/SearchProvider`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            FirstName: firstName,
+            LastName: lastName,
+            NPI: NPI,
+            Designation: designation,
+            FacilityName: facilityName,
+            City: city,
+            State: state,
+          })
+        })
+      const data = await response.json()
+      return data
     }
 
+
+  const searchHandler = async (e) => {
+    e.preventDefault();
+
+    const data = await fetchProviders()
+    setSearchResults(data)
+    console.log(data)
   }
+
+
+    //OnClick handler to modify a provider
+    const modifyHandler = (providerID) => {
+      navigate("/PharmaTech/editProvider/"+providerID)
+    }
+  
+
+    //OnClick handler to delete a provider
+    const deleteHandler = (providerID) => {
+      if (window.confirm(`Are you sure you want to delete the provider with the id: ${providerID}?`)) {
+  
+        //send DELETE request to server and refresh page
+        fetch(`${ENDPOINT}/DeleteProvider/${providerID}`, {
+          method: 'DELETE',
+        })
+        .then(res => res.text())
+        .then(res => console.log(res))
+        alert("Provider successfully deleted.")
+        navigate("/PharmaTech/ViewProvider")  
+      }
+    }
+
+  const clearResults = () =>{
+    setSearchResults('')
+  }
+
 
 
   return (
@@ -53,9 +102,14 @@ function SearchProvider() {
             </li>
          </ul>
 
+
+
+  {/* If the user has not yet searched a patient, display the search inputs */}
+  {(searchResults === '') && 
+    <>
     <h1>Search Providers</h1>
 
-    <form className="row g-3" onSubmit={submitHandler}>
+    <form className="row g-3" onSubmit={searchHandler}>
 
   <div className="col-md-6">
     <label for="firstName" className="form-label">First Name</label>
@@ -88,8 +142,8 @@ function SearchProvider() {
   </div>
 
   <div className="col-md-6">
-    <label for="FacilityName" className="form-label">Facility Name</label>
-    <input type="text" className="form-control" id="FacilityName" onChange={event => setFacilityName(event.target.value)} />
+    <label for="facilityName" className="form-label">Facility Name</label>
+    <input type="text" className="form-control" id="facilityName" onChange={event => setFacilityName(event.target.value)} />
   </div>
 
   <div className="col-md-6">
@@ -171,6 +225,53 @@ function SearchProvider() {
   <br/>
   <br/>
   <br/>
+  </>}
+
+
+{/* If the user has submitted their search, display search results table */}
+{(searchResults !== '') && 
+      <>
+      <h1>Provider Search Results</h1>
+      <br/>
+      <button className="btn btn-primary" onClick={clearResults}>New Search</button>
+      <br/>
+      <br/>
+      <h5>Search returned {searchResults.length} results</h5>
+
+      <br/>
+      <table className="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Provider ID</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">NPI</th>
+            <th scope="col">Designation</th>
+            <th scope="col">Modify</th>
+            <th scope="col">Delete</th>
+          </tr>
+        </thead>
+
+        {Array.isArray(searchResults) && searchResults.map((provider, index) => {
+              return (
+                <tbody>
+                    <tr key={provider.ProviderID}>
+                      <td>{provider.ProviderID}</td>
+                      <td>{provider.FirstName}</td>
+                      <td>{provider.LastName}</td>
+                      <td>{provider.NPI !== 0 ? provider.NPI : ''}</td>
+                      <td>{provider.Designation}</td>
+                      <td className="modify" onClick={() => modifyHandler(provider.ProviderID)}>⨁</td>
+                      <td className="delete" onClick={() => deleteHandler(provider.ProviderID)}>⨂</td>
+                    </tr>
+                </tbody>
+              );
+            })}
+      </table>
+      </>
+}
+  
+
 
 </div>
   )

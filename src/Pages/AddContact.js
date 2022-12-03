@@ -146,6 +146,7 @@ function AddContact() {
     <p><i>Note: Contacts may be added to a patient as needed, including multiple contacts for a single patient (e.g. in the case of adding two parents for a minor child).</i></p>
 
     <form className="row g-3" onSubmit={addContact} >
+      
       <div className="col-md-12">
         <label for="race" className="form-label">Patient ID <b>(required)</b></label>
         <select id="race" className="form-select" required onChange={event => setPatientID(event.target.value)} >
@@ -154,7 +155,7 @@ function AddContact() {
           {Array.isArray(patients) && patients.map((patient, index) => {
                     return (
                       <option value={patient.PatientID} key={patient.PatientID}>
-                          {`${patient.PatientID} ${patient.FirstName} ${patient.LastName}`}
+                          {`${patient.PatientID} - ${patient.FirstName} ${patient.LastName}`}
                       </option>
                     );
             })}
@@ -270,7 +271,8 @@ function AddContact() {
   <div className="col-md-2">
     <label for="phoneOpt" className="form-label">Email Opt</label>
     <select id="phoneOpt" className="form-select" onChange={event => setEmailOpt(event.target.value)} >
-      <option selected>No</option>
+      <option selected disabled>Select</option>
+      <option >No</option>
       <option >Yes</option>
     </select>
   </div>
@@ -278,7 +280,8 @@ function AddContact() {
   <div className="col-md-2">
     <label for="phoneOpt" className="form-label">Phone Opt</label>
     <select id="phoneOpt" className="form-select" onChange={event => setPhoneOpt(event.target.value)} >
-      <option selected>No</option>
+      <option selected disabled>Select</option>
+      <option >No</option>
       <option >Yes</option>
     </select>
   </div>
@@ -286,8 +289,8 @@ function AddContact() {
   <div className="col-md-2">
     <label for="mailOpt" className="form-label">Mail Opt</label>
     <select id="mailOpt" className="form-select" onChange={event => setMailOpt(event.target.value)} >
-      <option value="" disabled selected>Select</option>
-      <option selected>No</option>
+      <option selected disabled>Select</option>
+      <option >No</option>
       <option >Yes</option>
     </select>
   </div>

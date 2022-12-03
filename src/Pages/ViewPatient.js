@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom"
-import { React, useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
+import { json } from "express";
 
 // const ENDPOINT = 'http://localhost:44265'
 const ENDPOINT = 'http://flip1.engr.oregonstate.edu:44265'
@@ -12,12 +13,13 @@ function ViewPatient() {
   const [patients, setPatients] = useState('');
 
 
-  //fetch Patient Data once upon page mount
+  // fetch Patient Data once upon page mount
   useEffect(() => {
     fetch(`${ENDPOINT}/ViewPatient`)
     .then(res => res.json())
     .then(data => setPatients(data))
   }, [])
+ 
 
 
   //OnClick handler to modify a patient
@@ -34,10 +36,15 @@ function ViewPatient() {
         method: 'DELETE',
       })
       .then(res => res.text())
-      .then(res => console.log(res))
-      window.location.reload();
-    }
-  }
+      .then(res => {
+        console.log(res)
+        if(json.errno && json.errno == 1451){
+          window.alert("Error: Cannot delete a patient if they have a contact method entered.")
+        }else{
+          window.location.reload();
+        }
+    })
+  }}
 
   return (
 
