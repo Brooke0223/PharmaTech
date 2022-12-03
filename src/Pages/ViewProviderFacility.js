@@ -1,8 +1,34 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate } from "react-router-dom"
+
+// const ENDPOINT = 'http://localhost:44265'
+const ENDPOINT = 'http://flip1.engr.oregonstate.edu:44265'
 
 function ViewProviderFacility() {
     let navigate = useNavigate(); //This allows us to link user to another page in the pop-up alert window
+
+    const [providers, setProviders] = useState('');
+
+    // fetch ProviderFacility Data once upon page mount
+    useEffect(() => {
+      fetch(`${ENDPOINT}/ViewProviderFacility`)
+      .then(res => res.json())
+      .then(data => setProviders(data))
+    }, [])
+     
+    //OnClick handler to delete a provider/facility relationship
+    const deleteHandler = (ProvidersFacilitiesID) => {
+      if (window.confirm(`Are you sure you want to delete this provider/facility relationship with id: ${ProvidersFacilitiesID}?`)) {
+  
+        //send DELETE request to server and refresh page
+        fetch(`${ENDPOINT}/DeleteProviderFacility/${ProvidersFacilitiesID}`, {
+          method: 'DELETE',
+        })
+        .then(res => res.text())
+        .then(res => console.log(res))
+        window.location.reload();
+      }
+    }
 
   return (
     <div className="container">
@@ -34,37 +60,26 @@ function ViewProviderFacility() {
   <thead>
     <tr>
       <th scope="col">Provider ID</th>
+      <th scope="col">Provider Name</th>
       <th scope="col">Facility ID</th>
+      <th scope="col">Facility Name</th>
       <th scope="col">Delete</th>
     </tr>
   </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>1</td>
-      <td>⨂</td>
-    </tr>
-    <tr>
-      <th scope="row">1</th>
-      <td>4</td>
-      <td>⨂</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>1</td>
-      <td>⨂</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>2</td>
-      <td>⨂</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>3</td>
-      <td>⨂</td>
-    </tr>
-  </tbody>
+ 
+  {Array.isArray(providers) && providers.map((provider, index) => {
+              return (
+                <tbody>
+                    <tr key={provider.ProvidersFacilitiesID}>
+                      <td>{provider.ProviderID}</td>
+                      <td>{provider.ProviderName}</td>
+                      <td>{provider.FacilityID}</td>
+                      <td>{provider.FacilityName}</td>
+                      <td className="delete" onClick={() => deleteHandler(provider.ProvidersFacilitiesID)}>⨂</td>
+                    </tr>
+                </tbody>
+              );
+            })}
 </table>
 </div>
 
