@@ -1,78 +1,79 @@
-import { React, useState } from 'react'
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
+import { React, useState, useEffect } from "react";
+
 
 // const ENDPOINT = 'http://localhost:44265'
 const ENDPOINT = 'http://flip1.engr.oregonstate.edu:44265'
 
 
-function SearchFacility() {
-    let navigate = useNavigate(); //This allows us to link user to another page in the pop-up alert window
+function SearchEvent() {
+  let navigate = useNavigate(); //This allows us to link user to another page in the pop-up alert window
 
-    const [searchResults, setSearchResults] = useState('');
+  const [searchResults, setSearchResults] = useState(''); 
 
-    const [name, setName] = useState('');
-    const [facilityType, setFacilityType] = useState('');
-    const [city, setCity] = useState('');
-    const [state, setState] = useState('');
-    const [providerFirst, setProviderFirst] = useState('');
-    const [providerLast, setProviderLast] = useState('');
-    const [productType, setProductType] = useState('');
-    const [NDC, setNDC] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [middleName, setMiddleName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [DOB, setDOB] = useState('');
+  const [patientID, setPatientID] = useState('');
+  const [status, setStatus] = useState('');
+  const [facilityName, setFacilityName] = useState('');
+  const [facilityCity, setFacilityCity] = useState('');
+  const [facilityState, setFacilityState] = useState('');
+  const [facilityZip, setFacilityZip] = useState('');
 
 
-    async function fetchFacilities() {
-      const response = await fetch(`${ENDPOINT}/SearchFacility`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-              FacilityName: name,
-              FacilityType: facilityType,
-              City: city,
-              State: state,
-              ProviderFirstName: providerFirst,
-              ProviderLastName: providerLast,
-              ProductType: productType,
-              NDC: NDC
-            })
+  async function fetchEvents() {
+    const response = await fetch(`${ENDPOINT}/SearchEvent`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            FirstName: firstName,
+            MiddleName: middleName,
+            LastName: lastName,
+            DOB: DOB,
+            PatientID: patientID,
+            Status: status,
+            FacilityName: facilityName,
+            FacilityCity: facilityCity,
+            FacilityState: facilityState,
+            FacilityZip: facilityZip,
           })
-        const data = await response.json()
-        return data
-      }
-
-
-      const searchHandler = async (e) => {
-        e.preventDefault();
-    
-        const data = await fetchFacilities()
-        setSearchResults(data)
-        console.log(searchResults)
-      }
-
-
-
-    //OnClick handler to modify a facility
-    const modifyHandler = (facilityID) => {
-    navigate(`/PharmaTech/editFacility/${facilityID}`)
+        })
+      const data = await response.json()
+      return data
     }
 
-    //OnClick handler to delete a facility
-    const deleteHandler = (facilityID) => {
-      if (window.confirm(`Are you sure you want to delete the facility with the id: ${facilityID}?`)) {
-        
+
+  const searchHandler = async (e) => {
+    e.preventDefault();
+
+    const data = await fetchEvents()
+    setSearchResults(data)
+    console.log(data)
+  }
+
+
+    //OnClick handler to modify an event
+    const modifyHandler = (eventID) => {
+      navigate("/PharmaTech/editEvent/"+eventID)
+    }
+  
+
+    //OnClick handler to delete an event
+    const deleteHandler = (eventID) => {
+      if (window.confirm(`Are you sure you want to delete the event with the id: ${eventID}?`)) {
+  
         //send DELETE request to server and refresh page
-        async function deleteData() {
-          const response = await fetch(`${ENDPOINT}/DeleteFacility/${facilityID}`, {
-            method: 'DELETE'
-          })
-          if(response.status === 500){
-            alert("Unable to delete Facility with associated immunization event(s).")
-          }
-        }
-        deleteData()
-        alert("Facility successfully deleted.")
-        navigate("/PharmaTech/ViewFacility")  
+        fetch(`${ENDPOINT}/DeleteEvent/${eventID}`, {
+          method: 'DELETE',
+        })
+        .then(res => res.text())
+        .then(res => console.log(res))
+        alert("Event successfully deleted.")
+        navigate("/PharmaTech/ViewEvent")  
       }
     }
 
@@ -80,57 +81,79 @@ function SearchFacility() {
       setSearchResults('')
     }    
 
+
   return (
     <div className="container">
       <ul className="nav nav-tabs">
-          <li className="nav-link" onClick={event => navigate("/PharmaTech/viewFacility")}>
-              View Facilities
+          <li className="nav-link" onClick={event => navigate("/PharmaTech/viewEvent")}>
+              View Events
           </li>
 
-          <li className="nav-link" onClick={event => navigate("/PharmaTech/searchFacility")}>
-              Search Facilities
+          <li className="nav-link" onClick={event => navigate("/PharmaTech/searchEvent")}>
+              Search Events
           </li>
 
-          <li className="nav-link" onClick={event => navigate("/PharmaTech/addFacility")}>
-              Add Facility
+          <li className="nav-link" onClick={event => navigate("/PharmaTech/addEvent")}>
+              Add Event
           </li>
       </ul>
-    
-
 
 
     {/* If the user has not yet searched a patient, display the search inputs */}
     {(searchResults === '') && 
       <>
-      <h1>Search Facilities</h1>
+      <h1>Search Events</h1>
 
       <form className="row g-3" onSubmit={searchHandler}>
 
-        <div className="col-md-6">
-          <label for="facilityName" className="form-label">Name</label>
-          <input type="text" className="form-control" id="facilityName" onChange={event => setName(event.target.value)} />
+        <div className="col-md-4">
+          <label for="firstName" className="form-label">First Name</label>
+          <input type="text" className="form-control" id="firstName" onChange={event => setFirstName(event.target.value)} />
         </div>
 
-        <div className="col-md-6">
-          <label for="designation" className="form-label">Type</label>
-          <select id="designation" className="form-select" onChange={event => setFacilityType(event.target.value)} >
+        <div className="col-md-4">
+          <label for="middleName" className="form-label">Middle Name</label>
+          <input type="text" className="form-control" id="middleName" onChange={event => setMiddleName(event.target.value)} />
+        </div>
+
+        <div className="col-md-4">
+          <label for="lastName" className="form-label">Last Name</label>
+          <input type="text" className="form-control" id="lastName" onChange={event => setLastName(event.target.value)} />
+        </div>
+
+        <div className="col-md-4">
+          <label for="dob" className="form-label">Date of Birth</label>
+          <input type="date" className="form-control" id="dob" onChange={event => setDOB(event.target.value)} />
+        </div>
+
+        <div className="col-md-4">
+          <label for="patientID" className="form-label">Patient ID</label>
+          <input type="text" className="form-control" id="patientID" onChange={event => setPatientID(event.target.value)}/>
+        </div>
+
+        <div className="col-md-4">
+          <label for="status" className="form-label">Status</label>
+          <select id="status" className="form-select" onChange={event => setStatus(event.target.value)}>
             <option disabled selected>Select</option>
-            <option>Hospital</option>
-            <option>Pharmacy</option>
-            <option>Walk-In Clinic</option>
-            <option>Primary Care Clinic</option>
-            <option>Other Medical Practice</option>
+            <option>Alive</option>
+            <option>Deceased</option>
+            <option>Unknown</option>
           </select>
         </div>
 
-        <div className="col-md-6">
-          <label for="city" className="form-label">City</label>
-          <input type="text" className="form-control" id="city" onChange={event => setCity(event.target.value)} />
+        <div className="col-12">
+          <label for="facilityName" className="form-label">Facility Name</label>
+          <input type="text" className="form-control" id="facilityName" onChange={event => setFacilityName(event.target.value)} />
         </div>
 
         <div className="col-md-6">
-        <label for="state" className="form-label">State</label>
-          <select id="state" className="form-select" onChange={event => setState(event.target.value)} >
+          <label for="facilityCity" className="form-label">Facility City</label>
+          <input type="text" className="form-control" id="facilityCity" onChange={event => setFacilityCity(event.target.value)} />
+        </div>
+
+        <div className="col-md-4">
+          <label for="facilityState" className="form-label">Facility State</label>
+          <select id="facilityState" className="form-select" onChange={event => setFacilityState(event.target.value)}>
             <option disabled selected>Select</option>
             <option>AL</option>
             <option>AK</option>
@@ -194,99 +217,83 @@ function SearchFacility() {
           </select>
         </div>
 
-
-        <div className="col-md-6">
-          <label for="lastName" className="form-label">Provider First Name</label>
-          <input type="text" className="form-control" id="lastName" onChange={event => setProviderFirst(event.target.value)} />
-        </div>
-        
-        <div className="col-md-6">
-          <label for="lastName" className="form-label">Provider Last Name</label>
-          <input type="text" className="form-control" id="lastName" onChange={event => setProviderLast(event.target.value)} />
+        <div className="col-md-2">
+          <label for="facilityZip" className="form-label">Facility Zip</label>
+          <input type="text" className="form-control" id="facilityZip" onChange={event => setFacilityZip(event.target.value)} />
         </div>
 
-        <div className="col-md-6">
-          <label for="productType" className="form-label">Product Type</label>
-          <select id="productType" className="form-select" onChange={event => setProductType(event.target.value)} >
-            <option disabled selected>Select</option>
-            <option>Covid-19 (Jannssen)</option>
-            <option>Covid-19 (Novavax)</option>
-            <option>Covid-19 (Pfizer)</option>
-            <option>Covid-19 (Moderna)</option>
-            <option>Influenza</option>
-            <option>Influenza (Adult)</option>
-            <option>Zoster RZV (Shingrix)</option>
-            <option>Zoster ZVL (Zostavax)</option>
-          </select>
-        </div>
-
-        <div className="col-md-6">
-          <label for="NDC" className="form-label">Product NDC</label>
-          <input type="text" className="form-control" id="NDC" placeholder="00000-0000-00"onChange={event => setNDC(event.target.value)} />
-        </div>
-        
         <div className="col-12">
           <button type="submit" className="btn btn-primary">Search</button>
         </div>
       </form>
-      <br/>
-      <br/>
-      <br/>
+
+      <br />
+      <br />
+      <br />
+
       </>}
 
 
-
-
-
-    {/* If the user has searched a facility, display the search results */}
-    {(searchResults !== '') && 
+{/* If the user has submitted their search, display search results table */}
+{(searchResults !== '') && 
       <>
-      <h1>Facility Search Results</h1>
+      <h1>Event Search Results</h1>
       <br/>
       <button className="btn btn-primary" onClick={clearResults}>New Search</button>
       <br/>
       <br/>
       <h5>Search returned {searchResults.length} results</h5>
 
-      <table className="table table-hover">
-        <thead>
-          <tr>
-            <th scope="col">Facility ID</th>
-            <th scope="col">Name</th>
-            <th scope="col">Type</th>
-            <th scope="col">Address</th>
-            <th scope="col">City</th>
-            <th scope="col">State</th>
-            <th scope="col">Zip Code</th>
-            <th scope="col">Modify</th>
-            <th scope="col">Delete</th>
-          </tr>
-        </thead>
+    <br/>
+    <table className="table table-hover">
 
-        {Array.isArray(searchResults) && searchResults.map((facility, index) => {
-            return (
-              <tbody>
-                  <tr key={facility.FacilityID}>
-                    <td>{facility.FacilityID}</td>
-                    <td>{facility.FacilityName}</td>
-                    <td>{facility.FacilityType}</td>
-                    <td>{facility.AddressStreet}</td>
-                    <td>{facility.AddressCity}</td>
-                    <td>{facility.AddressState}</td>
-                    <td>{facility.AddressZip}</td>
-                    <td className="modify" onClick={() => modifyHandler(facility.FacilityID)}>⨁</td>
-                    <td className="delete" onClick={() => deleteHandler(facility.FacilityID)}>⨂</td>
-                  </tr>
-              </tbody>
+    <thead>
+    <tr>
+      <th scope="col">Event ID</th>
+      <th scope="col">Patient ID</th>
+      <th scope="col">Event Type</th>
+      <th scope="col">Event Date</th>
+      <th scope="col">Submission Date</th>
+      <th scope="col">Product ID</th>
+      <th scope="col">Administration Site</th>
+      <th scope="col">Administration Route</th>
+      <th scope="col">Provider ID</th>
+      <th scope="col">Facility ID</th>
+      <th scope="col">Notes</th>
+      <th scope="col">Modify</th>
+      <th scope="col">Delete</th>
+    </tr>
+  </thead>
+
+  {Array.isArray(searchResults) && searchResults.map((event, index) => {
+              return (
+                <tbody>
+                    <tr key={event.EventID}>
+                      <td>{event.EventID}</td>
+                      <td>{event.PatientID}</td>
+                      <td>{event.EventType}</td>
+                      <td>{event.EventDate !== '0000-00-00' ? event.EventDate.slice(0, 10) : ''}</td>
+                      <td>{event.SubmissionDate !== '0000-00-00' ? event.SubmissionDate.slice(0, 10) : ''}</td>
+                      <td>{event.ProductID}</td>
+                      <td>{event.AdministrationSite}</td>
+                      <td>{event.AdministrationRoute}</td>
+                      <td>{event.ProviderID}</td>
+                      <td>{event.FacilityID}</td>
+                      <td>{event.Notes}</td>
+                      <td className="modify" onClick={() => modifyHandler(event.EventID)}>⨁</td>
+                      <td className="delete" onClick={() => deleteHandler(event.EventID)}>⨂</td>
+                    </tr>
+                </tbody>
               );
             })}
       </table>
       </>
-    }
-      
+}
+  
 
 </div>
   )
 }
 
-export default SearchFacility
+export default SearchEvent
+
