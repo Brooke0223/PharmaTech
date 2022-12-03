@@ -1,8 +1,40 @@
-import React from 'react'
+import React, { useState, useEffect }  from 'react'
 import { useNavigate } from "react-router-dom"
+
+// const ENDPOINT = 'http://localhost:44265'
+const ENDPOINT = 'http://flip1.engr.oregonstate.edu:44265'
 
 function ViewEvent() {
     let navigate = useNavigate(); //This allows us to link user to another page in the pop-up alert window
+
+    const [events, setEvents] = useState('');
+
+    // fetch Event Data once upon page mount
+    useEffect(() => {
+      fetch(`${ENDPOINT}/ViewEvent`)
+      .then(res => res.json())
+      .then(data => setEvents(data))
+    }, [])
+   
+
+    //OnClick handler to modify an event
+    const modifyHandler = (eventID) => {
+      navigate("/PharmaTech/editEvent/"+eventID)
+    }
+  
+    //OnClick handler to delete a product
+    const deleteHandler = (eventID) => {
+      if (window.confirm(`Are you sure you want to delete the event with the id: ${eventID}?`)) {
+  
+        //send DELETE request to server and refresh page
+        fetch(`${ENDPOINT}/DeleteEvent/${eventID}`, {
+          method: 'DELETE',
+        })
+        .then(res => res.text())
+        .then(res => console.log(res))
+        window.location.reload();
+      }
+    }
 
   return (
     <div className="container">
@@ -41,83 +73,30 @@ function ViewEvent() {
       <th scope="col">Delete</th>
     </tr>
   </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>1</td>
-      <td>Historical</td>
-      <td>2020-10-02</td>
-      <td>2022-10-10</td>
-      <td>1</td>
-      <td><i>Null</i></td>
-      <td><i>Null</i></td>
-      <td><i>Null</i></td>
-      <td><i>Null</i></td>
-      <td>Tdap vaccine in 2020, per patient's vaccine card</td>
-      <td>⨁</td>
-      <td>⨂</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>2</td>
-      <td>Administration</td>
-      <td>2021-10-05</td>
-      <td>2021-10-05</td>
-      <td>2</td>
-      <td>Left Arm</td>
-      <td>Intramuscular</td>
-      <td>1</td>
-      <td>1</td>
-      <td><i>Null</i></td>
-      <td>⨁</td>
-      <td>⨂</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>3</td>
-      <td>Administration</td>
-      <td>2021-12-23</td>
-      <td>2021-12-23</td>
-      <td>3</td>
-      <td>Left Arm</td>
-      <td>Intramuscular</td>
-      <td>2</td>
-      <td>2</td>
-      <td><i>Null</i></td>
-      <td>⨁</td>
-      <td>⨂</td>
-    </tr>
-    <tr>
-      <th scope="row">4</th>
-      <td>3</td>
-      <td>Administration</td>
-      <td>2022-2-23</td>
-      <td>2022-2-23</td>
-      <td>4</td>
-      <td>Right Arm</td>
-      <td>Intramuscular</td>
-      <td>3</td>
-      <td>3</td>
-      <td><i>Null</i></td>
-      <td>⨁</td>
-      <td>⨂</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>2</td>
-      <td>Administration</td>
-      <td>2022-10-17</td>
-      <td>2022-10-17</td>
-      <td>2</td>
-      <td>Left Arm</td>
-      <td>Intramuscular</td>
-      <td>1</td>
-      <td>1</td>
-      <td><i>Null</i></td>
-      <td>⨁</td>
-      <td>⨂</td>
-    </tr>
-  </tbody>
+
+  {Array.isArray(events) && events.map((event, index) => {
+              return (
+                <tbody>
+                    <tr key={event.EventID}>
+                      <td>{event.EventID}</td>
+                      <td>{event.PatientID}</td>
+                      <td>{event.EventType}</td>
+                      <td>{event.EventDate.slice(0, 10)}</td>
+                      <td>{event.SubmissionDate.slice(0, 10)}</td>
+                      <td>{event.ProductID}</td>
+                      <td>{event.AdministrationSite}</td>
+                      <td>{event.AdministrationRoute}</td>
+                      <td>{event.ProviderID !== 0 ? event.ProviderID : ''}</td>
+                      <td>{event.FacilityID !== 0 ? event.FacilityID : ''}</td>
+                      <td>{event.Notes}</td>
+                      <td className="modify" onClick={() => modifyHandler(event.EventID)}>⨁</td>
+                      <td className="delete" onClick={() => deleteHandler(event.EventID)}>⨂</td>
+                    </tr>
+                </tbody>
+              );
+            })}
+
+
 </table>
 
     <br/>
