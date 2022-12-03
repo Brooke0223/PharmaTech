@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom"
 import { React, useState, useEffect } from 'react'
 
-const ENDPOINT = 'http://localhost:44265'
-// const ENDPOINT = 'http://flip1.engr.oregonstate.edu:44265'
+// const ENDPOINT = 'http://localhost:44265'
+const ENDPOINT = 'http://flip1.engr.oregonstate.edu:44265'
 
 
 function EditProduct() {
