@@ -25,7 +25,10 @@ import ViewProductFacility from './Pages/ViewProductFacility';
 import EditPatient from './Pages/EditPatient';
 import EditContact from './Pages/EditContact';
 import EditFacility from './Pages/EditFacility';
-
+import EditProvider from './Pages/EditProvider';
+import EditProduct from './Pages/EditProduct';
+import EditProductFacility from './Pages/EditProductFacility';
+import EditEvent from './Pages/EditEvent';
 
 function App() {
 
@@ -73,6 +76,10 @@ function App() {
           <Route path="/PharmaTech/editPatient/:id" element={<EditPatient />} />
           <Route path="/PharmaTech/editContact/:id" element={<EditContact />} />
           <Route path="/PharmaTech/editFacility/:id" element={<EditFacility />} />
+          <Route path="/PharmaTech/editProvider/:id" element={<EditProvider />} />
+          <Route path="/PharmaTech/editProduct/:id" element={<EditProduct />} />
+          <Route path="/PharmaTech/editProductFacility/:id" element={<EditProductFacility />} />
+          <Route path="/PharmaTech/editEvent/:id" element={<EditEvent />} />
         </Routes>
       </Router>
 
@@ -82,3 +89,4 @@ function App() {
 }
 
 export default App;
+
