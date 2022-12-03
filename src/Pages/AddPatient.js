@@ -104,47 +104,47 @@ function AddPatient() {
 
   <div className="col-md-4">
     <label for="sex" className="form-label">Sex</label>
-    <select id="sex" className="form-select" onChange={event => setSex(event.target.value)}>
-      <option disabled selected>Select</option>
-      <option>Male</option>
-      <option>Female</option>
-      <option>Other</option>
-      <option>Unknown</option>
+    <select id="sex" className="form-select" value = {sex} onChange={event => setSex(event.target.value)}>
+      <option value="" disabled>Select</option>
+      <option value="Male">Male</option>
+      <option value="Female">Female</option>
+      <option value="Other">Other</option>
+      <option value="Unknown">Unknown</option>
     </select>
   </div>
 
   <div className="col-md-4">
     <label for="status" className="form-label">Status <b>(required)</b></label>
-    <select id="status" className="form-select" required onChange={event => setStatus(event.target.value)} >
-      <option value="" disabled selected>Select</option>
-      <option>Alive</option>
-      <option>Deceased</option>
-      <option>Unknown</option>
+    <select id="status" className="form-select" value = {status} required onChange={event => setStatus(event.target.value)} >
+      <option value="" disabled>Select</option>
+      <option value="Alive">Alive</option>
+      <option value="Deceased">Deceased</option>
+      <option value="Unknown">Unknown</option>
     </select>
   </div>
 
 
   <div className="col-md-6">
     <label for="race" className="form-label">Race</label>
-    <select id="race" className="form-select" onChange={event => setRace(event.target.value)} >
-      <option disabled selected>Select</option>
-      <option>American Indian or Alaska Native</option>
-      <option>Asian</option>
-      <option>Black or African American</option>
-      <option>Native Hawaiian or Other Pacific Islander</option>
-      <option>White</option>
-      <option>Other Race</option>
-      <option>Unknown</option>
+    <select id="race" className="form-select" value = {race} onChange={event => setRace(event.target.value)} >
+      <option value="" disabled>Select</option>
+      <option value="American Indian or Alaska Native">American Indian or Alaska Native</option>
+      <option value="Asian">Asian</option>
+      <option value="Black or African American">Black or African American</option>
+      <option value="Native Hawaiian or Other Pacific Islander">Native Hawaiian or Other Pacific Islander</option>
+      <option value= "White">White</option>
+      <option value="Other Race">Other Race</option>
+      <option value="Unknown">Unknown</option>
     </select>
   </div>
 
   <div className="col-md-6">
     <label for="ethnicity" className="form-label">Ethnicity</label>
-    <select id="ethnicity" className="form-select" onChange={event => setEthnicity(event.target.value)} >
-      <option disabled selected>Select</option>
-      <option>Hispanic or Latino</option>
-      <option>Not Hispanic or Latino</option>
-      <option>Unknown</option>
+    <select id="ethnicity" className="form-select" value = {ethnicity} onChange={event => setEthnicity(event.target.value)} >
+      <option value="" disabled>Select</option>
+      <option value="Hispanic or Latino">Hispanic or Latino</option>
+      <option value="Not Hispanic or Latino">Not Hispanic or Latino</option>
+      <option value="Unknown">Unknown</option>
     </select>
   </div>
 
