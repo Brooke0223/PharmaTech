@@ -1,10 +1,6 @@
 import { React, useState, useEffect } from 'react'
 import { useNavigate } from "react-router-dom"
-
-// const ENDPOINT = 'http://localhost:44265'
-const ENDPOINT = 'http://flip1.engr.oregonstate.edu:44265'
-
-
+import { ENDPOINT } from './config';
 
 function ViewFacility() {
   let navigate = useNavigate(); //This allows us to link user to another page in the pop-up alert window
