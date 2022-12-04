@@ -65,10 +65,8 @@ return (
 <thead>
   <tr>
     <th scope="col">Product Facility ID</th>
-    <th scope="col">Product ID</th>
-    <th scope="col">Product Type</th>
-    <th scope="col">Facility ID</th>
-    <th scope="col">Facility Name</th>
+    <th scope="col">Product (ID - Name)</th>
+    <th scope="col">Facility (ID - Name)</th>
     <th scope="col">Dose Quantity</th>
     <th scope="col">Expiration</th>
     <th scope="col">Modify</th>
@@ -81,10 +79,8 @@ return (
               <tbody>
                   <tr key={product.ProductsFacilitiesID}>
                     <td>{product.ProductsFacilitiesID}</td>
-                    <td>{product.ProductID}</td>
-                    <td>{product.ProductType}</td>
-                    <td>{product.FacilityID}</td>
-                    <td>{product.FacilityName}</td>
+                    <td>{product.ProductID} - {product.ProductType}</td>
+                    <td>{product.FacilityID} - {product.FacilityName}</td>
                     <td>{product.DoseQty}</td>
                     <td>{product.Expiration.slice(0, 10)}</td>
                     <td className="modify" onClick={() => modifyHandler(product.ProductsFacilitiesID)}>⨁</td>

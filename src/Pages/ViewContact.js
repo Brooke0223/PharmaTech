@@ -56,8 +56,7 @@ function ViewContact() {
       <thead>
         <tr>
           <th scope="col">Contact ID</th>
-          <th scope="col">Patient ID</th>
-          <th scope="col">Patient Name</th>
+          <th scope="col">Patient (ID - Name)</th>
           <th scope="col">Phone</th>
           <th scope="col">Phone Type</th>
           <th scope="col">Phone Opt</th>
@@ -78,8 +77,7 @@ function ViewContact() {
         <tbody>
             <tr key={contact.contactID}>
               <td>{contact.ContactID}</td>
-              <td>{contact.PatientID}</td>
-              <td>{contact.PatientName}</td>
+              <td>{contact.PatientID} - {contact.PatientName}</td>
               <td>{contact.Phone !== 0 ? contact.Phone : ''}</td>
               <td>{contact.PhoneType}</td>
               <td>{contact.PhoneOpt}</td>

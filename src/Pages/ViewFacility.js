@@ -29,7 +29,7 @@ function ViewFacility() {
           method: 'DELETE'
         })
         if(response.status === 500){
-          alert("Unable to delete Facility with associated immunization event(s).")
+          alert("Unable to delete Facility with associated immunization event(s), provider(s), or product(s).")
         }
       }
       deleteData()

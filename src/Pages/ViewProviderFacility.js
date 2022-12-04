@@ -57,10 +57,8 @@ return (
   <table className="table table-hover">
 <thead>
   <tr>
-    <th scope="col">Provider ID</th>
-    <th scope="col">Provider Name</th>
-    <th scope="col">Facility ID</th>
-    <th scope="col">Facility Name</th>
+    <th scope="col">Provider (ID - Name)</th>
+    <th scope="col">Facility (ID - Name)</th>
     <th scope="col">Delete</th>
   </tr>
 </thead>
@@ -69,10 +67,8 @@ return (
             return (
               <tbody>
                   <tr key={provider.ProvidersFacilitiesID}>
-                    <td>{provider.ProviderID}</td>
-                    <td>{provider.ProviderName}</td>
-                    <td>{provider.FacilityID}</td>
-                    <td>{provider.FacilityName}</td>
+                    <td>{provider.ProviderID} - {provider.ProviderName}</td>
+                    <td>{provider.FacilityID} - {provider.FacilityName}</td>
                     <td className="delete" onClick={() => deleteHandler(provider.ProvidersFacilitiesID)}>⨂</td>
                   </tr>
               </tbody>

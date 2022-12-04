@@ -20,7 +20,7 @@ function ViewEvent() {
     navigate("/PharmaTech/editEvent/"+eventID)
   }
 
-  //OnClick handler to delete a product
+  //OnClick handler to delete an event
   const deleteHandler = (eventID) => {
     if (window.confirm(`Are you sure you want to delete the event with the id: ${eventID}?`)) {
 

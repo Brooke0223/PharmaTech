@@ -34,7 +34,7 @@ function ViewPatient() {
       .then(json => {
         console.log(json)
         if(json.errno && json.errno === 1451){
-          window.alert("Error: Cannot delete a patient if they have a contact method entered.")
+          window.alert("Unable to delete Patient with associated immunization event(s) or contact method(s).")
         }else{
           window.location.reload();
         }

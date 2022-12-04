@@ -28,11 +28,16 @@ function ViewProvider() {
       fetch(`${ENDPOINT}/DeleteProvider/${providerID}`, {
         method: 'DELETE',
       })
-      .then(res => res.text())
-      .then(res => console.log(res))
-      window.location.reload();
-    }
-  }
+      .then(res => res.json())
+      .then(json => {
+        console.log(json)
+        if(json.errno && json.errno === 1451){
+          window.alert("Unable to delete Provider with associated immunization event(s) or facility/facilities.")
+        }else{
+          window.location.reload();
+        }
+    })
+  }}
 
 return (
   <div className="container">
