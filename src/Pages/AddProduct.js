@@ -1,5 +1,6 @@
 import { React, useState } from 'react'
 import { useNavigate } from "react-router-dom"
+import { ENDPOINT } from '../endpoint-config';
 
 // const ENDPOINT = 'http://localhost:44265'
 const ENDPOINT = 'http://flip1.engr.oregonstate.edu:44265'

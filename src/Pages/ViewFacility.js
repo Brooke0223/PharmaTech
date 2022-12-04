@@ -1,10 +1,6 @@
 import { React, useState, useEffect } from 'react'
 import { useNavigate } from "react-router-dom"
-
-// const ENDPOINT = 'http://localhost:44265'
-const ENDPOINT = 'http://flip1.engr.oregonstate.edu:44265'
-
-
+import { ENDPOINT } from '../endpoint-config';
 
 function ViewFacility() {
   let navigate = useNavigate(); //This allows us to link user to another page in the pop-up alert window
@@ -33,7 +29,7 @@ function ViewFacility() {
           method: 'DELETE'
         })
         if(response.status === 500){
-          alert("Unable to delete Facility with associated immunization event(s).")
+          alert("Unable to delete Facility with associated immunization event(s), provider(s), or product(s).")
         }
       }
       deleteData()
