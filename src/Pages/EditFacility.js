@@ -220,11 +220,3 @@ function EditFacility() {
 }
 
 export default EditFacility
-
-
-
-
-
-
-
-
