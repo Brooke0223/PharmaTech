@@ -1,10 +1,6 @@
-import { useNavigate } from "react-router-dom"
 import { React, useState } from 'react'
-
-
-// const ENDPOINT = 'http://localhost:44265'
-const ENDPOINT = 'http://flip1.engr.oregonstate.edu:44265'
-
+import { useNavigate } from "react-router-dom"
+import { ENDPOINT } from '../endpoint-config';
 
 function SearchProduct() {
   let navigate = useNavigate(); //This allows us to link user to another page in the pop-up alert window

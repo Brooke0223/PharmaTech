@@ -1,8 +1,6 @@
 import { React, useState, useEffect } from 'react'
 import { useNavigate } from "react-router-dom"
-
-// const ENDPOINT = 'http://localhost:44265'
-const ENDPOINT = 'http://flip1.engr.oregonstate.edu:44265'
+import { ENDPOINT } from '../endpoint-config';
 
 function AddProviderFacility() {
   let navigate = useNavigate(); //This allows us to link user to another page in the pop-up alert window
@@ -30,7 +28,7 @@ function AddProviderFacility() {
     .then(res => res.json())
     .then(json => {
       console.log(json)
-      if(json.errno && json.errno == 1062){
+      if(json.errno && json.errno === 1062){
         window.alert("Provider Facility relationship already exists.")        
       }else{
         window.alert("Provider added to facility. You will now be routed back to the View Providers' Facilities page")

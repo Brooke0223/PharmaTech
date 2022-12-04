@@ -1,11 +1,6 @@
 import { useNavigate } from "react-router-dom"
-import React, { useState, useEffect } from 'react'
-import { json } from "express";
-
-// const ENDPOINT = 'http://localhost:44265'
-const ENDPOINT = 'http://flip1.engr.oregonstate.edu:44265'
-
-
+import { React, useState, useEffect } from 'react'
+import { ENDPOINT } from '../endpoint-config';
 
 function ViewPatient() {
   let navigate = useNavigate(); //This allows us to link user to another page in the pop-up alert window
@@ -35,11 +30,11 @@ function ViewPatient() {
       fetch(`${ENDPOINT}/DeletePatient/${patientID}`, {
         method: 'DELETE',
       })
-      .then(res => res.text())
-      .then(res => {
-        console.log(res)
-        if(json.errno && json.errno == 1451){
-          window.alert("Error: Cannot delete a patient if they have a contact method entered.")
+      .then(res => res.json())
+      .then(json => {
+        console.log(json)
+        if(json.errno && json.errno === 1451){
+          window.alert("Unable to delete Patient with associated immunization event(s) or contact method(s).")
         }else{
           window.location.reload();
         }
