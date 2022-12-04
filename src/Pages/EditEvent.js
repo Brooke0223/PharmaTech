@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom"
 import { React, useState, useEffect } from 'react'
-import { ENDPOINT } from './config';
+import { ENDPOINT } from '../endpoint-config';
 
 function EditEvent() {
   let navigate = useNavigate(); //This allows us to link user to another page in the pop-up alert window

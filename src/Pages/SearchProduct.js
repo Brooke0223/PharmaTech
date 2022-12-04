@@ -1,6 +1,6 @@
-import { useNavigate } from "react-router-dom"
 import { React, useState } from 'react'
-import { ENDPOINT } from './config';
+import { useNavigate } from "react-router-dom"
+import { ENDPOINT } from '../endpoint-config';
 
 function SearchProduct() {
   let navigate = useNavigate(); //This allows us to link user to another page in the pop-up alert window

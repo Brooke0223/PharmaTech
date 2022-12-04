@@ -1,6 +1,6 @@
+import { React, useState, useEffect } from 'react'
 import { useNavigate } from "react-router-dom"
-import React, { useState, useEffect } from 'react'
-import { ENDPOINT } from './config';
+import { ENDPOINT } from '../endpoint-config';
 
 function AddProductFacility() {
   let navigate = useNavigate(); //This allows us to link user to another page in the pop-up alert window
@@ -32,7 +32,7 @@ function AddProductFacility() {
     .then(res => res.json())
     .then(json => {
       console.log(json)
-      if(json.errno && json.errno == 1062){
+      if(json.errno && json.errno === 1062){
         window.alert("A product with the provided expiration already exists for the selected facility. If you intend to modify the doses on hand, please do so via the View Products in Facilities page.")        
       }
       else{

@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom"
 import { React, useState, useEffect } from 'react'
-import { ENDPOINT } from './config';
+import { ENDPOINT } from '../endpoint-config';
 
 function EditContact() {
   let navigate = useNavigate(); //This allows us to link user to another page in the pop-up alert window
@@ -26,7 +26,7 @@ function EditContact() {
     response = await response.json();
     
     if(response){
-      setPhone(response[0].Phone != 0 ? response[0].Phone : '')
+      setPhone(response[0].Phone !== 0 ? response[0].Phone : '')
       setPhoneType(response[0].PhoneType)
       setPhoneOpt(response[0].PhoneOpt)
       setEmail(response[0].Email)
@@ -34,7 +34,7 @@ function EditContact() {
       setAddress(response[0].AddressStreet)
       setCity(response[0].AddressCity)
       setState(response[0].AddressState)
-      setZip(response[0].AddressZip != 0 ? response[0].AddressZip : '')
+      setZip(response[0].AddressZip !== 0 ? response[0].AddressZip : '')
       setMailOpt(response[0].MailOpt)
     }
   }
