@@ -8,12 +8,13 @@ function ViewPatient() {
   const [patients, setPatients] = useState('');
 
 
-  //fetch Patient Data once upon page mount
+  // fetch Patient Data once upon page mount
   useEffect(() => {
     fetch(`${ENDPOINT}/ViewPatient`)
     .then(res => res.json())
     .then(data => setPatients(data))
   }, [])
+ 
 
 
   //OnClick handler to modify a patient
@@ -29,11 +30,16 @@ function ViewPatient() {
       fetch(`${ENDPOINT}/DeletePatient/${patientID}`, {
         method: 'DELETE',
       })
-      .then(res => res.text())
-      .then(res => console.log(res))
-      window.location.reload();
-    }
-  }
+      .then(res => res.json())
+      .then(json => {
+        console.log(json)
+        if(json.errno && json.errno === 1451){
+          window.alert("Error: Cannot delete a patient if they have a contact method entered.")
+        }else{
+          window.location.reload();
+        }
+    })
+  }}
 
   return (
 

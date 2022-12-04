@@ -1,101 +1,103 @@
-import React from 'react'
+import { React, useState, useEffect } from 'react'
 import { useNavigate } from "react-router-dom"
 import { ENDPOINT } from '../endpoint-config';
 
 function ViewProduct() {
-    let navigate = useNavigate(); //This allows us to link user to another page in the pop-up alert window
+  let navigate = useNavigate(); //This allows us to link user to another page in the pop-up alert window
 
-  return (
-    <div className="container">
-        <ul className="nav nav-tabs">
-            <li className="nav-link" onClick={event => navigate("/PharmaTech/viewProduct")}>
-                View Products
-            </li>
+  const [products, setProducts] = useState('');
 
-            <li className="nav-link" onClick={event => navigate("/PharmaTech/searchProduct")}>
-                Search Products
-            </li>
+  // fetch Product Data once upon page mount
+  useEffect(() => {
+    fetch(`${ENDPOINT}/ViewProduct`)
+    .then(res => res.json())
+    .then(data => setProducts(data))
+  }, [])
+ 
 
-            <li className="nav-link" onClick={event => navigate("/PharmaTech/addProduct")}>
-                Add A New Product
-            </li>
+  //OnClick handler to modify a product
+  const modifyHandler = (productID) => {
+    navigate("/PharmaTech/editProduct/"+productID)
+  }
 
-            <li className="nav-link" onClick={event => navigate("/PharmaTech/viewProductFacility")}>
-                View Products in Facilities
-            </li>
+  //OnClick handler to delete a product
+  const deleteHandler = (productID) => {
+    if (window.confirm(`Are you sure you want to delete the product with the id: ${productID}?`)) {
 
-            <li className="nav-link" onClick={event => navigate("/PharmaTech/addProductFacility")}>
-                Add Products to Facilities
-            </li>
-        </ul>
+      //send DELETE request to server and refresh page
+      fetch(`${ENDPOINT}/DeleteProduct/${productID}`, {
+        method: 'DELETE',
+      })
+      .then(res => res.text())
+      .then(res => console.log(res))
+      window.location.reload();
+    }
+  }
+
+return (
+  <div className="container">
+      <ul className="nav nav-tabs">
+          <li className="nav-link" onClick={event => navigate("/PharmaTech/viewProduct")}>
+              View Products
+          </li>
+
+          <li className="nav-link" onClick={event => navigate("/PharmaTech/searchProduct")}>
+              Search Products
+          </li>
+
+          <li className="nav-link" onClick={event => navigate("/PharmaTech/addProduct")}>
+              Add A New Product
+          </li>
+
+          <li className="nav-link" onClick={event => navigate("/PharmaTech/viewProductFacility")}>
+              View Products in Facilities
+          </li>
+
+          <li className="nav-link" onClick={event => navigate("/PharmaTech/addProductFacility")}>
+              Add Products to Facilities
+          </li>
+      </ul>
 
 
-      <h1>View Products</h1>
-      <br></br>
-    <table className="table table-hover">
-  <thead>
-    <tr>
-      <th scope="col">Product ID</th>
-      <th scope="col">Product Type</th>
-      <th scope="col">NDC</th>
-      <th scope="col">Lot</th>
-      <th scope="col">Expiration</th>
-      <th scope="col">Dose Volume</th>
-      <th scope="col">Dose Unit</th>
-      <th scope="col">Modify</th>
-      <th scope="col">Delete</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Tdap</td>
-      <td><i>Null</i></td>
-      <td><i>Null</i></td>
-      <td><i>Null</i></td>
-      <td><i>Null</i></td>
-      <td><i>Null</i></td>
-      <td>⨁</td>
-      <td>⨂</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Influenza</td>
-      <td>49281042210</td>
-      <td>UI975AB</td>
-      <td>2023-06-30</td>
-      <td>0.5</td>
-      <td>mL</td>
-      <td>⨁</td>
-      <td>⨂</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Zoster</td>
-      <td>58160081912</td>
-      <td>4ZYUYGL3</td>
-      <td>2022-09-30</td>
-      <td>0.5</td>
-      <td>mL</td>
-      <td>⨁</td>
-      <td>⨂</td>
-    </tr>
-    <tr>
-      <th scope="row">4</th>
-      <td>Pneumococcal</td>
-      <td>0005200001</td>
-      <td>EHEBY352</td>
-      <td>2022-05-31</td>
-      <td>0.5</td>
-      <td>mL</td>
-      <td>⨁</td>
-      <td>⨂</td>
-    </tr>
-  </tbody>
+    <h1>View Products</h1>
+    <br></br>
+  <table className="table table-hover">
+<thead>
+  <tr>
+    <th scope="col">Product ID</th>
+    <th scope="col">Product Type</th>
+    <th scope="col">NDC</th>
+    <th scope="col">Lot</th>
+    <th scope="col">Expiration</th>
+    <th scope="col">Dose Volume</th>
+    <th scope="col">Dose Unit</th>
+    <th scope="col">Modify</th>
+    <th scope="col">Delete</th>
+  </tr>
+</thead>
+
+{Array.isArray(products) && products.map((product, index) => {
+            return (
+              <tbody>
+                  <tr key={product.ProductID}>
+                    <td>{product.ProductID}</td>
+                    <td>{product.ProductType}</td>
+                    <td>{product.NDC !== 0 ? product.NDC : ''}</td>
+                    <td>{product.Lot !== 0 ? product.Lot : ''}</td>
+                    <td>{product.Expiration !== '0000-00-00' ? product.Expiration.slice(0, 10) : ''}</td>
+                    <td>{product.DoseVolume !== 0 ? product.DoseVolume : ''}</td>
+                    <td>{product.DoseUnit}</td>
+                    <td className="modify" onClick={() => modifyHandler(product.ProductID)}>⨁</td>
+                    <td className="delete" onClick={() => deleteHandler(product.ProductID)}>⨂</td>
+                  </tr>
+              </tbody>
+            );
+          })}
+
 </table>
 </div>
 
-  )
+)
 }
 
 export default ViewProduct

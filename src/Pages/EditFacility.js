@@ -117,13 +117,13 @@ function EditFacility() {
 
         <div className="col-md-4">
           <label for="facilityType" className="form-label">Type <b>(required)</b> </label>
-          <select id="facilityType" className="form-select" onChange={event => setFacilityType(event.target.value)}>
-            <option selected disabled>{facilityType}</option>
-            <option>Hospital</option>
-            <option>Pharmacy</option>
-            <option>Walk-In Clinic</option>
-            <option>Primary Care Clinic</option>
-            <option>Other Medical Practice</option>
+          <select id="facilityType" className="form-select" value={facilityType} onChange={event => setFacilityType(event.target.value)}>
+            <option value="" disabled>Select</option>
+            <option value="Hospital">Hospital</option>
+            <option value="Pharmacy">Pharmacy</option>
+            <option value="Walk-In Clinic">Walk-In Clinic</option>
+            <option value="Primary Care Clinic">Primary Care Clinic</option>
+            <option value="Other Medical Practice">Other Medical Practice</option>
           </select>
         </div>
 
@@ -139,8 +139,8 @@ function EditFacility() {
 
         <div className="col-md-3">
           <label for="facilityState" className="form-label">State <b>(required)</b> </label>
-          <select id="facilityState" className="form-select" onChange={event => setFacilityState(event.target.value)} >
-          <option selected disabled>{facilityState}</option>
+          <select id="facilityState" className="form-select" value={facilityState} onChange={event => setFacilityState(event.target.value)} >
+          <option value="" disabled>Select</option>
           <option> </option>
           <option>AL</option>
           <option>AK</option>
@@ -220,7 +220,6 @@ function EditFacility() {
 }
 
 export default EditFacility
-
 
 
 

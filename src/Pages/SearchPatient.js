@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { React, useState } from 'react'
 import { ENDPOINT } from '../endpoint-config';
 
@@ -33,6 +33,7 @@ function SearchPatient() {
             LastName: lastName,
             DOB: DOB,
             PatientID: patientID,
+            Status: status,
             Address: address,
             City: city,
             State: state,
@@ -77,6 +78,9 @@ function SearchPatient() {
       }
     }
 
+    const clearResults = () =>{
+      setSearchResults('')
+    }
 
   return (
     
@@ -254,6 +258,9 @@ function SearchPatient() {
 {(searchResults !== '') && 
       <>
       <h1>Patient Search Results</h1>
+      <br/>
+      <button className="btn btn-primary" onClick={clearResults}>New Search</button>
+      <br/>
       <br/>
       <h5>Search returned {searchResults.length} results</h5>
 

@@ -1,109 +1,103 @@
-import React from 'react'
+import { React, useState, useEffect } from 'react'
 import { useNavigate } from "react-router-dom"
 import { ENDPOINT } from '../endpoint-config';
 
 function ViewProductFacility() {
-    let navigate = useNavigate(); //This allows us to link user to another page in the pop-up alert window
+  let navigate = useNavigate(); //This allows us to link user to another page in the pop-up alert window
 
-  return (
-    <div className="container">
-        <ul className="nav nav-tabs">
-            <li className="nav-link" onClick={event => navigate("/PharmaTech/viewProduct")}>
-                View Products
-            </li>
+  const [products, setProducts] = useState('');
 
-            <li className="nav-link" onClick={event => navigate("/PharmaTech/searchProduct")}>
-                Search Products
-            </li>
+  // fetch ProductFacility Data once upon page mount
+  useEffect(() => {
+    fetch(`${ENDPOINT}/ViewProductFacility`)
+    .then(res => res.json())
+    .then(data => setProducts(data))
+  }, [])
+   
+//OnClick handler to modify a product/facility
+const modifyHandler = (ProductsFacilitiesID) => {
+  navigate("/PharmaTech/editProductFacility/"+ProductsFacilitiesID)
+}
 
-            <li className="nav-link" onClick={event => navigate("/PharmaTech/addProduct")}>
-                Add A New Product
-            </li>
+  //OnClick handler to delete a product from a facility 
+  const deleteHandler = (ProductsFacilitiesID) => {
+    if (window.confirm(`Are you sure you want to delete this product/facility id: ${ProductsFacilitiesID}?`)) {
 
-            <li className="nav-link" onClick={event => navigate("/PharmaTech/viewProductFacility")}>
-                View Products in Facilities
-            </li>
+      //send DELETE request to server and refresh page
+      fetch(`${ENDPOINT}/DeleteProductFacility/${ProductsFacilitiesID}`, {
+        method: 'DELETE',
+      })
+      .then(res => res.text())
+      .then(res => console.log(res))
+      window.location.reload();
+    }
+  }
 
-            <li className="nav-link" onClick={event => navigate("/PharmaTech/addProductFacility")}>
-                Add Products to Facilities
-            </li>
-        </ul>
+
+return (
+  <div className="container">
+      <ul className="nav nav-tabs">
+          <li className="nav-link" onClick={event => navigate("/PharmaTech/viewProduct")}>
+              View Products
+          </li>
+
+          <li className="nav-link" onClick={event => navigate("/PharmaTech/searchProduct")}>
+              Search Products
+          </li>
+
+          <li className="nav-link" onClick={event => navigate("/PharmaTech/addProduct")}>
+              Add A New Product
+          </li>
+
+          <li className="nav-link" onClick={event => navigate("/PharmaTech/viewProductFacility")}>
+              View Products in Facilities
+          </li>
+
+          <li className="nav-link" onClick={event => navigate("/PharmaTech/addProductFacility")}>
+              Add Products to Facilities
+          </li>
+      </ul>
 
 
-      <h1>View Facilities' Product Inventory</h1>
-      <br></br>
-    <table className="table table-hover">
-  <thead>
-    <tr>
-      <th scope="col">Product Facility ID</th>
-      <th scope="col">Product ID</th>
-      <th scope="col">Facility ID</th>
-      <th scope="col">Dose Quantity</th>
-      <th scope="col">Expiration</th>
-      <th scope="col">Modify</th>
-      <th scope="col">Delete</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>2</td>
-      <td>1</td>
-      <td>553</td>
-      <td>2023-06-30</td>
-      <td>⨁</td>
-      <td>⨂</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>3</td>
-      <td>1</td>
-      <td>65</td>
-      <td>2022-10-31</td>
-      <td>⨁</td>
-      <td>⨂</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>3</td>
-      <td>2</td>
-      <td>50</td>
-      <td>2023-09-30</td>
-      <td>⨁</td>
-      <td>⨂</td>
-    </tr>
-    <tr>
-      <th scope="row">4</th>
-      <td>4</td>
-      <td>2</td>
-      <td>25</td>
-      <td>2023-04-30</td>
-      <td>⨁</td>
-      <td>⨂</td>
-    </tr>
-    <tr>
-      <th scope="row">5</th>
-      <td>1</td>
-      <td>3</td>
-      <td>20</td>
-      <td>2022-05-31</td>
-      <td>⨁</td>
-      <td>⨂</td>
-    </tr>
-    <tr>
-      <th scope="row">6</th>
-      <td>4</td>
-      <td>4</td>
-      <td>15</td>
-      <td>2022-12-31</td>
-      <td>⨁</td>
-      <td>⨂</td>
-    </tr>
-  </tbody>
+    <h1>View Facilities' Product Inventory</h1>
+    <br></br>
+  <table className="table table-hover">
+<thead>
+  <tr>
+    <th scope="col">Product Facility ID</th>
+    <th scope="col">Product ID</th>
+    <th scope="col">Product Type</th>
+    <th scope="col">Facility ID</th>
+    <th scope="col">Facility Name</th>
+    <th scope="col">Dose Quantity</th>
+    <th scope="col">Expiration</th>
+    <th scope="col">Modify</th>
+    <th scope="col">Delete</th>
+  </tr>
+</thead>
+
+{Array.isArray(products) && products.map((product, index) => {
+            return (
+              <tbody>
+                  <tr key={product.ProductsFacilitiesID}>
+                    <td>{product.ProductsFacilitiesID}</td>
+                    <td>{product.ProductID}</td>
+                    <td>{product.ProductType}</td>
+                    <td>{product.FacilityID}</td>
+                    <td>{product.FacilityName}</td>
+                    <td>{product.DoseQty}</td>
+                    <td>{product.Expiration.slice(0, 10)}</td>
+                    <td className="modify" onClick={() => modifyHandler(product.ProductsFacilitiesID)}>⨁</td>
+                    <td className="delete" onClick={() => deleteHandler(product.ProductsFacilitiesID)}>⨂</td>
+                  </tr>
+              </tbody>
+            );
+          })}
+
 </table>
 </div>
 
-  )
+)
 }
 
 export default ViewProductFacility

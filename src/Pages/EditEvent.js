@@ -1,16 +1,12 @@
-import { React, useState, useEffect } from 'react'
 import { useNavigate } from "react-router-dom"
+import { React, useState, useEffect } from 'react'
 import { ENDPOINT } from '../endpoint-config';
 
-function AddEvent() {
+function EditEvent() {
   let navigate = useNavigate(); //This allows us to link user to another page in the pop-up alert window
 
-  let newDate = new Date()
-  let date = String("0" + newDate.getDate()).slice(-2);
-  let month = String("0" + (newDate.getMonth() + 1)).slice(-2);
-  let year = String(newDate.getFullYear());
-
-  let currentDate = year+"-"+month+"-"+date
+  //capture eventID of the event to edit from the URL
+  const eventID = window.location.href.split('editEvent/')[1]; 
 
   const [patientID, setPatientID] = useState('');
   const [eventType, setEventType] = useState('');
@@ -27,101 +23,118 @@ function AddEvent() {
   const [facilities, setFacilities] = useState('');
   const [products, setProducts] = useState('');
 
-  //onSubmit handler to add a new event
-  const addEvent = (e) => {
-    e.preventDefault();
-
-      // validate event date
-      let newDateString = new Date()
-      let date = String("0" + newDateString.getDate()).slice(-2);
-      let month = String("0" + (newDateString.getMonth() + 1)).slice(-2);
-      let year = String(newDateString.getFullYear());
-      let currentDateInteger = parseInt(year+month+date)
-      let eventDateInteger = parseInt(eventDate.slice(0,4)+eventDate.slice(5,7)+eventDate.slice(8,10))
-      if(eventDateInteger > currentDateInteger){
-        alert("Event Date cannot be set in the future")
-        return
-      }    
-
-    fetch(`${ENDPOINT}/AddEvent`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        PatientID: patientID,
-        EventType: eventType,
-        EventDate: eventDate,
-        SubmissionDate: currentDate,
-        ProductID: productID,
-        AdministrationSite: administrationSite,
-        AdministrationRoute: administrationRoute,
-        ProviderID: providerID,
-        FacilityID: facilityID,
-        Notes: notes,
-      })
-    })
-    .then(res => res.json())
-    .then(json => console.log(json));
-
-    window.alert("Event added. You will now be routed back to the main Events page")
-    navigate("/PharmaTech/ViewEvent")
+  
+  //fetch Product/Facility Data
+  const CollectData = async () => {
+    let response = await fetch(`${ENDPOINT}/FindEvent/${eventID}`)
+    // let response = await fetch(`http://flip1.engr.oregonstate.edu:44265/FindEvent/${eventID}`)
+    response = await response.json();
+    
+    if(response){
+        setPatientID(response[0].PatientID)
+        setEventType(response[0].EventType)
+        setEventDate(response[0].EventDate.slice(0,4)+'-'+response[0].EventDate.slice(5,7)+'-'+response[0].EventDate.slice(8,10))
+        setSubmissionDate(response[0].SubmissionDate.slice(0,4)+'-'+response[0].SubmissionDate.slice(5,7)+'-'+response[0].SubmissionDate.slice(8,10))
+        setProductID(response[0].ProductID)
+        setAdministrationSite(response[0].AdministrationSite)
+        setAdministrationRoute(response[0].AdministrationRoute)
+        setProviderID(response[0].ProviderID)
+        setFacilityID(response[0].FacilityID)
+        setNotes(response[0].Notes)
+    }
   }
 
+  // Event Data will fetch once upon page mount
+  useEffect(() => {
+    CollectData()
+  }, [])
+  
+
+  //OnClick handler to submit changes
+  const modifyHandler = (e) => {
+    e.preventDefault();
+
+    //send PUT request to server to modify the specified event
+    fetch(`${ENDPOINT}/EditEvent/${eventID}`, {
+    // fetch(`http://flip1.engr.oregonstate.edu:44265/EditEvent/${eventID}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            PatientID: patientID,
+            EventType: eventType,
+            EventDate: eventDate,
+            ProductID: productID,
+            AdministrationSite: administrationSite,
+            AdministrationRoute: administrationRoute,
+            ProviderID: providerID,
+            FacilityID: facilityID,
+            Notes: notes,
+        })
+      })
+      .then(res => res.json())
+      .then(json => console.log(json));
+
+      window.alert("Edit complete. You will now be routed back to the View Events page")
+      navigate("/PharmaTech/viewEvent")
+    }
+  
 
     //fetch Patient Data upon page mount (will use PatientID, FirstName, LastName to assist with selection)
     useEffect(() => {
-      fetch(`${ENDPOINT}/ViewPatient`)
-      // fetch('http://flip1.engr.oregonstate.edu:44265/ViewPatient')
-      .then(res => res.json())
-      .then(data => setPatients(data))
-    }, [])
-
-    //fetch Provider Data upon page mount (will use ProviderID, FirstName, LastName to assist with selection)
-    useEffect(() => {
-      fetch(`${ENDPOINT}/ViewProvider`)
-      // fetch('http://flip1.engr.oregonstate.edu:44265/ViewProvider')
-      .then(res => res.json())
-      .then(data => setProviders(data))
-    }, [])
+        fetch(`${ENDPOINT}/ViewPatient`)
+        // fetch('http://flip1.engr.oregonstate.edu:44265/ViewPatient')
+        .then(res => res.json())
+        .then(data => setPatients(data))
+      }, [])
   
-    //fetch Faclity Data upon page mount (will use FacilityID and FacilityName to assist with selection)
-    useEffect(() => {
-      fetch(`${ENDPOINT}/ViewFacility`)
-      // fetch('http://flip1.engr.oregonstate.edu:44265/ViewFacility')
-      .then(res => res.json())
-      .then(data => setFacilities(data))
-    }, [])
+      //fetch Provider Data upon page mount (will use ProviderID, FirstName, LastName to assist with selection)
+      useEffect(() => {
+        fetch(`${ENDPOINT}/ViewProvider`)
+        // fetch('http://flip1.engr.oregonstate.edu:44265/ViewProvider')
+        .then(res => res.json())
+        .then(data => setProviders(data))
+      }, [])
+    
+      //fetch Faclity Data upon page mount (will use FacilityID and FacilityName to assist with selection)
+      useEffect(() => {
+        fetch(`${ENDPOINT}/ViewFacility`)
+        // fetch('http://flip1.engr.oregonstate.edu:44265/ViewFacility')
+        .then(res => res.json())
+        .then(data => setFacilities(data))
+      }, [])
+  
+      //fetch Product Data upon page mount (will use ProductID and ProductType to assist with selection)
+      useEffect(() => {
+        fetch(`${ENDPOINT}/ViewProduct`)
+        // fetch('http://flip1.engr.oregonstate.edu:44265/ViewProduct')
+        .then(res => res.json())
+        .then(data => setProducts(data))
+      }, [])    
 
-    //fetch Product Data upon page mount (will use ProductID and ProductType to assist with selection)
-    useEffect(() => {
-      fetch(`${ENDPOINT}/ViewProduct`)
-      // fetch('http://flip1.engr.oregonstate.edu:44265/ViewProduct')
-      .then(res => res.json())
-      .then(data => setProducts(data))
-    }, [])
+    return (
 
+        <div className="container">
+        <ul className="nav nav-tabs">
+            <li className="nav-link" onClick={event => navigate("/PharmaTech/viewEvent")}>
+                View Events
+            </li>
 
-  return (
-    <div className="container">
-      <ul className="nav nav-tabs">
-          <li className="nav-link" onClick={event => navigate("/PharmaTech/viewEvent")}>
-              View Events
-          </li>
+            <li className="nav-link" onClick={event => navigate("/PharmaTech/searchEvent")}>
+                Search Events
+            </li>
 
-          <li className="nav-link" onClick={event => navigate("/PharmaTech/searchEvent")}>
-              Search Events
-          </li>
+            <li className="nav-link" onClick={event => navigate("/PharmaTech/addEvent")}>
+                Add Event
+            </li>
+        </ul>
 
-          <li className="nav-link" onClick={event => navigate("/PharmaTech/addEvent")}>
-              Add Event
-          </li>
-      </ul>
+        <h1>Edit Event</h1>
+        <br></br>
 
-
-    <h1>Add A New Event</h1>
-
-    <form className="row g-3" onSubmit={addEvent}>
+        
+        <form className="row g-3" onSubmit={modifyHandler}>
 
         <div className="col-md-4">
           <label for="patientID" className="form-label">Patient ID <b>(required)</b></label>
@@ -154,7 +167,7 @@ function AddEvent() {
 
         <div className="col-md-4">
         <label for="submissionDate" className="form-label">Submission Date  <b>(required)</b></label>
-        <input value={currentDate} type="text" className="form-control" id="submissionDate" placeholder={currentDate} disabled onChange={event => setSubmissionDate(event.target.value)}/>
+        <input value={submissionDate} type="text" className="form-control" id="submissionDate" placeholder={submissionDate} disabled onChange={event => setSubmissionDate(event.target.value)}/>
         </div>
 
         <div className="col-md-4">
@@ -238,16 +251,14 @@ function AddEvent() {
         </div>
 
         <div className="col-12">
-        <button type="submit" className="btn btn-primary">Add</button>
+        <button type="submit" className="btn btn-primary">Submit</button>
         </div>
+
+
         </form>
-
-    <br/>
-    <br/>
-    <br/>
-
-</div>
-  )
+        </div>        
+        )
 }
 
-export default AddEvent
+
+export default EditEvent

@@ -26,7 +26,7 @@ function EditContact() {
     response = await response.json();
     
     if(response){
-      setPhone(response[0].Phone != 0 ? response[0].Phone : '')
+      setPhone(response[0].Phone !== 0 ? response[0].Phone : '')
       setPhoneType(response[0].PhoneType)
       setPhoneOpt(response[0].PhoneOpt)
       setEmail(response[0].Email)
@@ -34,7 +34,7 @@ function EditContact() {
       setAddress(response[0].AddressStreet)
       setCity(response[0].AddressCity)
       setState(response[0].AddressState)
-      setZip(response[0].AddressZip != 0 ? response[0].AddressZip : '')
+      setZip(response[0].AddressZip !== 0 ? response[0].AddressZip : '')
       setMailOpt(response[0].MailOpt)
     }
   }
@@ -165,8 +165,8 @@ function EditContact() {
 
         <div className="col-md-3">
           <label for="state" className="form-label">State</label>
-          <select id="state" className="form-select" onChange={event => setState(event.target.value)} >
-          <option selected disabled>{state}</option>
+          <select id="state" className="form-select" value={state} onChange={event => setState(event.target.value)} >
+          <option value="" disabled>Select</option>
           <option> </option>
           <option>AL</option>
           <option>AK</option>
@@ -242,12 +242,12 @@ function EditContact() {
 
         <div className="col-md-2">
           <label for="phoneType" className="form-label">Phone Type</label>
-          <select id="phoneType" className="form-select" onChange={event => setPhoneType(event.target.value)}>
-            <option selected disabled>{phoneType}</option>
+          <select id="phoneType" className="form-select" value={phoneType} onChange={event => setPhoneType(event.target.value)}>
+            <option value="" disabled>Select</option>
             <option value=''></option>
-            <option>Home</option>
-            <option>Work</option>
-            <option>Mobile</option>
+            <option value="Home">Home</option>
+            <option value="Work">Work</option>
+            <option value="Mobile">Mobile</option>
           </select>
         </div>
 
@@ -258,26 +258,26 @@ function EditContact() {
 
         <div className="col-md-2">
           <label for="emailOpt" className="form-label">Email Opt</label>
-          <select id="emailOpt" className="form-select" onChange={event => setEmailOpt(event.target.value)}>
-            <option selected disabled>{emailOpt}</option>
-            <option>No</option>
-            <option>Yes</option>
+          <select id="emailOpt" className="form-select" value={emailOpt} onChange={event => setEmailOpt(event.target.value)}>
+            <option value="" disabled>Select</option>
+            <option value="No">No</option>
+            <option value="Yes">Yes</option>
           </select>
         </div>
 
         <div className="col-md-2">
           <label for="phoneOpt" className="form-label">Phone Opt</label>
-          <select id="phoneOpt" className="form-select" onChange={event => setPhoneOpt(event.target.value)}>
-            <option selected disabled>{phoneOpt}</option>
-            <option>No</option>
-            <option>Yes</option>
+          <select id="phoneOpt" className="form-select" value={phoneOpt} onChange={event => setPhoneOpt(event.target.value)}>
+            <option value="" disabled>Select</option>
+            <option value="No">No</option>
+            <option value="Yes">Yes</option>
           </select>
         </div>
 
         <div className="col-md-2">
           <label for="mailOpt" className="form-label">Mail Opt</label>
-          <select id="mailOpt" className="form-select" onChange={event => setMailOpt(event.target.value)}>
-            <option selected disabled>{mailOpt}</option>
+          <select id="mailOpt" className="form-select" value={mailOpt} onChange={event => setMailOpt(event.target.value)}>
+            <option value="" disabled>Select</option>
             <option>No</option>
             <option>Yes</option>
           </select>
