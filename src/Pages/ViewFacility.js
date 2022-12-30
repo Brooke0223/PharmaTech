@@ -40,7 +40,7 @@ function ViewFacility() {
   return (
     <div className="container">
     <ul className="nav nav-tabs">
-        <li className="nav-link" onClick={event => navigate("/viewFacility")}>
+        <li className="nav-link" onClick={event => window.location.reload()}>
             View Facilities
         </li>
 

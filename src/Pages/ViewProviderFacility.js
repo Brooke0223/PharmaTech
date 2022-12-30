@@ -43,7 +43,7 @@ return (
               Add Provider
           </li>
 
-          <li className="nav-link" onClick={event => navigate("/viewProviderFacility")}>
+          <li className="nav-link" onClick={event => window.location.reload()}>
               View Providers' Facilities
           </li>
 

@@ -40,7 +40,7 @@ function ViewContact() {
     
     <div className="container">
     <ul className="nav nav-tabs">
-        <li className="nav-link" onClick={event => navigate("/viewContact")}>
+        <li className="nav-link" onClick={event => window.location.reload()}>
             View Contacts
         </li>
 

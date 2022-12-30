@@ -49,7 +49,7 @@ return (
               Add A New Product
           </li>
 
-          <li className="nav-link" onClick={event => navigate("/viewProductFacility")}>
+          <li className="nav-link" onClick={event => window.location.reload()}>
               View Products in Facilities
           </li>
 

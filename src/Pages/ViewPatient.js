@@ -45,7 +45,7 @@ function ViewPatient() {
 
     <div className="container">
       <ul className="nav nav-tabs">
-          <li className="nav-link" onClick={event => navigate("/ViewPatient")}>
+          <li className="nav-link" onClick={event => window.location.reload()}>
               View Patients
           </li>
 

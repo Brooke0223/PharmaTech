@@ -37,7 +37,7 @@ function ViewEvent() {
 return (
   <div className="container">
       <ul className="nav nav-tabs">
-          <li className="nav-link" onClick={event => navigate("/viewEvent")}>
+          <li className="nav-link" onClick={event => window.location.reload()}>
               View Events
           </li>
 
