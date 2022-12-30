@@ -238,9 +238,6 @@ function SearchProduct() {
       <>
       <h1>Product Search Results</h1>
       <br/>
-      <button className="btn btn-primary" onClick={clearResults}>New Search</button>
-      <br/>
-      <br/>
       <h5>Search returned {searchResults.length} results</h5>
 
     <br/>
@@ -277,6 +274,10 @@ function SearchProduct() {
               );
             })}
       </table>
+      <br/>
+      <button className="btn btn-primary" onClick={clearResults}>New Search</button>
+      <br/>
+      <br/>
       </>
 }
   

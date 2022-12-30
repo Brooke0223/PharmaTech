@@ -101,13 +101,10 @@ function SearchPatient() {
 
 
 
-
-
     {/* If the user has not yet searched a patient, display the search inputs */}
     {(searchResults === '') && 
       <>
     
-
     <h1>Search Patients</h1>
     
     <form className="row g-3" onSubmit={searchHandler}>
@@ -247,7 +244,6 @@ function SearchPatient() {
   <br/>
   <br/>
   <br/>
-
  </>
 }
 
@@ -258,9 +254,6 @@ function SearchPatient() {
 {(searchResults !== '') && 
       <>
       <h1>Patient Search Results</h1>
-      <br/>
-      <button className="btn btn-primary" onClick={clearResults}>New Search</button>
-      <br/>
       <br/>
       <h5>Search returned {searchResults.length} results</h5>
 
@@ -302,6 +295,10 @@ function SearchPatient() {
               );
             })}
       </table>
+      <br/>
+      <br/>
+      <button className="btn btn-primary" onClick={clearResults}>New Search</button>
+      <br/>
       </>
 }
   

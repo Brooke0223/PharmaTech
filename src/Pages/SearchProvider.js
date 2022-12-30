@@ -228,9 +228,6 @@ function SearchProvider() {
       <>
       <h1>Provider Search Results</h1>
       <br/>
-      <button className="btn btn-primary" onClick={clearResults}>New Search</button>
-      <br/>
-      <br/>
       <h5>Search returned {searchResults.length} results</h5>
 
       <br/>
@@ -263,6 +260,10 @@ function SearchProvider() {
               );
             })}
       </table>
+      <br/>
+      <button className="btn btn-primary" onClick={clearResults}>New Search</button>
+      <br/>
+      <br/>
       </>
 }
   

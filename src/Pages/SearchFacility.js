@@ -240,9 +240,6 @@ return (
     <>
     <h1>Facility Search Results</h1>
     <br/>
-    <button className="btn btn-primary" onClick={clearResults}>New Search</button>
-    <br/>
-    <br/>
     <h5>Search returned {searchResults.length} results</h5>
 
     <table className="table table-hover">
@@ -278,6 +275,10 @@ return (
             );
           })}
     </table>
+    <br/>
+    <button className="btn btn-primary" onClick={clearResults}>New Search</button>
+    <br/>
+    <br/>
     </>
   }
     
