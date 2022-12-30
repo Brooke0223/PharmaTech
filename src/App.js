@@ -39,47 +39,47 @@ function App() {
       <HashRouter>
         <div class="links">
         {/* <Link to="/PharmaTech"> Home </Link> */}
-        <Link to="/PharmaTech/viewPatient"> Patients </Link>
-        <Link to="/PharmaTech/viewContact"> Contacts </Link>
-        <Link to="/PharmaTech/viewEvent"> Events </Link>
-        <Link to="/PharmaTech/viewFacility"> Facilities </Link>
-        <Link to="/PharmaTech/viewProvider"> Providers </Link>
-        <Link to="/PharmaTech/viewProduct"> Products </Link>
+        <Link to="/viewPatient"> Patients </Link>
+        <Link to="/viewContact"> Contacts </Link>
+        <Link to="/viewEvent"> Events </Link>
+        <Link to="/viewFacility"> Facilities </Link>
+        <Link to="/viewProvider"> Providers </Link>
+        <Link to="/viewProduct"> Products </Link>
         <br></br>
         <br></br>
         </div>
 
         <Routes>
           {/* <Route path="/PharmaTech" element={<Home />} /> */}
-          <Route path="/PharmaTech" element={<ViewPatient />} />
-          <Route path="/PharmaTech/searchPatient" element={<SearchPatient />} />
-          <Route path="/PharmaTech/searchEvent" element={<SearchEvent />} />
-          <Route path="/PharmaTech/addEvent" element={<AddEvent />} />
-          <Route path="/PharmaTech/searchProvider" element={<SearchProvider />} />
-          <Route path="/PharmaTech/searchFacility" element={<SearchFacility />} />
-          <Route path="/PharmaTech/searchProduct" element={<SearchProduct />} />
-          <Route path="/PharmaTech/addPatient" element={<AddPatient />} />
-          <Route path="/PharmaTech/addProvider" element={<AddProvider />} />
-          <Route path="/PharmaTech/addFacility" element={<AddFacility />} />
-          <Route path="/PharmaTech/addProduct" element={<AddProduct />} />
-          <Route path="/PharmaTech/addProductFacility" element={<AddProductFacility />} />
-          <Route path="/PharmaTech/viewPatient" element={<ViewPatient />} />
-          <Route path="/PharmaTech/viewEvent" element={<ViewEvent />} />
-          <Route path="/PharmaTech/viewProvider" element={<ViewProvider />} />
-          <Route path="/PharmaTech/viewFacility" element={<ViewFacility />} />
-          <Route path="/PharmaTech/viewProduct" element={<ViewProduct />} />
-          <Route path="/PharmaTech/viewContact" element={<ViewContact />} />
-          <Route path="/PharmaTech/addContact" element={<AddContact />} />
-          <Route path="/PharmaTech/viewProviderFacility" element={<ViewProviderFacility />} />
-          <Route path="/PharmaTech/addProviderFacility" element={<AddProviderFacility />} />
-          <Route path="/PharmaTech/viewProductFacility" element={<ViewProductFacility />} />
-          <Route path="/PharmaTech/editPatient/:id" element={<EditPatient />} />
-          <Route path="/PharmaTech/editContact/:id" element={<EditContact />} />
-          <Route path="/PharmaTech/editFacility/:id" element={<EditFacility />} />
-          <Route path="/PharmaTech/editProvider/:id" element={<EditProvider />} />
-          <Route path="/PharmaTech/editProduct/:id" element={<EditProduct />} />
-          <Route path="/PharmaTech/editProductFacility/:id" element={<EditProductFacility />} />
-          <Route path="/PharmaTech/editEvent/:id" element={<EditEvent />} />
+          <Route exact path="/" element={<ViewPatient />} />
+          <Route path="/searchPatient" element={<SearchPatient />} />
+          <Route path="/searchEvent" element={<SearchEvent />} />
+          <Route path="/addEvent" element={<AddEvent />} />
+          <Route path="/searchProvider" element={<SearchProvider />} />
+          <Route path="/searchFacility" element={<SearchFacility />} />
+          <Route path="/searchProduct" element={<SearchProduct />} />
+          <Route path="/addPatient" element={<AddPatient />} />
+          <Route path="/addProvider" element={<AddProvider />} />
+          <Route path="/addFacility" element={<AddFacility />} />
+          <Route path="/addProduct" element={<AddProduct />} />
+          <Route path="/addProductFacility" element={<AddProductFacility />} />
+          <Route path="/viewPatient" element={<ViewPatient />} />
+          <Route path="/viewEvent" element={<ViewEvent />} />
+          <Route path="/viewProvider" element={<ViewProvider />} />
+          <Route path="/viewFacility" element={<ViewFacility />} />
+          <Route path="/viewProduct" element={<ViewProduct />} />
+          <Route path="/viewContact" element={<ViewContact />} />
+          <Route path="/addContact" element={<AddContact />} />
+          <Route path="/viewProviderFacility" element={<ViewProviderFacility />} />
+          <Route path="/addProviderFacility" element={<AddProviderFacility />} />
+          <Route path="/viewProductFacility" element={<ViewProductFacility />} />
+          <Route path="/editPatient/:id" element={<EditPatient />} />
+          <Route path="/editContact/:id" element={<EditContact />} />
+          <Route path="/editFacility/:id" element={<EditFacility />} />
+          <Route path="/editProvider/:id" element={<EditProvider />} />
+          <Route path="/editProduct/:id" element={<EditProduct />} />
+          <Route path="/editProductFacility/:id" element={<EditProductFacility />} />
+          <Route path="/editEvent/:id" element={<EditEvent />} />
         </Routes>
       </HashRouter>
 
