@@ -35,29 +35,29 @@ function AddProduct() {
     .then(json => console.log(json));
 
     window.alert("Product added. You will now be routed back to the main Products page")
-    navigate("/PharmaTech/ViewProduct")
+    navigate("/ViewProduct")
   }
   return (
     <div className="container">
 
     <ul className="nav nav-tabs">
-            <li className="nav-link" onClick={event => navigate("/PharmaTech/viewProduct")}>
+            <li className="nav-link" onClick={event => navigate("/viewProduct")}>
                 View Products
             </li>
 
-            <li className="nav-link" onClick={event => navigate("/PharmaTech/searchProduct")}>
+            <li className="nav-link" onClick={event => navigate("/searchProduct")}>
                 Search Products
             </li>
 
-            <li className="nav-link" onClick={event => navigate("/PharmaTech/addProduct")}>
+            <li className="nav-link" onClick={event => navigate("/addProduct")}>
                 Add A New Product
             </li>
 
-            <li className="nav-link" onClick={event => navigate("/PharmaTech/viewProductFacility")}>
+            <li className="nav-link" onClick={event => navigate("/viewProductFacility")}>
                 View Products in Facilities
             </li>
 
-            <li className="nav-link" onClick={event => navigate("/PharmaTech/addProductFacility")}>
+            <li className="nav-link" onClick={event => navigate("/addProductFacility")}>
                 Add Products to Facilities
             </li>
         </ul>

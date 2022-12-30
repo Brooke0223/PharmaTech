@@ -17,7 +17,7 @@ function ViewProvider() {
 
   //OnClick handler to modify a provider
   const modifyHandler = (providerID) => {
-    navigate("/PharmaTech/editProvider/"+providerID)
+    navigate("/editProvider/"+providerID)
   }
 
   //OnClick handler to delete a provider
@@ -42,23 +42,23 @@ function ViewProvider() {
 return (
   <div className="container">
       <ul className="nav nav-tabs">
-          <li className="nav-link" onClick={event => navigate("/PharmaTech/viewProvider")}>
+          <li className="nav-link" onClick={event => navigate("/viewProvider")}>
               View Providers
           </li>
 
-          <li className="nav-link" onClick={event => navigate("/PharmaTech/searchProvider")}>
+          <li className="nav-link" onClick={event => navigate("/searchProvider")}>
               Search Providers
           </li>
 
-          <li className="nav-link" onClick={event => navigate("/PharmaTech/addProvider")}>
+          <li className="nav-link" onClick={event => navigate("/addProvider")}>
               Add Provider
           </li>
 
-          <li className="nav-link" onClick={event => navigate("/PharmaTech/viewProviderFacility")}>
+          <li className="nav-link" onClick={event => navigate("/viewProviderFacility")}>
               View Providers' Facilities
           </li>
 
-          <li className="nav-link" onClick={event => navigate("/PharmaTech/addProviderFacility")}>
+          <li className="nav-link" onClick={event => navigate("/addProviderFacility")}>
               Add Providers to Facilities
           </li>
        </ul>

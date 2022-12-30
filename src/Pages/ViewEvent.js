@@ -17,7 +17,7 @@ function ViewEvent() {
 
   //OnClick handler to modify an event
   const modifyHandler = (eventID) => {
-    navigate("/PharmaTech/editEvent/"+eventID)
+    navigate("/editEvent/"+eventID)
   }
 
   //OnClick handler to delete an event
@@ -37,15 +37,15 @@ function ViewEvent() {
 return (
   <div className="container">
       <ul className="nav nav-tabs">
-          <li className="nav-link" onClick={event => navigate("/PharmaTech/viewEvent")}>
+          <li className="nav-link" onClick={event => navigate("/viewEvent")}>
               View Events
           </li>
 
-          <li className="nav-link" onClick={event => navigate("/PharmaTech/searchEvent")}>
+          <li className="nav-link" onClick={event => navigate("/searchEvent")}>
               Search Events
           </li>
 
-          <li className="nav-link" onClick={event => navigate("/PharmaTech/addEvent")}>
+          <li className="nav-link" onClick={event => navigate("/addEvent")}>
               Add Event
           </li>
       </ul>

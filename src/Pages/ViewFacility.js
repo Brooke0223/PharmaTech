@@ -16,7 +16,7 @@ function ViewFacility() {
 
   //OnClick handler to modify a facility
   const modifyHandler = (facilityID) => {
-    navigate(`/PharmaTech/editFacility/${facilityID}`)
+    navigate(`/editFacility/${facilityID}`)
   }
 
   //OnClick handler to delete a facility
@@ -40,15 +40,15 @@ function ViewFacility() {
   return (
     <div className="container">
     <ul className="nav nav-tabs">
-        <li className="nav-link" onClick={event => navigate("/PharmaTech/viewFacility")}>
+        <li className="nav-link" onClick={event => navigate("/viewFacility")}>
             View Facilities
         </li>
 
-        <li className="nav-link" onClick={event => navigate("/PharmaTech/searchFacility")}>
+        <li className="nav-link" onClick={event => navigate("/searchFacility")}>
             Search Facilities
         </li>
 
-        <li className="nav-link" onClick={event => navigate("/PharmaTech/addFacility")}>
+        <li className="nav-link" onClick={event => navigate("/addFacility")}>
             Add Facility
         </li>
     </ul>

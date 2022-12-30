@@ -17,7 +17,7 @@ function ViewContact() {
   
     //OnClick handler to modify a contact
     const modifyHandler = (contactID) => {
-      navigate(`/PharmaTech/editContact/${contactID}`)
+      navigate(`/editContact/${contactID}`)
     }
   
     //OnClick handler to delete a contact
@@ -40,11 +40,11 @@ function ViewContact() {
     
     <div className="container">
     <ul className="nav nav-tabs">
-        <li className="nav-link" onClick={event => navigate("/PharmaTech/viewContact")}>
+        <li className="nav-link" onClick={event => navigate("/viewContact")}>
             View Contacts
         </li>
 
-        <li className="nav-link" onClick={event => navigate("/PharmaTech/addContact")}>
+        <li className="nav-link" onClick={event => navigate("/addContact")}>
             Add Contacts
         </li>
     </ul>

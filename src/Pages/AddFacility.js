@@ -44,7 +44,7 @@ function AddFacility() {
     .then(json => console.log(json));
 
     window.alert("Facility added. You will now be routed back to the main Facilities page")
-    navigate("/PharmaTech/viewFacility")
+    navigate("/viewFacility")
   }
 
   // data-validator for zipcode input
@@ -56,15 +56,15 @@ function AddFacility() {
 return (
   <div className="container">
       <ul className="nav nav-tabs">
-          <li className="nav-link" onClick={event => navigate("/PharmaTech/viewFacility")}>
+          <li className="nav-link" onClick={event => navigate("/viewFacility")}>
               View Facilities
           </li>
 
-          <li className="nav-link" onClick={event => navigate("/PharmaTech/searchFacility")}>
+          <li className="nav-link" onClick={event => navigate("/searchFacility")}>
               Search Facilities
           </li>
 
-          <li className="nav-link" onClick={event => navigate("/PharmaTech/addFacility")}>
+          <li className="nav-link" onClick={event => navigate("/addFacility")}>
               Add Facility
           </li>
       </ul>

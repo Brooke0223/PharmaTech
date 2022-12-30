@@ -65,7 +65,7 @@ function AddEvent() {
     .then(json => console.log(json));
 
     window.alert("Event added. You will now be routed back to the main Events page")
-    navigate("/PharmaTech/ViewEvent")
+    navigate("/ViewEvent")
   }
 
 
@@ -105,15 +105,15 @@ function AddEvent() {
   return (
     <div className="container">
       <ul className="nav nav-tabs">
-          <li className="nav-link" onClick={event => navigate("/PharmaTech/viewEvent")}>
+          <li className="nav-link" onClick={event => navigate("/viewEvent")}>
               View Events
           </li>
 
-          <li className="nav-link" onClick={event => navigate("/PharmaTech/searchEvent")}>
+          <li className="nav-link" onClick={event => navigate("/searchEvent")}>
               Search Events
           </li>
 
-          <li className="nav-link" onClick={event => navigate("/PharmaTech/addEvent")}>
+          <li className="nav-link" onClick={event => navigate("/addEvent")}>
               Add Event
           </li>
       </ul>

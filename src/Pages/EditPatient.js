@@ -77,7 +77,7 @@ function EditPatient() {
     .then(json => console.log(json));
 
     window.alert("Edit complete. You will now be routed back to the main page")
-    navigate("/PharmaTech/ViewPatient")
+    navigate("/ViewPatient")
   }
   
   
@@ -87,15 +87,15 @@ function EditPatient() {
     <div className="container">
 
       <ul className="nav nav-tabs">
-          <li className="nav-link" onClick={event => navigate("/PharmaTech/ViewPatient")}>
+          <li className="nav-link" onClick={event => navigate("/ViewPatient")}>
               View Patients
           </li>
 
-          <li className="nav-link" onClick={event => navigate("/PharmaTech/searchPatient")}>
+          <li className="nav-link" onClick={event => navigate("/searchPatient")}>
               Search Patients
           </li>
 
-          <li className="nav-link" onClick={event => navigate("/PharmaTech/addPatient")}>
+          <li className="nav-link" onClick={event => navigate("/addPatient")}>
               Add Patient
           </li>
       </ul>

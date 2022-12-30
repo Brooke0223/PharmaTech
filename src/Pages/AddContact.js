@@ -102,7 +102,7 @@ function AddContact() {
     .then(json => console.log(json));
 
     window.alert("Contact Added. You will now be routed back to the main Contacts page")
-    navigate("/PharmaTech/viewContact")
+    navigate("/viewContact")
   }
 
 
@@ -132,11 +132,11 @@ function AddContact() {
   <div className="container">
   
   <ul className="nav nav-tabs">
-      <li className="nav-link" onClick={event => navigate("/PharmaTech/viewContact")}>
+      <li className="nav-link" onClick={event => navigate("/viewContact")}>
           View Contacts
       </li>
 
-      <li className="nav-link" onClick={event => navigate("/PharmaTech/addContact")}>
+      <li className="nav-link" onClick={event => navigate("/addContact")}>
           Add Contacts
       </li>
   </ul>

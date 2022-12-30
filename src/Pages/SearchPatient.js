@@ -59,7 +59,7 @@ function SearchPatient() {
 
     //OnClick handler to modify a patient
     const modifyHandler = (patientID) => {
-      navigate("/PharmaTech/editPatient/"+patientID)
+      navigate("/editPatient/"+patientID)
     }
   
 
@@ -74,7 +74,7 @@ function SearchPatient() {
         .then(res => res.text())
         .then(res => console.log(res))
         alert("Patient successfully deleted.")
-        navigate("/PharmaTech/ViewPatient")  
+        navigate("/ViewPatient")  
       }
     }
 
@@ -86,15 +86,15 @@ function SearchPatient() {
     
     <div className="container">
     <ul className="nav nav-tabs">
-        <li className="nav-link" onClick={event => navigate("/PharmaTech/ViewPatient")}>
+        <li className="nav-link" onClick={event => navigate("/ViewPatient")}>
             View Patients
         </li>
 
-        <li className="nav-link" onClick={event => navigate("/PharmaTech/searchPatient")}>
+        <li className="nav-link" onClick={event => navigate("/searchPatient")}>
             Search Patients
         </li>
 
-        <li className="nav-link" onClick={event => navigate("/PharmaTech/addPatient")}>
+        <li className="nav-link" onClick={event => navigate("/addPatient")}>
             Add Patient
         </li>
     </ul>
