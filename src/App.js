@@ -36,7 +36,7 @@ function App() {
 
 
 
-      <HashRouter>
+      <HashRouter basename="/">
         <div class="links">
         {/* <Link to="/PharmaTech"> Home </Link> */}
         <Link to="/PharmaTech/viewPatient"> Patients </Link>
