@@ -1,5 +1,5 @@
 import './App.css';
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom"
+import { BrowserRouter as HashRouter, Routes, Route, Link } from "react-router-dom"
 import Home from './Pages/Home';
 import SearchPatient from './Pages/SearchPatient';
 import SearchEvent from './Pages/SearchEvent';
@@ -36,7 +36,7 @@ function App() {
 
 
 
-      <Router>
+      <HashRouter>
         <div class="links">
         {/* <Link to="/PharmaTech"> Home </Link> */}
         <Link to="/PharmaTech/viewPatient"> Patients </Link>
@@ -81,7 +81,7 @@ function App() {
           <Route path="/PharmaTech/editProductFacility/:id" element={<EditProductFacility />} />
           <Route path="/PharmaTech/editEvent/:id" element={<EditEvent />} />
         </Routes>
-      </Router>
+      </HashRouter>
 
   
   
