@@ -78,6 +78,8 @@ function AddProduct() {
     <option value="Influenza (Adult)">Influenza (Adult)</option>
     <option value="Zoster RZV (Shingrix)">Zoster RZV (Shingrix)</option>
     <option value="Zoster ZVL (Zostavax)">Zoster ZVL (Zostavax)</option>
+    <option value="Tdap">Tdap</option>
+    <option value="Pneumococcal">Pneumococcal</option>
   </select>
 </div>
 

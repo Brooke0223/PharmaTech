@@ -64,7 +64,7 @@ function EditProduct() {
       window.alert("Edit complete. You will now be routed back to the Products page")
       navigate("/viewProduct")
     }
-  
+
 
     return (
 
@@ -98,7 +98,7 @@ function EditProduct() {
 
             <form className="row g-3" onSubmit={modifyHandler}>
 
-            <div className="col-md-2">
+            <div className="col-md-3">
                 <label for="productID" className="form-label">ProductID <b>(required)</b> </label>
                 <input value={productID} type="text" className="form-control" id="productID" disabled/>
             </div>
@@ -115,10 +115,12 @@ function EditProduct() {
                     <option value="Influenza (Adult)">Influenza (Adult)</option>
                     <option value="Zoster RZV (Shingrix)">Zoster RZV (Shingrix)</option>
                     <option value="Zoster ZVL (Zostavax)">Zoster ZVL (Zostavax)</option>
+                    <option value="Tdap">Tdap</option>
+                    <option value="Pneumococcal">Pneumococcal</option>
                 </select>
             </div>
 
-            <div className="col-md-5">
+            <div className="col-md-4">
                 <label for="NDC" className="form-label">NDC</label>
                 <input value={NDC !== 0 ? NDC : ''} type="text" className="form-control" id="NDC" placeholder="00000-0000-00" onChange={event => setNDC(event.target.value)} />
             </div>
