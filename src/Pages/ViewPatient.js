@@ -10,12 +10,30 @@ function ViewPatient() {
 
   // fetch Patient Data once upon page mount
   useEffect(() => {
-    fetch(`${ENDPOINT}/ViewPatient`)
-    .then(res => res.json())
-    .then(data => setPatients(data))
+    // declare the async data fetching function
+    const fetchPatients = async () => {
+      // get the data from the api
+      const data = await fetch(`${ENDPOINT}/ViewPatient`);
+      // convert the data to json
+      const json = await data.json();
+  
+      // set state with the result
+      setPatients(json);
+    }
+  
+    // call the function
+    fetchPatients()
+      // make sure to catch any error
+      .catch(console.error);;
   }, [])
- 
 
+
+   // fetch Patient Data once upon page mount
+  // useEffect(() => {
+  //   fetch(`${ENDPOINT}/ViewPatient`)
+  //   .then(res => res.json())
+  //   .then(data => setPatients(data))
+  // }, [])
 
   //OnClick handler to modify a patient
   const modifyHandler = (patientID) => {
