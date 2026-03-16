@@ -1,8 +1,3 @@
-# URL
-https://brooke0223.github.io/PharmaTech/
-
-
-
 # Overview
 
 Immunization Registry databases (or Immunization Information Systems) are currently managed by individual states and/or large municipalities, amounting to 56 fragmented databases that can result in duplicated and inconsistent information. 
